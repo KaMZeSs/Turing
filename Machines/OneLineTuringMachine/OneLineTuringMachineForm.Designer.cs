@@ -33,8 +33,15 @@ namespace Turing.Machines.OneLineTuringMachine
             this.qweqweToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.одноленточнаяToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.двухленточнаяToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.скоростьВыполненияToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.медленноToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.среднеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.быстрееToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.быстроToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.оченьБыстроToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.мгновенноToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.button2 = new System.Windows.Forms.Button();
+            this.ButtonToLeft = new System.Windows.Forms.Button();
             this.label15 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
@@ -50,17 +57,20 @@ namespace Turing.Machines.OneLineTuringMachine
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
+            this.ButtonToRight = new System.Windows.Forms.Button();
             this.CurrentCondition = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.TableConditions = new System.Windows.Forms.DataGridView();
             this.Alphabet = new System.Windows.Forms.TextBox();
             this.label16 = new System.Windows.Forms.Label();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
+            this.AddColumn = new System.Windows.Forms.Button();
+            this.DeleteColumn = new System.Windows.Forms.Button();
             this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
-            this.button5 = new System.Windows.Forms.Button();
-            this.button6 = new System.Windows.Forms.Button();
+            this.DoAllSteps_Button = new System.Windows.Forms.Button();
+            this.MakeStep_Button = new System.Windows.Forms.Button();
+            this.Return_Button = new System.Windows.Forms.Button();
+            this.Clear_button = new System.Windows.Forms.Button();
+            this.StopWork_Button = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -71,7 +81,8 @@ namespace Turing.Machines.OneLineTuringMachine
             // menuStrip1
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.qweqweToolStripMenuItem});
+            this.qweqweToolStripMenuItem,
+            this.скоростьВыполненияToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(792, 24);
@@ -100,9 +111,64 @@ namespace Turing.Machines.OneLineTuringMachine
             this.двухленточнаяToolStripMenuItem.Size = new System.Drawing.Size(161, 22);
             this.двухленточнаяToolStripMenuItem.Text = "Двухленточная";
             // 
+            // скоростьВыполненияToolStripMenuItem
+            // 
+            this.скоростьВыполненияToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.медленноToolStripMenuItem,
+            this.среднеToolStripMenuItem,
+            this.быстрееToolStripMenuItem,
+            this.быстроToolStripMenuItem,
+            this.оченьБыстроToolStripMenuItem,
+            this.мгновенноToolStripMenuItem});
+            this.скоростьВыполненияToolStripMenuItem.Name = "скоростьВыполненияToolStripMenuItem";
+            this.скоростьВыполненияToolStripMenuItem.Size = new System.Drawing.Size(143, 20);
+            this.скоростьВыполненияToolStripMenuItem.Text = "Скорость выполнения";
+            // 
+            // медленноToolStripMenuItem
+            // 
+            this.медленноToolStripMenuItem.Name = "медленноToolStripMenuItem";
+            this.медленноToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
+            this.медленноToolStripMenuItem.Text = "Медленно";
+            this.медленноToolStripMenuItem.Click += new System.EventHandler(this.OnTimerSpeedClick);
+            // 
+            // среднеToolStripMenuItem
+            // 
+            this.среднеToolStripMenuItem.Name = "среднеToolStripMenuItem";
+            this.среднеToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
+            this.среднеToolStripMenuItem.Text = "Средне";
+            this.среднеToolStripMenuItem.Click += new System.EventHandler(this.OnTimerSpeedClick);
+            // 
+            // быстрееToolStripMenuItem
+            // 
+            this.быстрееToolStripMenuItem.Name = "быстрееToolStripMenuItem";
+            this.быстрееToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
+            this.быстрееToolStripMenuItem.Text = "Быстрее";
+            this.быстрееToolStripMenuItem.Click += new System.EventHandler(this.OnTimerSpeedClick);
+            // 
+            // быстроToolStripMenuItem
+            // 
+            this.быстроToolStripMenuItem.Name = "быстроToolStripMenuItem";
+            this.быстроToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
+            this.быстроToolStripMenuItem.Text = "Быстро";
+            this.быстроToolStripMenuItem.Click += new System.EventHandler(this.OnTimerSpeedClick);
+            // 
+            // оченьБыстроToolStripMenuItem
+            // 
+            this.оченьБыстроToolStripMenuItem.Name = "оченьБыстроToolStripMenuItem";
+            this.оченьБыстроToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
+            this.оченьБыстроToolStripMenuItem.Text = "Очень Быстро";
+            this.оченьБыстроToolStripMenuItem.Click += new System.EventHandler(this.OnTimerSpeedClick);
+            // 
+            // мгновенноToolStripMenuItem
+            // 
+            this.мгновенноToolStripMenuItem.Name = "мгновенноToolStripMenuItem";
+            this.мгновенноToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
+            this.мгновенноToolStripMenuItem.Text = "Мгновенно";
+            this.мгновенноToolStripMenuItem.Click += new System.EventHandler(this.OnTimerSpeedClick);
+            // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.button2);
+            this.panel1.Controls.Add(this.ButtonToLeft);
             this.panel1.Controls.Add(this.label15);
             this.panel1.Controls.Add(this.label14);
             this.panel1.Controls.Add(this.label13);
@@ -118,23 +184,23 @@ namespace Turing.Machines.OneLineTuringMachine
             this.panel1.Controls.Add(this.label3);
             this.panel1.Controls.Add(this.label2);
             this.panel1.Controls.Add(this.label1);
-            this.panel1.Controls.Add(this.button1);
+            this.panel1.Controls.Add(this.ButtonToRight);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 24);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(792, 46);
             this.panel1.TabIndex = 1;
             // 
-            // button2
+            // ButtonToLeft
             // 
-            this.button2.Dock = System.Windows.Forms.DockStyle.Left;
-            this.button2.Location = new System.Drawing.Point(771, 0);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(21, 46);
-            this.button2.TabIndex = 30;
-            this.button2.Text = "button2";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.ButtonToLeft.Dock = System.Windows.Forms.DockStyle.Left;
+            this.ButtonToLeft.Location = new System.Drawing.Point(771, 0);
+            this.ButtonToLeft.Name = "ButtonToLeft";
+            this.ButtonToLeft.Size = new System.Drawing.Size(21, 46);
+            this.ButtonToLeft.TabIndex = 30;
+            this.ButtonToLeft.Text = "button2";
+            this.ButtonToLeft.UseVisualStyleBackColor = true;
+            this.ButtonToLeft.Click += new System.EventHandler(this.ButtonToLeft_Click);
             // 
             // label15
             // 
@@ -331,16 +397,16 @@ namespace Turing.Machines.OneLineTuringMachine
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.label1.DoubleClick += new System.EventHandler(this.OnLabelClick);
             // 
-            // button1
+            // ButtonToRight
             // 
-            this.button1.Dock = System.Windows.Forms.DockStyle.Left;
-            this.button1.Location = new System.Drawing.Point(0, 0);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(21, 46);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.ButtonToRight.Dock = System.Windows.Forms.DockStyle.Left;
+            this.ButtonToRight.Location = new System.Drawing.Point(0, 0);
+            this.ButtonToRight.Name = "ButtonToRight";
+            this.ButtonToRight.Size = new System.Drawing.Size(21, 46);
+            this.ButtonToRight.TabIndex = 0;
+            this.ButtonToRight.Text = "button1";
+            this.ButtonToRight.UseVisualStyleBackColor = true;
+            this.ButtonToRight.Click += new System.EventHandler(this.ButtonToRight_Click);
             // 
             // CurrentCondition
             // 
@@ -398,25 +464,25 @@ namespace Turing.Machines.OneLineTuringMachine
             this.label16.TabIndex = 5;
             this.label16.Text = "Алфавит";
             // 
-            // button3
+            // AddColumn
             // 
-            this.button3.Location = new System.Drawing.Point(457, 121);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(127, 23);
-            this.button3.TabIndex = 6;
-            this.button3.Text = "Добавить столбец";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
+            this.AddColumn.Location = new System.Drawing.Point(457, 121);
+            this.AddColumn.Name = "AddColumn";
+            this.AddColumn.Size = new System.Drawing.Size(127, 23);
+            this.AddColumn.TabIndex = 6;
+            this.AddColumn.Text = "Добавить столбец";
+            this.AddColumn.UseVisualStyleBackColor = true;
+            this.AddColumn.Click += new System.EventHandler(this.AddColumnButton_Click);
             // 
-            // button4
+            // DeleteColumn
             // 
-            this.button4.Location = new System.Drawing.Point(596, 121);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(111, 23);
-            this.button4.TabIndex = 7;
-            this.button4.Text = "Удалить столбец";
-            this.button4.UseVisualStyleBackColor = true;
-            this.button4.Click += new System.EventHandler(this.button4_Click);
+            this.DeleteColumn.Location = new System.Drawing.Point(596, 121);
+            this.DeleteColumn.Name = "DeleteColumn";
+            this.DeleteColumn.Size = new System.Drawing.Size(111, 23);
+            this.DeleteColumn.TabIndex = 7;
+            this.DeleteColumn.Text = "Удалить столбец";
+            this.DeleteColumn.UseVisualStyleBackColor = true;
+            this.DeleteColumn.Click += new System.EventHandler(this.DeleteColumntButton_Click);
             // 
             // numericUpDown1
             // 
@@ -430,35 +496,69 @@ namespace Turing.Machines.OneLineTuringMachine
             this.numericUpDown1.Size = new System.Drawing.Size(79, 20);
             this.numericUpDown1.TabIndex = 8;
             // 
-            // button5
+            // DoAllSteps_Button
             // 
-            this.button5.Location = new System.Drawing.Point(457, 92);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(127, 23);
-            this.button5.TabIndex = 9;
-            this.button5.Text = "Выполнить";
-            this.button5.UseVisualStyleBackColor = true;
+            this.DoAllSteps_Button.Location = new System.Drawing.Point(12, 95);
+            this.DoAllSteps_Button.Name = "DoAllSteps_Button";
+            this.DoAllSteps_Button.Size = new System.Drawing.Size(109, 23);
+            this.DoAllSteps_Button.TabIndex = 9;
+            this.DoAllSteps_Button.Text = "Выполнить";
+            this.DoAllSteps_Button.UseVisualStyleBackColor = true;
+            this.DoAllSteps_Button.Click += new System.EventHandler(this.DoAllSteps_Button_Click);
             // 
-            // button6
+            // MakeStep_Button
             // 
-            this.button6.Location = new System.Drawing.Point(596, 92);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(111, 23);
-            this.button6.TabIndex = 10;
-            this.button6.Text = "Шаг";
-            this.button6.UseVisualStyleBackColor = true;
-            this.button6.Click += new System.EventHandler(this.button6_Click);
+            this.MakeStep_Button.Location = new System.Drawing.Point(136, 121);
+            this.MakeStep_Button.Name = "MakeStep_Button";
+            this.MakeStep_Button.Size = new System.Drawing.Size(111, 23);
+            this.MakeStep_Button.TabIndex = 10;
+            this.MakeStep_Button.Text = "Шаг";
+            this.MakeStep_Button.UseVisualStyleBackColor = true;
+            this.MakeStep_Button.Click += new System.EventHandler(this.MakeStepButton_Click);
+            // 
+            // Return_Button
+            // 
+            this.Return_Button.Location = new System.Drawing.Point(713, 83);
+            this.Return_Button.Name = "Return_Button";
+            this.Return_Button.Size = new System.Drawing.Size(75, 23);
+            this.Return_Button.TabIndex = 11;
+            this.Return_Button.Text = "Заново";
+            this.Return_Button.UseVisualStyleBackColor = true;
+            this.Return_Button.Click += new System.EventHandler(this.ReturnButton_Click);
+            // 
+            // Clear_button
+            // 
+            this.Clear_button.Location = new System.Drawing.Point(631, 83);
+            this.Clear_button.Name = "Clear_button";
+            this.Clear_button.Size = new System.Drawing.Size(75, 23);
+            this.Clear_button.TabIndex = 12;
+            this.Clear_button.Text = "Очистить";
+            this.Clear_button.UseVisualStyleBackColor = true;
+            // 
+            // StopWork_Button
+            // 
+            this.StopWork_Button.Enabled = false;
+            this.StopWork_Button.Location = new System.Drawing.Point(136, 95);
+            this.StopWork_Button.Name = "StopWork_Button";
+            this.StopWork_Button.Size = new System.Drawing.Size(111, 23);
+            this.StopWork_Button.TabIndex = 13;
+            this.StopWork_Button.Text = "Стоп";
+            this.StopWork_Button.UseVisualStyleBackColor = true;
+            this.StopWork_Button.Click += new System.EventHandler(this.StopWork_Button_Click);
             // 
             // OneLineTuringMachineForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(792, 450);
-            this.Controls.Add(this.button6);
-            this.Controls.Add(this.button5);
+            this.Controls.Add(this.StopWork_Button);
+            this.Controls.Add(this.Clear_button);
+            this.Controls.Add(this.Return_Button);
+            this.Controls.Add(this.MakeStep_Button);
+            this.Controls.Add(this.DoAllSteps_Button);
             this.Controls.Add(this.numericUpDown1);
-            this.Controls.Add(this.button4);
-            this.Controls.Add(this.button3);
+            this.Controls.Add(this.DeleteColumn);
+            this.Controls.Add(this.AddColumn);
             this.Controls.Add(this.label16);
             this.Controls.Add(this.Alphabet);
             this.Controls.Add(this.panel2);
@@ -492,7 +592,7 @@ namespace Turing.Machines.OneLineTuringMachine
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.TextBox Alphabet;
         private System.Windows.Forms.Label label16;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button ButtonToRight;
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Label label13;
@@ -508,12 +608,22 @@ namespace Turing.Machines.OneLineTuringMachine
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button ButtonToLeft;
         private System.Windows.Forms.DataGridView TableConditions;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button AddColumn;
+        private System.Windows.Forms.Button DeleteColumn;
         private System.Windows.Forms.NumericUpDown numericUpDown1;
-        private System.Windows.Forms.Button button5;
-        private System.Windows.Forms.Button button6;
+        private System.Windows.Forms.Button DoAllSteps_Button;
+        private System.Windows.Forms.Button MakeStep_Button;
+        private System.Windows.Forms.Button Return_Button;
+        private System.Windows.Forms.ToolStripMenuItem скоростьВыполненияToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem медленноToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem среднеToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem быстрееToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem быстроToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem оченьБыстроToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem мгновенноToolStripMenuItem;
+        private System.Windows.Forms.Button Clear_button;
+        private System.Windows.Forms.Button StopWork_Button;
     }
 }

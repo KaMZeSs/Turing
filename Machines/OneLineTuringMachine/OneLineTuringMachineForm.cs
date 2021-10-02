@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 using Turing.Library;
 
@@ -12,7 +8,13 @@ namespace Turing.Machines.OneLineTuringMachine
 {
     public partial class OneLineTuringMachineForm : Form
     {
+        System.Windows.Forms.Timer timer = new System.Windows.Forms.Timer();
+
+        bool flag = true;
+
         String PreviousAlphabet;
+
+        String LineOnStart;
 
         TuringMachine turingMachine;
 
@@ -26,7 +28,7 @@ namespace Turing.Machines.OneLineTuringMachine
             TableConditions.AllowUserToAddRows = false;
             TableConditions.AllowUserToDeleteRows = false;
             PreviousAlphabet = "";
-            button3_Click(new object(), new EventArgs());
+            AddColumnButton_Click(new object(), new EventArgs());
             DataGridViewRow newRow = new DataGridViewRow();
             newRow.HeaderCell.Value = "λ";
             TableConditions.Rows.Add(newRow);
@@ -34,12 +36,17 @@ namespace Turing.Machines.OneLineTuringMachine
             PreviousAlphabet = Alphabet.Text;
             OrganizeLabels();
             ShowLine();
+            timer.Tick += Timer_Tick;
+            timer.Interval = 800;
         }
 
         private void TuringMachine_ValuesChanged(object sender, MachineValuesChangedEventArgs e)
         {
             ShowLine();
-            CurrentCondition.Text = "q" + e.CurrentCondition.ToString();
+            if (e.CurrentCondition == -1)
+                CurrentCondition.Text = "qz";
+            else
+                CurrentCondition.Text = "q" + e.CurrentCondition.ToString();
         }
 
         private void OrganizeLabels()
@@ -97,15 +104,6 @@ namespace Turing.Machines.OneLineTuringMachine
             if (turingMachine.CurrentPos + 7 != turingMachine.Line.Length)
             {
                 turingMachine.CurrentPos++;
-                ShowLine();
-            }
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-            if (turingMachine.CurrentPos - 7 != 0)
-            {
-                turingMachine.CurrentPos--;
                 ShowLine();
             }
         }
@@ -200,7 +198,7 @@ namespace Turing.Machines.OneLineTuringMachine
             return row;
         }
 
-        private void button3_Click(object sender, EventArgs e)
+        private void AddColumnButton_Click(object sender, EventArgs e)
         {
             int index = TableConditions.Columns.Count;
             TableConditions.Columns.Add(index.ToString(), "q" + index.ToString());
@@ -208,7 +206,7 @@ namespace Turing.Machines.OneLineTuringMachine
             TableConditions.Columns[TableConditions.Columns.Count - 1].Width = 50;
         }
 
-        private void button4_Click(object sender, EventArgs e)
+        private void DeleteColumntButton_Click(object sender, EventArgs e)
         {
             if (TableConditions.Columns.Count == 1) 
                 return;
@@ -264,21 +262,127 @@ namespace Turing.Machines.OneLineTuringMachine
             Cell.Value = str;
         }
 
-        private void button6_Click(object sender, EventArgs e)
+        private void MakeStepButton_Click(object sender, EventArgs e)
         {
             foreach (DataGridViewRow Row in TableConditions.Rows)
                 foreach (DataGridViewCell Cell in Row.Cells)
                     if (Cell.Value == null)
                         Cell.Value = "";
+            LineOnStart = turingMachine.Line;
             try
             {
                 turingMachine.NextStep();
+                if (turingMachine.CurrentCondition == -1)
+                {
+                    MessageBox.Show("Машина Тьюринга завершила работу");
+                    return;
+                }
             }
             catch (Exception except)
             {
                 //Сообщение об отсутствии команды
                 MessageBox.Show(except.Message);
             }
+        }
+
+        private void ReturnButton_Click(object sender, EventArgs e)
+        {
+            if (LineOnStart != null)
+                turingMachine.Line = LineOnStart;
+            else
+                turingMachine.Line = new String('λ', 201);
+            CurrentCondition.Text = "q0";
+            turingMachine.CurrentPos = 101;
+            turingMachine.CurrentCondition = 0;
+            ShowLine();
+        }
+
+        private void DoAllSteps_Button_Click(object sender, EventArgs e)
+        {
+            foreach (DataGridViewRow Row in TableConditions.Rows)
+                foreach (DataGridViewCell Cell in Row.Cells)
+                    if (Cell.Value == null)
+                        Cell.Value = "";
+            LineOnStart = turingMachine.Line;
+            timer.Start();
+            StopWork_Button.Enabled = true;
+        }
+
+        private void Timer_Tick(object sender, EventArgs e)
+        {
+            try
+            {
+                turingMachine.NextStep();
+                ShowLine();
+                if (turingMachine.CurrentCondition == -1)
+                {
+                    timer.Stop();
+                    StopWork_Button.Enabled = false;
+                    MessageBox.Show("Машина Тьюринга завершила работу");
+                }
+                
+            }
+            catch (Exception except)
+            {
+                timer.Stop();
+                MessageBox.Show(except.Message);
+            }
+        }
+
+        private void OnTimerSpeedClick(object sender, EventArgs e)
+        {
+            int counter = 0;
+            foreach (ToolStripMenuItem elment in скоростьВыполненияToolStripMenuItem.DropDownItems)
+            {
+                if (sender == elment)
+                    break;
+                counter++;
+            }
+            switch (counter)
+            {
+                case 0:
+                    timer.Interval = 800;
+                    break;
+                case 1:
+                    timer.Interval = 600;
+                    break;
+                case 2:
+                    timer.Interval = 300;
+                    break;
+                case 3:
+                    timer.Interval = 150;
+                    break;
+                case 4:
+                    timer.Interval = 50;
+                    break;
+                case 5:
+                    timer.Interval = 2;
+                    break;
+            }
+        }
+
+        private void ButtonToLeft_Click(object sender, EventArgs e)
+        {
+            if (turingMachine.CurrentPos + 7 != turingMachine.Line.Length)
+            {
+                turingMachine.CurrentPos++;
+                ShowLine();
+            }
+        }
+
+        private void ButtonToRight_Click(object sender, EventArgs e)
+        {
+            if (turingMachine.CurrentPos - 7 != 0)
+            {
+                turingMachine.CurrentPos--;
+                ShowLine();
+            }
+        }
+
+        private void StopWork_Button_Click(object sender, EventArgs e)
+        {
+            StopWork_Button.Enabled = false;
+            timer.Stop();
         }
     }
 }
