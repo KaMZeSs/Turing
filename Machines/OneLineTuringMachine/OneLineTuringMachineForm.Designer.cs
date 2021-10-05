@@ -71,6 +71,8 @@ namespace Turing.Machines.OneLineTuringMachine
             this.Return_Button = new System.Windows.Forms.Button();
             this.Clear_button = new System.Windows.Forms.Button();
             this.StopWork_Button = new System.Windows.Forms.Button();
+            this.SaveMachine_Button = new System.Windows.Forms.Button();
+            this.OpenMachine_Button = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -546,11 +548,33 @@ namespace Turing.Machines.OneLineTuringMachine
             this.StopWork_Button.UseVisualStyleBackColor = true;
             this.StopWork_Button.Click += new System.EventHandler(this.StopWork_Button_Click);
             // 
+            // SaveMachine_Button
+            // 
+            this.SaveMachine_Button.Location = new System.Drawing.Point(377, 121);
+            this.SaveMachine_Button.Name = "SaveMachine_Button";
+            this.SaveMachine_Button.Size = new System.Drawing.Size(75, 23);
+            this.SaveMachine_Button.TabIndex = 14;
+            this.SaveMachine_Button.Text = "Экспорт";
+            this.SaveMachine_Button.UseVisualStyleBackColor = true;
+            this.SaveMachine_Button.Click += new System.EventHandler(this.SaveMachine_Button_Click);
+            // 
+            // OpenMachine_Button
+            // 
+            this.OpenMachine_Button.Location = new System.Drawing.Point(296, 121);
+            this.OpenMachine_Button.Name = "OpenMachine_Button";
+            this.OpenMachine_Button.Size = new System.Drawing.Size(75, 23);
+            this.OpenMachine_Button.TabIndex = 15;
+            this.OpenMachine_Button.Text = "Импорт";
+            this.OpenMachine_Button.UseVisualStyleBackColor = true;
+            this.OpenMachine_Button.Click += new System.EventHandler(this.OpenMachine_Button_Click);
+            // 
             // OneLineTuringMachineForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(792, 450);
+            this.Controls.Add(this.OpenMachine_Button);
+            this.Controls.Add(this.SaveMachine_Button);
             this.Controls.Add(this.StopWork_Button);
             this.Controls.Add(this.Clear_button);
             this.Controls.Add(this.Return_Button);
@@ -625,5 +649,7 @@ namespace Turing.Machines.OneLineTuringMachine
         private System.Windows.Forms.ToolStripMenuItem мгновенноToolStripMenuItem;
         private System.Windows.Forms.Button Clear_button;
         private System.Windows.Forms.Button StopWork_Button;
+        private System.Windows.Forms.Button SaveMachine_Button;
+        private System.Windows.Forms.Button OpenMachine_Button;
     }
 }
