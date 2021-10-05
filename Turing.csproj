@@ -45,10 +45,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Library\WorkWithString.cs" />
-    <Compile Include="Machines\OneLineTuringMachine\GetElemFromAlphabet.cs">
+    <Compile Include="Machines\GetElemFromAlphabet.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Machines\OneLineTuringMachine\GetElemFromAlphabet.Designer.cs">
+    <Compile Include="Machines\GetElemFromAlphabet.Designer.cs">
       <DependentUpon>GetElemFromAlphabet.cs</DependentUpon>
     </Compile>
     <Compile Include="Machines\OneLineTuringMachine\OneLineTuringMachineForm.cs">
@@ -66,7 +66,7 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Machines\OneLineTuringMachine\GetElemFromAlphabet.resx">
+    <EmbeddedResource Include="Machines\GetElemFromAlphabet.resx">
       <DependentUpon>GetElemFromAlphabet.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Machines\OneLineTuringMachine\OneLineTuringMachineForm.resx">
