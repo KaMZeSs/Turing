@@ -198,7 +198,7 @@ namespace Turing.Machines.OneLineTuringMachine
             this.ButtonToLeft.Name = "ButtonToLeft";
             this.ButtonToLeft.Size = new System.Drawing.Size(21, 46);
             this.ButtonToLeft.TabIndex = 30;
-            this.ButtonToLeft.Text = "button2";
+            this.ButtonToLeft.Text = ">";
             this.ButtonToLeft.UseVisualStyleBackColor = true;
             this.ButtonToLeft.Click += new System.EventHandler(this.ButtonToLeft_Click);
             // 
@@ -404,7 +404,7 @@ namespace Turing.Machines.OneLineTuringMachine
             this.ButtonToRight.Name = "ButtonToRight";
             this.ButtonToRight.Size = new System.Drawing.Size(21, 46);
             this.ButtonToRight.TabIndex = 0;
-            this.ButtonToRight.Text = "button1";
+            this.ButtonToRight.Text = "<";
             this.ButtonToRight.UseVisualStyleBackColor = true;
             this.ButtonToRight.Click += new System.EventHandler(this.ButtonToRight_Click);
             // 

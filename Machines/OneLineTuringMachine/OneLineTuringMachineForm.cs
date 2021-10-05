@@ -10,8 +10,6 @@ namespace Turing.Machines.OneLineTuringMachine
     {
         System.Windows.Forms.Timer timer = new System.Windows.Forms.Timer();
 
-        bool flag = true;
-
         String PreviousAlphabet;
 
         String LineOnStart;
@@ -234,32 +232,86 @@ namespace Turing.Machines.OneLineTuringMachine
                 e.ColumnIndex);
         }
 
+        struct PartsOfCommand
+        {
+            public char Letter;
+            public int PosLetter;
+            public char Direction;
+            public int PosDirection;
+            public int Num;
+            public int PosNum;
+        }
+
         private void RepairCell(DataGridViewCell Cell, String Row, int Column)
         {
-            String str = null;
-            if (Cell.Value == null)
-                str = new String(' ', 3);
-            else
-                str = Cell.Value.ToString();
+            PartsOfCommand command = GetPartsOfCommand(Cell.Value);
 
-            if (str.Length < 3)
-                str = new String(' ', 3);
-            if (!Alphabet.Text.Contains(str[0]))
-                str = str.ChangeValue(0, Row);
-            if (!WorkWithString.isDirection(str[1].ToString()))
-                str = str.ChangeValue(1, ">");
-            String substr = str.Substring(2);
-            try
+            if (command.PosLetter != -1)
             {
-                int num = Convert.ToInt32(str.Substring(2));
-                if (!(num >= -1 && num <= numericUpDown1.Maximum))
-                    str = str.ChangeValue(2, str.Length, Column.ToString());
+                if (!Alphabet.Text.Contains(command.Letter))
+                    command.Letter = Row[0];
             }
-            catch
+            else
+                command.Letter = Row[0];
+
+            if (command.PosDirection == -1)
+                command.Direction = '>';
+
+            if (command.PosNum != -1)
             {
-                str = str.ChangeValue(2, str.Length, Column.ToString());
+                if (!(command.Num >= -1 & command.Num <= numericUpDown1.Maximum))
+                    command.Num = Column;
             }
-            Cell.Value = str;
+            else
+                command.Num = Column;
+
+            Cell.Value = command.Letter.ToString() + command.Direction + command.Num;
+        }
+
+        private PartsOfCommand GetPartsOfCommand(object obj)
+        {
+            String str;
+            PartsOfCommand parts = new PartsOfCommand();
+            parts.PosDirection = parts.PosLetter = parts.PosNum = -1;
+            if (obj == null)
+                return parts;
+            else
+                str = obj.ToString();
+            if (str == null | str.Length == 0)
+                return parts;
+
+            for (int i = 0; i < str.Length; i++)
+            {
+                if (parts.PosLetter == -1)
+                    if (Char.IsLetter(str[i]))
+                    {
+                        parts.PosLetter = i;
+                        parts.Letter = str[parts.PosLetter];
+                        continue;
+                    }
+                        
+                if (WorkWithString.isDirection(str[i].ToString()))
+                {
+                    parts.PosDirection = i;
+                    parts.Direction = str[parts.PosDirection];
+                    continue;
+                }
+                    
+                if (parts.PosNum == -1)
+                    if (str.isNumber(i))
+                    {
+                        try
+                        {
+                            parts.Num = Convert.ToInt32(str.Substring(parts.PosNum));
+                            parts.PosNum = i;
+                        }
+                        catch { }
+                        continue;
+                    }
+                        
+            }
+
+            return parts;
         }
 
         private void MakeStepButton_Click(object sender, EventArgs e)

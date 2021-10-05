@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Turing.Machines.OneLineTuringMachine;
 
 namespace Turing.Library
 {
@@ -11,10 +12,7 @@ namespace Turing.Library
         {
             StringBuilder sb = new StringBuilder(multiplier * source.Length);
             for (int i = 0; i < multiplier; i++)
-            {
                 sb.Append(source);
-            }
-
             return sb.ToString();
         }
 
@@ -59,7 +57,6 @@ namespace Turing.Library
             String str = source.Substring(length: index, startIndex: 0);
             str += newValue;
             str += source.Substring(startIndex: index + 1);
-
             return str;
         }
 
@@ -70,5 +67,32 @@ namespace Turing.Library
             str += source.Substring(startIndex: LastIndex);
             return str;
         }
+
+        public static bool isNumber(this string source)
+        {
+            foreach (var element in source)
+                if (!Char.IsDigit(element))
+                    return false;
+            return true;
+        }
+
+        public static bool isNumber(this string source, int StartPos)
+        {
+            bool isMinus = false;
+            foreach (var element in source.Substring(StartPos))
+            {
+                if (element == '-')
+                    if (isMinus)
+                        return false;
+                    else
+                        isMinus = true;
+                else if (!Char.IsDigit(element))
+                    return false;
+            }
+                
+            return true;
+        }
+
+        
     }
 }
