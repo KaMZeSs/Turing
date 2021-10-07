@@ -29,67 +29,48 @@ namespace Turing
         /// </summary>
         private void InitializeComponent()
         {
-            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.qweqweToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.одноленточнаяToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.двухленточнаяToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuStrip1.SuspendLayout();
+            this.button1 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // menuStrip1
+            // button1
             // 
-            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.qweqweToolStripMenuItem});
-            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(792, 24);
-            this.menuStrip1.TabIndex = 1;
-            this.menuStrip1.Text = "menuStrip1";
+            this.button1.Location = new System.Drawing.Point(12, 12);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(93, 23);
+            this.button1.TabIndex = 0;
+            this.button1.Text = "Одноленточная";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // qweqweToolStripMenuItem
+            // button2
             // 
-            this.qweqweToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.одноленточнаяToolStripMenuItem,
-            this.двухленточнаяToolStripMenuItem});
-            this.qweqweToolStripMenuItem.Name = "qweqweToolStripMenuItem";
-            this.qweqweToolStripMenuItem.Size = new System.Drawing.Size(124, 20);
-            this.qweqweToolStripMenuItem.Text = "Машина Тьюринга";
-            // 
-            // одноленточнаяToolStripMenuItem
-            // 
-            this.одноленточнаяToolStripMenuItem.Name = "одноленточнаяToolStripMenuItem";
-            this.одноленточнаяToolStripMenuItem.Size = new System.Drawing.Size(161, 22);
-            this.одноленточнаяToolStripMenuItem.Text = "Одноленточная";
-            this.одноленточнаяToolStripMenuItem.Click += new System.EventHandler(this.одноленточнаяToolStripMenuItem_Click);
-            // 
-            // двухленточнаяToolStripMenuItem
-            // 
-            this.двухленточнаяToolStripMenuItem.Name = "двухленточнаяToolStripMenuItem";
-            this.двухленточнаяToolStripMenuItem.Size = new System.Drawing.Size(161, 22);
-            this.двухленточнаяToolStripMenuItem.Text = "Двухленточная";
+            this.button2.Location = new System.Drawing.Point(126, 12);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(96, 23);
+            this.button2.TabIndex = 0;
+            this.button2.Text = "Двуленточная";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(792, 450);
-            this.Controls.Add(this.menuStrip1);
-            this.MaximumSize = new System.Drawing.Size(808, 489);
-            this.MinimumSize = new System.Drawing.Size(808, 489);
+            this.ClientSize = new System.Drawing.Size(234, 47);
+            this.Controls.Add(this.button2);
+            this.Controls.Add(this.button1);
+            this.MaximumSize = new System.Drawing.Size(250, 86);
+            this.MinimumSize = new System.Drawing.Size(250, 86);
             this.Name = "MainForm";
             this.Text = "MainForm";
-            this.menuStrip1.ResumeLayout(false);
-            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
 
-        private System.Windows.Forms.MenuStrip menuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem qweqweToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem одноленточнаяToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem двухленточнаяToolStripMenuItem;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button button2;
     }
 }

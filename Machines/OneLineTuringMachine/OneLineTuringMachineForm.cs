@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
@@ -67,18 +68,6 @@ namespace Turing.Machines.OneLineTuringMachine
             labels[12] = label13;
             labels[13] = label14;
             labels[14] = label15;
-        }
-
-        private void одноленточнаяToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            this.Controls.Clear();
-            this.MinimumSize = new Size(765, 489);
-            Form form = new Turing.Machines.OneLineTuringMachine.OneLineTuringMachineForm();
-            Control[] controls = new Control[form.Controls.Count];
-            form.Controls.CopyTo(controls, 0);
-            this.Controls.AddRange(controls);
-            OrganizeLabels();
-            ShowLine();
         }
 
         private void ShowLine()

@@ -6,19 +6,34 @@ namespace Turing
 {
     public partial class MainForm : Form
     {
+        int counter = 0;
         public MainForm()
         {
             InitializeComponent();
-            одноленточнаяToolStripMenuItem_Click(new object(), new EventArgs());
         }
 
-        private void одноленточнаяToolStripMenuItem_Click(object sender, EventArgs e)
+        private void button1_Click(object sender, EventArgs e)
         {
-            this.Controls.Clear();
             Form form = new Turing.Machines.OneLineTuringMachine.OneLineTuringMachineForm();
-            Control[] controls = new Control[form.Controls.Count];
-            form.Controls.CopyTo(controls, 0);
-            this.Controls.AddRange(controls);
+            form.FormClosed += Form_Closed;
+            form.Show();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            Form form = new Turing.Machines.TwoLinesTuringMachine.TwoLinesTuringMachine();
+            form.Show();
+        }
+
+        private void Form_Closed(object sender, EventArgs e)
+        {
+            if(counter < 10)
+            {
+                counter++;
+                return;
+            }
+            counter = 0;
+            GC.Collect();
         }
     }
 }

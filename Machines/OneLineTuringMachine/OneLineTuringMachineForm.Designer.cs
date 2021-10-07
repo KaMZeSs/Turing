@@ -30,9 +30,6 @@ namespace Turing.Machines.OneLineTuringMachine
         private void InitializeComponent()
         {
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.qweqweToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.одноленточнаяToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.двухленточнаяToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.скоростьВыполненияToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.медленноToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.среднеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -83,35 +80,12 @@ namespace Turing.Machines.OneLineTuringMachine
             // menuStrip1
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.qweqweToolStripMenuItem,
             this.скоростьВыполненияToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(792, 24);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
-            // 
-            // qweqweToolStripMenuItem
-            // 
-            this.qweqweToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.одноленточнаяToolStripMenuItem,
-            this.двухленточнаяToolStripMenuItem});
-            this.qweqweToolStripMenuItem.Name = "qweqweToolStripMenuItem";
-            this.qweqweToolStripMenuItem.Size = new System.Drawing.Size(124, 20);
-            this.qweqweToolStripMenuItem.Text = "Машина Тьюринга";
-            // 
-            // одноленточнаяToolStripMenuItem
-            // 
-            this.одноленточнаяToolStripMenuItem.Name = "одноленточнаяToolStripMenuItem";
-            this.одноленточнаяToolStripMenuItem.Size = new System.Drawing.Size(161, 22);
-            this.одноленточнаяToolStripMenuItem.Text = "Одноленточная";
-            this.одноленточнаяToolStripMenuItem.Click += new System.EventHandler(this.одноленточнаяToolStripMenuItem_Click);
-            // 
-            // двухленточнаяToolStripMenuItem
-            // 
-            this.двухленточнаяToolStripMenuItem.Name = "двухленточнаяToolStripMenuItem";
-            this.двухленточнаяToolStripMenuItem.Size = new System.Drawing.Size(161, 22);
-            this.двухленточнаяToolStripMenuItem.Text = "Двухленточная";
             // 
             // скоростьВыполненияToolStripMenuItem
             // 
@@ -129,42 +103,42 @@ namespace Turing.Machines.OneLineTuringMachine
             // медленноToolStripMenuItem
             // 
             this.медленноToolStripMenuItem.Name = "медленноToolStripMenuItem";
-            this.медленноToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
+            this.медленноToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.медленноToolStripMenuItem.Text = "Медленно";
             this.медленноToolStripMenuItem.Click += new System.EventHandler(this.OnTimerSpeedClick);
             // 
             // среднеToolStripMenuItem
             // 
             this.среднеToolStripMenuItem.Name = "среднеToolStripMenuItem";
-            this.среднеToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
+            this.среднеToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.среднеToolStripMenuItem.Text = "Средне";
             this.среднеToolStripMenuItem.Click += new System.EventHandler(this.OnTimerSpeedClick);
             // 
             // быстрееToolStripMenuItem
             // 
             this.быстрееToolStripMenuItem.Name = "быстрееToolStripMenuItem";
-            this.быстрееToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
+            this.быстрееToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.быстрееToolStripMenuItem.Text = "Быстрее";
             this.быстрееToolStripMenuItem.Click += new System.EventHandler(this.OnTimerSpeedClick);
             // 
             // быстроToolStripMenuItem
             // 
             this.быстроToolStripMenuItem.Name = "быстроToolStripMenuItem";
-            this.быстроToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
+            this.быстроToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.быстроToolStripMenuItem.Text = "Быстро";
             this.быстроToolStripMenuItem.Click += new System.EventHandler(this.OnTimerSpeedClick);
             // 
             // оченьБыстроToolStripMenuItem
             // 
             this.оченьБыстроToolStripMenuItem.Name = "оченьБыстроToolStripMenuItem";
-            this.оченьБыстроToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
+            this.оченьБыстроToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.оченьБыстроToolStripMenuItem.Text = "Очень Быстро";
             this.оченьБыстроToolStripMenuItem.Click += new System.EventHandler(this.OnTimerSpeedClick);
             // 
             // мгновенноToolStripMenuItem
             // 
             this.мгновенноToolStripMenuItem.Name = "мгновенноToolStripMenuItem";
-            this.мгновенноToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
+            this.мгновенноToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.мгновенноToolStripMenuItem.Text = "Мгновенно";
             this.мгновенноToolStripMenuItem.Click += new System.EventHandler(this.OnTimerSpeedClick);
             // 
@@ -608,10 +582,7 @@ namespace Turing.Machines.OneLineTuringMachine
         #endregion
 
         private System.Windows.Forms.MenuStrip menuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem qweqweToolStripMenuItem;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.ToolStripMenuItem одноленточнаяToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem двухленточнаяToolStripMenuItem;
         private System.Windows.Forms.Label CurrentCondition;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.TextBox Alphabet;
