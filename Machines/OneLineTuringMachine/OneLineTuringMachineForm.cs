@@ -1,5 +1,4 @@
 ﻿using System;
-using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
@@ -42,13 +41,13 @@ namespace Turing.Machines.OneLineTuringMachine
             timer.Interval = 800;
         }
 
-        private void TuringMachine_ValuesChanged(object sender, MachineValuesChangedEventArgs e)
+        private void TuringMachine_ValuesChanged(object sender,EventArgs e)
         {
             ShowLine();
-            if (e.CurrentCondition == -1)
+            if (turingMachine.CurrentCondition == -1)
                 CurrentCondition.Text = "qz";
             else
-                CurrentCondition.Text = "q" + e.CurrentCondition.ToString();
+                CurrentCondition.Text = "q" + turingMachine.CurrentCondition.ToString();
         }
 
         private void OrganizeLabels()
@@ -72,7 +71,6 @@ namespace Turing.Machines.OneLineTuringMachine
 
         private void ShowLine()
         {
-            String str = turingMachine.Line;
             int pos = turingMachine.CurrentPos - 7;
             foreach (Label label in labels)
             {
@@ -86,15 +84,6 @@ namespace Turing.Machines.OneLineTuringMachine
                 }
                 label.Text = turingMachine.Line[pos].ToString();
                 pos++;
-            }
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            if (turingMachine.CurrentPos + 7 != turingMachine.Line.Length)
-            {
-                turingMachine.CurrentPos++;
-                ShowLine();
             }
         }
 
@@ -156,7 +145,7 @@ namespace Turing.Machines.OneLineTuringMachine
             {
                 if (PreviousAlphabet.Contains(Letter))
                 {
-                    //Если в прошлом алфавите эта строка была, а в ном ее нет - удаляем эту строку
+                    //Если в прошлом алфавите эта строка была, а в новом ее нет - удаляем эту строку
                     TableConditions.Rows.Remove(GetRowToDelete(Letter));
                 }
                 else
@@ -205,6 +194,8 @@ namespace Turing.Machines.OneLineTuringMachine
         private void DeleteColumntButton_Click(object sender, EventArgs e)
         {
             if (TableConditions.Columns.Count == 1) 
+                return;
+            if ((int)numericUpDown1.Value > (int)numericUpDown1.Maximum)
                 return;
             TableConditions.Columns.RemoveAt(((int)numericUpDown1.Value));
 
@@ -300,7 +291,7 @@ namespace Turing.Machines.OneLineTuringMachine
                     {
                         try
                         {
-                            parts.Num = Convert.ToInt32(str.Substring(parts.PosNum));
+                            parts.Num = Convert.ToInt32(str.Substring(i));
                             parts.PosNum = i;
                         }
                         catch { }

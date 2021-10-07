@@ -563,6 +563,7 @@ namespace Turing.Machines.OneLineTuringMachine
             this.Controls.Add(this.CurrentCondition);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.menuStrip1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MainMenuStrip = this.menuStrip1;
             this.MaximumSize = new System.Drawing.Size(808, 489);
             this.MinimumSize = new System.Drawing.Size(808, 489);

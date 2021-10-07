@@ -1,5 +1,5 @@
 ﻿
-namespace Turing.Machines.OneLineTuringMachine
+namespace Turing.Machines
 {
     partial class GetElemFromAlphabet
     {

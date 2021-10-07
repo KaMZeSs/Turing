@@ -59,11 +59,11 @@
     </Compile>
     <Compile Include="Machines\OneLineTuringMachine\TuringMachine.cs" />
     <Compile Include="Machines\TwoLinesTuringMachine\TuringMachine.cs" />
-    <Compile Include="Machines\TwoLinesTuringMachine\TwoLinesTuringMachine.cs">
+    <Compile Include="Machines\TwoLinesTuringMachine\TwoLinesTuringMachineForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Machines\TwoLinesTuringMachine\TwoLinesTuringMachine.Designer.cs">
-      <DependentUpon>TwoLinesTuringMachine.cs</DependentUpon>
+    <Compile Include="Machines\TwoLinesTuringMachine\TwoLinesTuringMachineForm.Designer.cs">
+      <DependentUpon>TwoLinesTuringMachineForm.cs</DependentUpon>
     </Compile>
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
@@ -79,8 +79,8 @@
     <EmbeddedResource Include="Machines\OneLineTuringMachine\OneLineTuringMachineForm.resx">
       <DependentUpon>OneLineTuringMachineForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Machines\TwoLinesTuringMachine\TwoLinesTuringMachine.resx">
-      <DependentUpon>TwoLinesTuringMachine.cs</DependentUpon>
+    <EmbeddedResource Include="Machines\TwoLinesTuringMachine\TwoLinesTuringMachineForm.resx">
+      <DependentUpon>TwoLinesTuringMachineForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>

@@ -92,7 +92,5 @@ namespace Turing.Library
                 
             return true;
         }
-
-        
     }
 }

@@ -1,7 +1,7 @@
 ﻿
 namespace Turing.Machines.TwoLinesTuringMachine
 {
-    partial class TwoLinesTuringMachine
+    partial class TwoLinesTuringMachineForm
     {
         /// <summary>
         /// Required designer variable.
@@ -56,7 +56,6 @@ namespace Turing.Machines.TwoLinesTuringMachine
             this.label1 = new System.Windows.Forms.Label();
             this.ButtonToRightFirst = new System.Windows.Forms.Button();
             this.CurrentCondition = new System.Windows.Forms.Label();
-            this.label16 = new System.Windows.Forms.Label();
             this.ButtonToLeftSecond = new System.Windows.Forms.Button();
             this.label17 = new System.Windows.Forms.Label();
             this.label18 = new System.Windows.Forms.Label();
@@ -75,9 +74,24 @@ namespace Turing.Machines.TwoLinesTuringMachine
             this.label31 = new System.Windows.Forms.Label();
             this.ButtonToRightSecond = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.label32 = new System.Windows.Forms.Label();
+            this.TableConditions = new System.Windows.Forms.DataGridView();
+            this.Alphabet = new System.Windows.Forms.TextBox();
+            this.OpenMachine_Button = new System.Windows.Forms.Button();
+            this.SaveMachine_Button = new System.Windows.Forms.Button();
+            this.StopWork_Button = new System.Windows.Forms.Button();
+            this.Clear_button = new System.Windows.Forms.Button();
+            this.Return_Button = new System.Windows.Forms.Button();
+            this.MakeStep_Button = new System.Windows.Forms.Button();
+            this.DoAllSteps_Button = new System.Windows.Forms.Button();
+            this.DeleteColumn = new System.Windows.Forms.Button();
+            this.AddColumn = new System.Windows.Forms.Button();
+            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.TableConditions)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -86,7 +100,7 @@ namespace Turing.Machines.TwoLinesTuringMachine
             this.скоростьВыполненияToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(800, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(791, 24);
             this.menuStrip1.TabIndex = 1;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -106,37 +120,37 @@ namespace Turing.Machines.TwoLinesTuringMachine
             // медленноToolStripMenuItem
             // 
             this.медленноToolStripMenuItem.Name = "медленноToolStripMenuItem";
-            this.медленноToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.медленноToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
             this.медленноToolStripMenuItem.Text = "Медленно";
             // 
             // среднеToolStripMenuItem
             // 
             this.среднеToolStripMenuItem.Name = "среднеToolStripMenuItem";
-            this.среднеToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.среднеToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
             this.среднеToolStripMenuItem.Text = "Средне";
             // 
             // быстрееToolStripMenuItem
             // 
             this.быстрееToolStripMenuItem.Name = "быстрееToolStripMenuItem";
-            this.быстрееToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.быстрееToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
             this.быстрееToolStripMenuItem.Text = "Быстрее";
             // 
             // быстроToolStripMenuItem
             // 
             this.быстроToolStripMenuItem.Name = "быстроToolStripMenuItem";
-            this.быстроToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.быстроToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
             this.быстроToolStripMenuItem.Text = "Быстро";
             // 
             // оченьБыстроToolStripMenuItem
             // 
             this.оченьБыстроToolStripMenuItem.Name = "оченьБыстроToolStripMenuItem";
-            this.оченьБыстроToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.оченьБыстроToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
             this.оченьБыстроToolStripMenuItem.Text = "Очень Быстро";
             // 
             // мгновенноToolStripMenuItem
             // 
             this.мгновенноToolStripMenuItem.Name = "мгновенноToolStripMenuItem";
-            this.мгновенноToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.мгновенноToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
             this.мгновенноToolStripMenuItem.Text = "Мгновенно";
             // 
             // panel1
@@ -161,7 +175,7 @@ namespace Turing.Machines.TwoLinesTuringMachine
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 24);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(800, 50);
+            this.panel1.Size = new System.Drawing.Size(791, 50);
             this.panel1.TabIndex = 2;
             // 
             // ButtonToLeftFirst
@@ -185,6 +199,7 @@ namespace Turing.Machines.TwoLinesTuringMachine
             this.label15.TabIndex = 46;
             this.label15.Text = "A";
             this.label15.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label15.DoubleClick += new System.EventHandler(this.OnLabelClick);
             // 
             // label14
             // 
@@ -197,6 +212,7 @@ namespace Turing.Machines.TwoLinesTuringMachine
             this.label14.TabIndex = 45;
             this.label14.Text = "A";
             this.label14.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label14.DoubleClick += new System.EventHandler(this.OnLabelClick);
             // 
             // label13
             // 
@@ -209,6 +225,7 @@ namespace Turing.Machines.TwoLinesTuringMachine
             this.label13.TabIndex = 44;
             this.label13.Text = "A";
             this.label13.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label13.DoubleClick += new System.EventHandler(this.OnLabelClick);
             // 
             // label12
             // 
@@ -221,6 +238,7 @@ namespace Turing.Machines.TwoLinesTuringMachine
             this.label12.TabIndex = 43;
             this.label12.Text = "A";
             this.label12.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label12.DoubleClick += new System.EventHandler(this.OnLabelClick);
             // 
             // label11
             // 
@@ -233,6 +251,7 @@ namespace Turing.Machines.TwoLinesTuringMachine
             this.label11.TabIndex = 42;
             this.label11.Text = "A";
             this.label11.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label11.DoubleClick += new System.EventHandler(this.OnLabelClick);
             // 
             // label10
             // 
@@ -245,6 +264,7 @@ namespace Turing.Machines.TwoLinesTuringMachine
             this.label10.TabIndex = 41;
             this.label10.Text = "A";
             this.label10.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label10.DoubleClick += new System.EventHandler(this.OnLabelClick);
             // 
             // label9
             // 
@@ -257,6 +277,7 @@ namespace Turing.Machines.TwoLinesTuringMachine
             this.label9.TabIndex = 40;
             this.label9.Text = "A";
             this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label9.DoubleClick += new System.EventHandler(this.OnLabelClick);
             // 
             // label8
             // 
@@ -269,6 +290,7 @@ namespace Turing.Machines.TwoLinesTuringMachine
             this.label8.TabIndex = 39;
             this.label8.Text = "A";
             this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label8.DoubleClick += new System.EventHandler(this.OnLabelClick);
             // 
             // label7
             // 
@@ -281,6 +303,7 @@ namespace Turing.Machines.TwoLinesTuringMachine
             this.label7.TabIndex = 38;
             this.label7.Text = "A";
             this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label7.DoubleClick += new System.EventHandler(this.OnLabelClick);
             // 
             // label6
             // 
@@ -293,6 +316,7 @@ namespace Turing.Machines.TwoLinesTuringMachine
             this.label6.TabIndex = 37;
             this.label6.Text = "A";
             this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label6.DoubleClick += new System.EventHandler(this.OnLabelClick);
             // 
             // label5
             // 
@@ -305,6 +329,7 @@ namespace Turing.Machines.TwoLinesTuringMachine
             this.label5.TabIndex = 36;
             this.label5.Text = "A";
             this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label5.DoubleClick += new System.EventHandler(this.OnLabelClick);
             // 
             // label4
             // 
@@ -317,6 +342,7 @@ namespace Turing.Machines.TwoLinesTuringMachine
             this.label4.TabIndex = 35;
             this.label4.Text = "A";
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label4.DoubleClick += new System.EventHandler(this.OnLabelClick);
             // 
             // label3
             // 
@@ -329,6 +355,7 @@ namespace Turing.Machines.TwoLinesTuringMachine
             this.label3.TabIndex = 34;
             this.label3.Text = "A";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label3.DoubleClick += new System.EventHandler(this.OnLabelClick);
             // 
             // label2
             // 
@@ -341,6 +368,7 @@ namespace Turing.Machines.TwoLinesTuringMachine
             this.label2.TabIndex = 33;
             this.label2.Text = "A";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label2.DoubleClick += new System.EventHandler(this.OnLabelClick);
             // 
             // label1
             // 
@@ -353,6 +381,7 @@ namespace Turing.Machines.TwoLinesTuringMachine
             this.label1.TabIndex = 32;
             this.label1.Text = "A";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label1.DoubleClick += new System.EventHandler(this.OnLabelClick);
             // 
             // ButtonToRightFirst
             // 
@@ -367,20 +396,11 @@ namespace Turing.Machines.TwoLinesTuringMachine
             // CurrentCondition
             // 
             this.CurrentCondition.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F);
-            this.CurrentCondition.Location = new System.Drawing.Point(371, 77);
+            this.CurrentCondition.Location = new System.Drawing.Point(371, 130);
             this.CurrentCondition.Name = "CurrentCondition";
             this.CurrentCondition.Size = new System.Drawing.Size(50, 45);
-            this.CurrentCondition.TabIndex = 3;
+            this.CurrentCondition.TabIndex = 5;
             this.CurrentCondition.Text = "q0";
-            // 
-            // label16
-            // 
-            this.label16.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F);
-            this.label16.Location = new System.Drawing.Point(371, 168);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(50, 45);
-            this.label16.TabIndex = 5;
-            this.label16.Text = "q0";
             // 
             // ButtonToLeftSecond
             // 
@@ -403,6 +423,7 @@ namespace Turing.Machines.TwoLinesTuringMachine
             this.label17.TabIndex = 46;
             this.label17.Text = "A";
             this.label17.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label17.DoubleClick += new System.EventHandler(this.OnLabelClick);
             // 
             // label18
             // 
@@ -415,6 +436,7 @@ namespace Turing.Machines.TwoLinesTuringMachine
             this.label18.TabIndex = 45;
             this.label18.Text = "A";
             this.label18.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label18.DoubleClick += new System.EventHandler(this.OnLabelClick);
             // 
             // label19
             // 
@@ -427,6 +449,7 @@ namespace Turing.Machines.TwoLinesTuringMachine
             this.label19.TabIndex = 44;
             this.label19.Text = "A";
             this.label19.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label19.DoubleClick += new System.EventHandler(this.OnLabelClick);
             // 
             // label20
             // 
@@ -439,6 +462,7 @@ namespace Turing.Machines.TwoLinesTuringMachine
             this.label20.TabIndex = 43;
             this.label20.Text = "A";
             this.label20.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label20.DoubleClick += new System.EventHandler(this.OnLabelClick);
             // 
             // label21
             // 
@@ -451,6 +475,7 @@ namespace Turing.Machines.TwoLinesTuringMachine
             this.label21.TabIndex = 42;
             this.label21.Text = "A";
             this.label21.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label21.DoubleClick += new System.EventHandler(this.OnLabelClick);
             // 
             // label22
             // 
@@ -463,6 +488,7 @@ namespace Turing.Machines.TwoLinesTuringMachine
             this.label22.TabIndex = 41;
             this.label22.Text = "A";
             this.label22.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label22.DoubleClick += new System.EventHandler(this.OnLabelClick);
             // 
             // label23
             // 
@@ -475,6 +501,7 @@ namespace Turing.Machines.TwoLinesTuringMachine
             this.label23.TabIndex = 40;
             this.label23.Text = "A";
             this.label23.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label23.DoubleClick += new System.EventHandler(this.OnLabelClick);
             // 
             // label24
             // 
@@ -487,6 +514,7 @@ namespace Turing.Machines.TwoLinesTuringMachine
             this.label24.TabIndex = 39;
             this.label24.Text = "A";
             this.label24.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label24.DoubleClick += new System.EventHandler(this.OnLabelClick);
             // 
             // label25
             // 
@@ -499,6 +527,7 @@ namespace Turing.Machines.TwoLinesTuringMachine
             this.label25.TabIndex = 38;
             this.label25.Text = "A";
             this.label25.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label25.DoubleClick += new System.EventHandler(this.OnLabelClick);
             // 
             // label26
             // 
@@ -511,6 +540,7 @@ namespace Turing.Machines.TwoLinesTuringMachine
             this.label26.TabIndex = 37;
             this.label26.Text = "A";
             this.label26.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label26.DoubleClick += new System.EventHandler(this.OnLabelClick);
             // 
             // label27
             // 
@@ -523,6 +553,7 @@ namespace Turing.Machines.TwoLinesTuringMachine
             this.label27.TabIndex = 36;
             this.label27.Text = "A";
             this.label27.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label27.DoubleClick += new System.EventHandler(this.OnLabelClick);
             // 
             // label28
             // 
@@ -535,6 +566,7 @@ namespace Turing.Machines.TwoLinesTuringMachine
             this.label28.TabIndex = 35;
             this.label28.Text = "A";
             this.label28.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label28.DoubleClick += new System.EventHandler(this.OnLabelClick);
             // 
             // label29
             // 
@@ -547,6 +579,7 @@ namespace Turing.Machines.TwoLinesTuringMachine
             this.label29.TabIndex = 34;
             this.label29.Text = "A";
             this.label29.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label29.DoubleClick += new System.EventHandler(this.OnLabelClick);
             // 
             // label30
             // 
@@ -559,6 +592,7 @@ namespace Turing.Machines.TwoLinesTuringMachine
             this.label30.TabIndex = 33;
             this.label30.Text = "A";
             this.label30.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label30.DoubleClick += new System.EventHandler(this.OnLabelClick);
             // 
             // label31
             // 
@@ -571,6 +605,7 @@ namespace Turing.Machines.TwoLinesTuringMachine
             this.label31.TabIndex = 32;
             this.label31.Text = "A";
             this.label31.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label31.DoubleClick += new System.EventHandler(this.OnLabelClick);
             // 
             // ButtonToRightSecond
             // 
@@ -601,27 +636,175 @@ namespace Turing.Machines.TwoLinesTuringMachine
             this.panel2.Controls.Add(this.label30);
             this.panel2.Controls.Add(this.label31);
             this.panel2.Controls.Add(this.ButtonToRightSecond);
-            this.panel2.Location = new System.Drawing.Point(0, 115);
+            this.panel2.Location = new System.Drawing.Point(0, 77);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(800, 50);
             this.panel2.TabIndex = 4;
             // 
-            // TwoLinesTuringMachine
+            // label32
+            // 
+            this.label32.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F);
+            this.label32.Location = new System.Drawing.Point(12, 212);
+            this.label32.Name = "label32";
+            this.label32.Size = new System.Drawing.Size(100, 23);
+            this.label32.TabIndex = 6;
+            this.label32.Text = "Алфавит";
+            // 
+            // TableConditions
+            // 
+            this.TableConditions.AllowUserToAddRows = false;
+            this.TableConditions.AllowUserToDeleteRows = false;
+            this.TableConditions.AllowUserToResizeColumns = false;
+            this.TableConditions.AllowUserToResizeRows = false;
+            this.TableConditions.BackgroundColor = System.Drawing.SystemColors.Control;
+            this.TableConditions.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.TableConditions.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.TableConditions.GridColor = System.Drawing.SystemColors.Control;
+            this.TableConditions.Location = new System.Drawing.Point(0, 269);
+            this.TableConditions.MultiSelect = false;
+            this.TableConditions.Name = "TableConditions";
+            this.TableConditions.Size = new System.Drawing.Size(791, 272);
+            this.TableConditions.TabIndex = 7;
+            this.TableConditions.ColumnAdded += new System.Windows.Forms.DataGridViewColumnEventHandler(this.TableConditions_ColumnAdded);
+            this.TableConditions.ColumnRemoved += new System.Windows.Forms.DataGridViewColumnEventHandler(this.TableConditions_ColumnAdded);
+            // 
+            // Alphabet
+            // 
+            this.Alphabet.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.Alphabet.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.Alphabet.Location = new System.Drawing.Point(0, 238);
+            this.Alphabet.Name = "Alphabet";
+            this.Alphabet.Size = new System.Drawing.Size(791, 31);
+            this.Alphabet.TabIndex = 8;
+            this.Alphabet.TextChanged += new System.EventHandler(this.Alphabet_TextChanged);
+            // 
+            // OpenMachine_Button
+            // 
+            this.OpenMachine_Button.Location = new System.Drawing.Point(292, 210);
+            this.OpenMachine_Button.Name = "OpenMachine_Button";
+            this.OpenMachine_Button.Size = new System.Drawing.Size(75, 23);
+            this.OpenMachine_Button.TabIndex = 24;
+            this.OpenMachine_Button.Text = "Импорт";
+            this.OpenMachine_Button.UseVisualStyleBackColor = true;
+            // 
+            // SaveMachine_Button
+            // 
+            this.SaveMachine_Button.Location = new System.Drawing.Point(373, 210);
+            this.SaveMachine_Button.Name = "SaveMachine_Button";
+            this.SaveMachine_Button.Size = new System.Drawing.Size(75, 23);
+            this.SaveMachine_Button.TabIndex = 23;
+            this.SaveMachine_Button.Text = "Экспорт";
+            this.SaveMachine_Button.UseVisualStyleBackColor = true;
+            // 
+            // StopWork_Button
+            // 
+            this.StopWork_Button.Enabled = false;
+            this.StopWork_Button.Location = new System.Drawing.Point(132, 184);
+            this.StopWork_Button.Name = "StopWork_Button";
+            this.StopWork_Button.Size = new System.Drawing.Size(111, 23);
+            this.StopWork_Button.TabIndex = 22;
+            this.StopWork_Button.Text = "Стоп";
+            this.StopWork_Button.UseVisualStyleBackColor = true;
+            // 
+            // Clear_button
+            // 
+            this.Clear_button.Location = new System.Drawing.Point(627, 172);
+            this.Clear_button.Name = "Clear_button";
+            this.Clear_button.Size = new System.Drawing.Size(75, 23);
+            this.Clear_button.TabIndex = 21;
+            this.Clear_button.Text = "Очистить";
+            this.Clear_button.UseVisualStyleBackColor = true;
+            // 
+            // Return_Button
+            // 
+            this.Return_Button.Location = new System.Drawing.Point(709, 172);
+            this.Return_Button.Name = "Return_Button";
+            this.Return_Button.Size = new System.Drawing.Size(75, 23);
+            this.Return_Button.TabIndex = 20;
+            this.Return_Button.Text = "Заново";
+            this.Return_Button.UseVisualStyleBackColor = true;
+            // 
+            // MakeStep_Button
+            // 
+            this.MakeStep_Button.Location = new System.Drawing.Point(132, 210);
+            this.MakeStep_Button.Name = "MakeStep_Button";
+            this.MakeStep_Button.Size = new System.Drawing.Size(111, 23);
+            this.MakeStep_Button.TabIndex = 19;
+            this.MakeStep_Button.Text = "Шаг";
+            this.MakeStep_Button.UseVisualStyleBackColor = true;
+            // 
+            // DoAllSteps_Button
+            // 
+            this.DoAllSteps_Button.Location = new System.Drawing.Point(8, 184);
+            this.DoAllSteps_Button.Name = "DoAllSteps_Button";
+            this.DoAllSteps_Button.Size = new System.Drawing.Size(109, 23);
+            this.DoAllSteps_Button.TabIndex = 18;
+            this.DoAllSteps_Button.Text = "Выполнить";
+            this.DoAllSteps_Button.UseVisualStyleBackColor = true;
+            // 
+            // DeleteColumn
+            // 
+            this.DeleteColumn.Location = new System.Drawing.Point(592, 210);
+            this.DeleteColumn.Name = "DeleteColumn";
+            this.DeleteColumn.Size = new System.Drawing.Size(111, 23);
+            this.DeleteColumn.TabIndex = 17;
+            this.DeleteColumn.Text = "Удалить столбец";
+            this.DeleteColumn.UseVisualStyleBackColor = true;
+            this.DeleteColumn.Click += new System.EventHandler(this.DeleteColumntButton_Click);
+            // 
+            // AddColumn
+            // 
+            this.AddColumn.Location = new System.Drawing.Point(453, 210);
+            this.AddColumn.Name = "AddColumn";
+            this.AddColumn.Size = new System.Drawing.Size(127, 23);
+            this.AddColumn.TabIndex = 16;
+            this.AddColumn.Text = "Добавить столбец";
+            this.AddColumn.UseVisualStyleBackColor = true;
+            this.AddColumn.Click += new System.EventHandler(this.AddColumnButton_Click);
+            // 
+            // numericUpDown1
+            // 
+            this.numericUpDown1.Location = new System.Drawing.Point(709, 210);
+            this.numericUpDown1.Maximum = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.numericUpDown1.Name = "numericUpDown1";
+            this.numericUpDown1.Size = new System.Drawing.Size(79, 20);
+            this.numericUpDown1.TabIndex = 25;
+            // 
+            // TwoLinesTuringMachineForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.label16);
-            this.Controls.Add(this.panel2);
+            this.ClientSize = new System.Drawing.Size(791, 541);
+            this.Controls.Add(this.numericUpDown1);
+            this.Controls.Add(this.OpenMachine_Button);
+            this.Controls.Add(this.SaveMachine_Button);
+            this.Controls.Add(this.StopWork_Button);
+            this.Controls.Add(this.Clear_button);
+            this.Controls.Add(this.Return_Button);
+            this.Controls.Add(this.MakeStep_Button);
+            this.Controls.Add(this.DoAllSteps_Button);
+            this.Controls.Add(this.DeleteColumn);
+            this.Controls.Add(this.AddColumn);
+            this.Controls.Add(this.Alphabet);
+            this.Controls.Add(this.TableConditions);
+            this.Controls.Add(this.label32);
             this.Controls.Add(this.CurrentCondition);
+            this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.menuStrip1);
-            this.Name = "TwoLinesTuringMachine";
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Name = "TwoLinesTuringMachineForm";
             this.Text = "TwoLinesTuringMachine";
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.TableConditions)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -656,7 +839,6 @@ namespace Turing.Machines.TwoLinesTuringMachine
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button ButtonToRightFirst;
         private System.Windows.Forms.Label CurrentCondition;
-        private System.Windows.Forms.Label label16;
         private System.Windows.Forms.Button ButtonToLeftSecond;
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.Label label18;
@@ -675,5 +857,18 @@ namespace Turing.Machines.TwoLinesTuringMachine
         private System.Windows.Forms.Label label31;
         private System.Windows.Forms.Button ButtonToRightSecond;
         private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Label label32;
+        private System.Windows.Forms.DataGridView TableConditions;
+        private System.Windows.Forms.TextBox Alphabet;
+        private System.Windows.Forms.Button OpenMachine_Button;
+        private System.Windows.Forms.Button SaveMachine_Button;
+        private System.Windows.Forms.Button StopWork_Button;
+        private System.Windows.Forms.Button Clear_button;
+        private System.Windows.Forms.Button Return_Button;
+        private System.Windows.Forms.Button MakeStep_Button;
+        private System.Windows.Forms.Button DoAllSteps_Button;
+        private System.Windows.Forms.Button DeleteColumn;
+        private System.Windows.Forms.Button AddColumn;
+        private System.Windows.Forms.NumericUpDown numericUpDown1;
     }
 }

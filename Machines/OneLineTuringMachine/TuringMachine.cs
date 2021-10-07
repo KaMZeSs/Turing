@@ -49,14 +49,10 @@ namespace Turing.Machines.OneLineTuringMachine
                 CurrentPos--;
             CurrentCondition = Convert.ToInt32(Command.Substring(2));
 
-            MachineValuesChangedEventArgs args = new MachineValuesChangedEventArgs();
-            args.CurrentCondition = CurrentCondition;
-            args.CurrentPos = CurrentPos;
-            args.Line = Line;
-            OnMachineValuesChanged(args);
+            OnMachineValuesChanged(new EventArgs());
         }
 
-        protected virtual void OnMachineValuesChanged(MachineValuesChangedEventArgs e)
+        protected virtual void OnMachineValuesChanged(EventArgs e)
         {
             MachineValuesChangedEventHandler handler = ValuesChanged;
             if (handler != null)
@@ -68,12 +64,5 @@ namespace Turing.Machines.OneLineTuringMachine
         public event MachineValuesChangedEventHandler ValuesChanged;
     }
 
-    public class MachineValuesChangedEventArgs : EventArgs
-    {
-        public int CurrentPos { get; set; }
-        public String Line { get; set; }
-        public int CurrentCondition { get; set; }
-    }
-    public delegate void MachineValuesChangedEventHandler(Object sender, MachineValuesChangedEventArgs e);
-
+    public delegate void MachineValuesChangedEventHandler(Object sender, EventArgs e);
 }

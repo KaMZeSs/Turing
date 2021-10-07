@@ -21,7 +21,7 @@ namespace Turing
 
         private void button2_Click(object sender, EventArgs e)
         {
-            Form form = new Turing.Machines.TwoLinesTuringMachine.TwoLinesTuringMachine();
+            Form form = new Turing.Machines.TwoLinesTuringMachine.TwoLinesTuringMachineForm();
             form.Show();
         }
 
