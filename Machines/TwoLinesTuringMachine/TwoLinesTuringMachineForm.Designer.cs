@@ -81,7 +81,6 @@ namespace Turing.Machines.TwoLinesTuringMachine
             this.SaveMachine_Button = new System.Windows.Forms.Button();
             this.StopWork_Button = new System.Windows.Forms.Button();
             this.Clear_button = new System.Windows.Forms.Button();
-            this.Return_Button = new System.Windows.Forms.Button();
             this.MakeStep_Button = new System.Windows.Forms.Button();
             this.DoAllSteps_Button = new System.Windows.Forms.Button();
             this.DeleteColumn = new System.Windows.Forms.Button();
@@ -665,6 +664,7 @@ namespace Turing.Machines.TwoLinesTuringMachine
             this.TableConditions.Name = "TableConditions";
             this.TableConditions.Size = new System.Drawing.Size(791, 272);
             this.TableConditions.TabIndex = 7;
+            this.TableConditions.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.TableConditions_CellEndEdit);
             this.TableConditions.ColumnAdded += new System.Windows.Forms.DataGridViewColumnEventHandler(this.TableConditions_ColumnAdded);
             this.TableConditions.ColumnRemoved += new System.Windows.Forms.DataGridViewColumnEventHandler(this.TableConditions_ColumnAdded);
             // 
@@ -708,21 +708,12 @@ namespace Turing.Machines.TwoLinesTuringMachine
             // 
             // Clear_button
             // 
-            this.Clear_button.Location = new System.Drawing.Point(627, 172);
+            this.Clear_button.Location = new System.Drawing.Point(709, 172);
             this.Clear_button.Name = "Clear_button";
             this.Clear_button.Size = new System.Drawing.Size(75, 23);
             this.Clear_button.TabIndex = 21;
             this.Clear_button.Text = "Очистить";
             this.Clear_button.UseVisualStyleBackColor = true;
-            // 
-            // Return_Button
-            // 
-            this.Return_Button.Location = new System.Drawing.Point(709, 172);
-            this.Return_Button.Name = "Return_Button";
-            this.Return_Button.Size = new System.Drawing.Size(75, 23);
-            this.Return_Button.TabIndex = 20;
-            this.Return_Button.Text = "Заново";
-            this.Return_Button.UseVisualStyleBackColor = true;
             // 
             // MakeStep_Button
             // 
@@ -732,6 +723,7 @@ namespace Turing.Machines.TwoLinesTuringMachine
             this.MakeStep_Button.TabIndex = 19;
             this.MakeStep_Button.Text = "Шаг";
             this.MakeStep_Button.UseVisualStyleBackColor = true;
+            this.MakeStep_Button.Click += new System.EventHandler(this.MakeStepButton_Click);
             // 
             // DoAllSteps_Button
             // 
@@ -784,7 +776,6 @@ namespace Turing.Machines.TwoLinesTuringMachine
             this.Controls.Add(this.SaveMachine_Button);
             this.Controls.Add(this.StopWork_Button);
             this.Controls.Add(this.Clear_button);
-            this.Controls.Add(this.Return_Button);
             this.Controls.Add(this.MakeStep_Button);
             this.Controls.Add(this.DoAllSteps_Button);
             this.Controls.Add(this.DeleteColumn);
@@ -864,7 +855,6 @@ namespace Turing.Machines.TwoLinesTuringMachine
         private System.Windows.Forms.Button SaveMachine_Button;
         private System.Windows.Forms.Button StopWork_Button;
         private System.Windows.Forms.Button Clear_button;
-        private System.Windows.Forms.Button Return_Button;
         private System.Windows.Forms.Button MakeStep_Button;
         private System.Windows.Forms.Button DoAllSteps_Button;
         private System.Windows.Forms.Button DeleteColumn;

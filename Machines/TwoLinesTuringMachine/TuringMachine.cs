@@ -24,41 +24,42 @@ namespace Turing.Machines.TwoLinesTuringMachine
             DataConditions = dataGridView;
         }
 
-        //public void NextStep()
-        //{
-        //    char Letter = Line[CurrentPos];
+        public void NextStep()
+        {
+            char Letter1 = Line_First[CurrentPos_First], Letter2 = Line_Second[CurrentPos_Second];
 
-        //    String str = null;
+            String str = null;
 
-        //    foreach (DataGridViewRow row in DataConditions.Rows)
-        //        if (row.HeaderCell.Value.ToString() == Letter.ToString())
-        //        {
-        //            str = row.Cells[CurrentCondition].Value.ToString();
-        //            break;
-        //        }
-                    
+            foreach (DataGridViewRow row in DataConditions.Rows)
+                if (row.HeaderCell.Value.ToString() == Letter1.ToString() + Letter2.ToString())
+                {
+                    str = row.Cells[CurrentCondition].Value.ToString();
+                    break;
+                }
 
-        //    if (str == "")
-        //        throw new Exception("No Command");
+            if (str == "")
+                throw new Exception("No Command");
 
-        //    ExecuteCommand(str);
-        //}
+            ExecuteCommand(str);
+        }
 
-        //private void ExecuteCommand(String Command)
-        //{
-        //    Line = Line.ChangeValue(CurrentPos, Command[0].ToString());
-        //    if (Command[1] == '>')
-        //        CurrentPos++;
-        //    else if (Command[1] == '<')
-        //        CurrentPos--;
-        //    CurrentCondition = Convert.ToInt32(Command.Substring(2));
+        private void ExecuteCommand(String Command)
+        {
+            Line_First = Line_First.ChangeValue(CurrentPos_First, Command[0].ToString());
+            Line_Second = Line_Second.ChangeValue(CurrentPos_Second, Command[2].ToString());
+            
+            if (Command[1] == '>')
+                CurrentPos_First++;
+            else if (Command[1] == '<')
+                CurrentPos_First--;
+            if (Command[3] == '>')
+                CurrentPos_Second++;
+            else if (Command[3] == '<')
+                CurrentPos_Second--;
 
-        //    MachineValuesChangedEventArgs args = new MachineValuesChangedEventArgs();
-        //    args.CurrentCondition = CurrentCondition;
-        //    args.CurrentPos = CurrentPos;
-        //    args.Line = Line;
-        //    OnMachineValuesChanged(args);
-        //}
+            CurrentCondition = Convert.ToInt32(Command.Substring(4));
+            OnMachineValuesChanged(new EventArgs());
+        }
 
         protected virtual void OnMachineValuesChanged(EventArgs e)
         {

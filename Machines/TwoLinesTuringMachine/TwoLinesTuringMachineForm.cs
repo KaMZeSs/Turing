@@ -284,16 +284,27 @@ namespace Turing.Machines.TwoLinesTuringMachine
         {
             PartsOfCommand command = GetPartsOfCommand(Cell.Value);
 
-            if (command.PosLetter != -1)
+            if (command.PosLetter1 != -1)
             {
-                if (!Alphabet.Text.Contains(command.Letter))
-                    command.Letter = Row[0];
+                if (!Alphabet.Text.Contains(command.Letter1))
+                    command.Letter1 = Row[0];
             }
             else
-                command.Letter = Row[0];
+                command.Letter1 = Row[0];
+            
+            if (command.PosLetter2 != -1)
+            {
+                if (!Alphabet.Text.Contains(command.Letter2))
+                    command.Letter2 = Row[1];
+            }
+            else
+                command.Letter2 = Row[1];
 
-            if (command.PosDirection == -1)
-                command.Direction = '>';
+            if (command.PosDirection1 == -1)
+                command.Direction1 = '>';
+
+            if (command.PosDirection2 == -1)
+                command.Direction2 = '>';
 
             if (command.PosNum != -1)
             {
@@ -303,7 +314,7 @@ namespace Turing.Machines.TwoLinesTuringMachine
             else
                 command.Num = Column;
 
-            Cell.Value = command.Letter.ToString() + command.Direction + command.Num;
+            Cell.Value = $"{command.Letter1}{command.Direction1}{command.Letter2}{command.Direction2}{command.Num}";
         }
 
         private PartsOfCommand GetPartsOfCommand(object obj)
@@ -318,38 +329,73 @@ namespace Turing.Machines.TwoLinesTuringMachine
             if (str == null | str.Length == 0)
                 return parts;
 
+            bool isFirstLetter = true;
+            bool isFirstDirection = true;
             for (int i = 0; i < str.Length; i++)
             {
-                if (parts.PosLetter == -1)
-                    if (Char.IsLetter(str[i]))
+                if (Char.IsLetter(str[i]))
+                {
+                    if (isFirstLetter)
                     {
-                        parts.PosLetter = i;
-                        parts.Letter = str[parts.PosLetter];
+                        parts.PosLetter1 = i;
+                        parts.Letter1 = str[parts.PosLetter1];
+                        isFirstLetter = false;
                         continue;
                     }
-
-                if (WorkWithString.isDirection(str[i].ToString()))
-                {
-                    parts.PosDirection = i;
-                    parts.Direction = str[parts.PosDirection];
+                    parts.PosLetter2 = i;
+                    parts.Letter2 = str[parts.PosLetter2];
+                    isFirstDirection = false;
                     continue;
                 }
 
-                if (parts.PosNum == -1)
-                    if (str.isNumber(i))
+                if (WorkWithString.isDirection(str[i].ToString()))
+                {
+                    if (isFirstDirection)
                     {
-                        try
-                        {
-                            parts.Num = Convert.ToInt32(str.Substring(i));
-                            parts.PosNum = i;
-                        }
-                        catch { }
+                        parts.PosDirection1 = i;
+                        parts.Direction1 = str[parts.PosDirection1];
+                        isFirstDirection = false;
                         continue;
                     }
+                    parts.PosDirection2 = i;
+                    parts.Direction2 = str[parts.PosDirection2];
+                    continue;
+                }
 
+                if (str.isNumber(i))
+                {
+                    try
+                    {
+                        parts.Num = Convert.ToInt32(str.Substring(i));
+                        parts.PosNum = i;
+                        break;
+                    }
+                    catch { }
+                }
             }
-
             return parts;
+        }
+
+        private void MakeStepButton_Click(object sender, EventArgs e)
+        {
+            foreach (DataGridViewRow Row in TableConditions.Rows)
+                foreach (DataGridViewCell Cell in Row.Cells)
+                    if (Cell.Value == null)
+                        Cell.Value = "";
+            try
+            {
+                turingMachine.NextStep();
+                if (turingMachine.CurrentCondition == -1)
+                {
+                    MessageBox.Show("Машина Тьюринга завершила работу");
+                    return;
+                }
+            }
+            catch (Exception except)
+            {
+                //Сообщение об отсутствии команды
+                MessageBox.Show(except.Message);
+            }
         }
     }
 }

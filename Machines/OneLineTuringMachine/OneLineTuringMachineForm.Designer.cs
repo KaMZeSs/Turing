@@ -65,7 +65,6 @@ namespace Turing.Machines.OneLineTuringMachine
             this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             this.DoAllSteps_Button = new System.Windows.Forms.Button();
             this.MakeStep_Button = new System.Windows.Forms.Button();
-            this.Return_Button = new System.Windows.Forms.Button();
             this.Clear_button = new System.Windows.Forms.Button();
             this.StopWork_Button = new System.Windows.Forms.Button();
             this.SaveMachine_Button = new System.Windows.Forms.Button();
@@ -103,42 +102,42 @@ namespace Turing.Machines.OneLineTuringMachine
             // медленноToolStripMenuItem
             // 
             this.медленноToolStripMenuItem.Name = "медленноToolStripMenuItem";
-            this.медленноToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.медленноToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
             this.медленноToolStripMenuItem.Text = "Медленно";
             this.медленноToolStripMenuItem.Click += new System.EventHandler(this.OnTimerSpeedClick);
             // 
             // среднеToolStripMenuItem
             // 
             this.среднеToolStripMenuItem.Name = "среднеToolStripMenuItem";
-            this.среднеToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.среднеToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
             this.среднеToolStripMenuItem.Text = "Средне";
             this.среднеToolStripMenuItem.Click += new System.EventHandler(this.OnTimerSpeedClick);
             // 
             // быстрееToolStripMenuItem
             // 
             this.быстрееToolStripMenuItem.Name = "быстрееToolStripMenuItem";
-            this.быстрееToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.быстрееToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
             this.быстрееToolStripMenuItem.Text = "Быстрее";
             this.быстрееToolStripMenuItem.Click += new System.EventHandler(this.OnTimerSpeedClick);
             // 
             // быстроToolStripMenuItem
             // 
             this.быстроToolStripMenuItem.Name = "быстроToolStripMenuItem";
-            this.быстроToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.быстроToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
             this.быстроToolStripMenuItem.Text = "Быстро";
             this.быстроToolStripMenuItem.Click += new System.EventHandler(this.OnTimerSpeedClick);
             // 
             // оченьБыстроToolStripMenuItem
             // 
             this.оченьБыстроToolStripMenuItem.Name = "оченьБыстроToolStripMenuItem";
-            this.оченьБыстроToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.оченьБыстроToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
             this.оченьБыстроToolStripMenuItem.Text = "Очень Быстро";
             this.оченьБыстроToolStripMenuItem.Click += new System.EventHandler(this.OnTimerSpeedClick);
             // 
             // мгновенноToolStripMenuItem
             // 
             this.мгновенноToolStripMenuItem.Name = "мгновенноToolStripMenuItem";
-            this.мгновенноToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.мгновенноToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
             this.мгновенноToolStripMenuItem.Text = "Мгновенно";
             this.мгновенноToolStripMenuItem.Click += new System.EventHandler(this.OnTimerSpeedClick);
             // 
@@ -492,24 +491,15 @@ namespace Turing.Machines.OneLineTuringMachine
             this.MakeStep_Button.UseVisualStyleBackColor = true;
             this.MakeStep_Button.Click += new System.EventHandler(this.MakeStepButton_Click);
             // 
-            // Return_Button
-            // 
-            this.Return_Button.Location = new System.Drawing.Point(713, 83);
-            this.Return_Button.Name = "Return_Button";
-            this.Return_Button.Size = new System.Drawing.Size(75, 23);
-            this.Return_Button.TabIndex = 11;
-            this.Return_Button.Text = "Заново";
-            this.Return_Button.UseVisualStyleBackColor = true;
-            this.Return_Button.Click += new System.EventHandler(this.ReturnButton_Click);
-            // 
             // Clear_button
             // 
-            this.Clear_button.Location = new System.Drawing.Point(631, 83);
+            this.Clear_button.Location = new System.Drawing.Point(713, 83);
             this.Clear_button.Name = "Clear_button";
             this.Clear_button.Size = new System.Drawing.Size(75, 23);
             this.Clear_button.TabIndex = 12;
             this.Clear_button.Text = "Очистить";
             this.Clear_button.UseVisualStyleBackColor = true;
+            this.Clear_button.Click += new System.EventHandler(this.Clear_button_Click);
             // 
             // StopWork_Button
             // 
@@ -551,7 +541,6 @@ namespace Turing.Machines.OneLineTuringMachine
             this.Controls.Add(this.SaveMachine_Button);
             this.Controls.Add(this.StopWork_Button);
             this.Controls.Add(this.Clear_button);
-            this.Controls.Add(this.Return_Button);
             this.Controls.Add(this.MakeStep_Button);
             this.Controls.Add(this.DoAllSteps_Button);
             this.Controls.Add(this.numericUpDown1);
@@ -611,7 +600,6 @@ namespace Turing.Machines.OneLineTuringMachine
         private System.Windows.Forms.NumericUpDown numericUpDown1;
         private System.Windows.Forms.Button DoAllSteps_Button;
         private System.Windows.Forms.Button MakeStep_Button;
-        private System.Windows.Forms.Button Return_Button;
         private System.Windows.Forms.ToolStripMenuItem скоростьВыполненияToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem медленноToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem среднеToolStripMenuItem;

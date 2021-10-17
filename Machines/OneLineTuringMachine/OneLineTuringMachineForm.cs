@@ -15,8 +15,6 @@ namespace Turing.Machines.OneLineTuringMachine
 
         String PreviousAlphabet;
 
-        String LineOnStart;
-
         TuringMachine turingMachine;
 
         Label[] labels = new Label[15];
@@ -309,7 +307,6 @@ namespace Turing.Machines.OneLineTuringMachine
                 foreach (DataGridViewCell Cell in Row.Cells)
                     if (Cell.Value == null)
                         Cell.Value = "";
-            LineOnStart = turingMachine.Line;
             try
             {
                 turingMachine.NextStep();
@@ -326,25 +323,12 @@ namespace Turing.Machines.OneLineTuringMachine
             }
         }
 
-        private void ReturnButton_Click(object sender, EventArgs e)
-        {
-            if (LineOnStart != null)
-                turingMachine.Line = LineOnStart;
-            else
-                turingMachine.Line = new String('λ', 201);
-            CurrentCondition.Text = "q0";
-            turingMachine.CurrentPos = 101;
-            turingMachine.CurrentCondition = 0;
-            ShowLine();
-        }
-
         private void DoAllSteps_Button_Click(object sender, EventArgs e)
         {
             foreach (DataGridViewRow Row in TableConditions.Rows)
                 foreach (DataGridViewCell Cell in Row.Cells)
                     if (Cell.Value == null)
                         Cell.Value = "";
-            LineOnStart = turingMachine.Line;
             timer.Start();
             StopWork_Button.Enabled = true;
         }
@@ -366,6 +350,7 @@ namespace Turing.Machines.OneLineTuringMachine
             catch (Exception except)
             {
                 timer.Stop();
+                StopWork_Button.Enabled = false;
                 MessageBox.Show(except.Message);
             }
         }
@@ -521,6 +506,12 @@ namespace Turing.Machines.OneLineTuringMachine
                 }
             }
             isOpenFile = false;
+        }
+
+        private void Clear_button_Click(object sender, EventArgs e)
+        {
+            turingMachine.Line = new String('λ', 201);
+            ShowLine();
         }
     }
 }
