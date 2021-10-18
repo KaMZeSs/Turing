@@ -49,6 +49,14 @@ namespace Turing.Machines.OneLineTuringMachine
                 CurrentPos--;
             CurrentCondition = Convert.ToInt32(Command.Substring(2));
 
+            if (CurrentPos == Line.Length - 20)
+                Line += new string('λ', 100);
+            if (CurrentPos == 20)
+            {
+                Line = new string('λ', 100) + Line;
+                CurrentPos += 100;
+            }
+
             OnMachineValuesChanged(new EventArgs());
         }
 

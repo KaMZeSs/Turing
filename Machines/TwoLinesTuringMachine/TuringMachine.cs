@@ -58,6 +58,23 @@ namespace Turing.Machines.TwoLinesTuringMachine
                 CurrentPos_Second--;
 
             CurrentCondition = Convert.ToInt32(Command.Substring(4));
+
+            if (CurrentPos_First == Line_First.Length - 20)
+                Line_First += new string('λ', 100);
+            if (CurrentPos_Second == Line_Second.Length - 20)
+                Line_Second += new string('λ', 100);
+            if (CurrentPos_First == 20)
+            {
+                Line_First = new string('λ', 100) + Line_First;
+                CurrentPos_First += 100;
+            }
+            if (CurrentPos_Second == 20)
+            {
+                Line_Second = new string('λ', 100) + Line_Second;
+                CurrentPos_Second += 100;
+            }
+
+
             OnMachineValuesChanged(new EventArgs());
         }
 

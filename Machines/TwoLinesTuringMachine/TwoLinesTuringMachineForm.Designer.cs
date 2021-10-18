@@ -119,38 +119,44 @@ namespace Turing.Machines.TwoLinesTuringMachine
             // медленноToolStripMenuItem
             // 
             this.медленноToolStripMenuItem.Name = "медленноToolStripMenuItem";
-            this.медленноToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
+            this.медленноToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.медленноToolStripMenuItem.Text = "Медленно";
+            this.медленноToolStripMenuItem.Click += new System.EventHandler(this.OnTimerSpeedClick);
             // 
             // среднеToolStripMenuItem
             // 
             this.среднеToolStripMenuItem.Name = "среднеToolStripMenuItem";
-            this.среднеToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
+            this.среднеToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.среднеToolStripMenuItem.Text = "Средне";
+            this.среднеToolStripMenuItem.Click += new System.EventHandler(this.OnTimerSpeedClick);
             // 
             // быстрееToolStripMenuItem
             // 
             this.быстрееToolStripMenuItem.Name = "быстрееToolStripMenuItem";
-            this.быстрееToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
+            this.быстрееToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.быстрееToolStripMenuItem.Text = "Быстрее";
+            this.быстрееToolStripMenuItem.Click += new System.EventHandler(this.OnTimerSpeedClick);
             // 
             // быстроToolStripMenuItem
             // 
             this.быстроToolStripMenuItem.Name = "быстроToolStripMenuItem";
-            this.быстроToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
+            this.быстроToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.быстроToolStripMenuItem.Text = "Быстро";
+            this.быстроToolStripMenuItem.Click += new System.EventHandler(this.OnTimerSpeedClick);
             // 
             // оченьБыстроToolStripMenuItem
             // 
             this.оченьБыстроToolStripMenuItem.Name = "оченьБыстроToolStripMenuItem";
-            this.оченьБыстроToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
+            this.оченьБыстроToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.оченьБыстроToolStripMenuItem.Text = "Очень Быстро";
+            this.оченьБыстроToolStripMenuItem.Click += new System.EventHandler(this.OnTimerSpeedClick);
             // 
             // мгновенноToolStripMenuItem
             // 
             this.мгновенноToolStripMenuItem.Name = "мгновенноToolStripMenuItem";
-            this.мгновенноToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
+            this.мгновенноToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.мгновенноToolStripMenuItem.Text = "Мгновенно";
+            this.мгновенноToolStripMenuItem.Click += new System.EventHandler(this.OnTimerSpeedClick);
             // 
             // panel1
             // 
@@ -733,6 +739,7 @@ namespace Turing.Machines.TwoLinesTuringMachine
             this.DoAllSteps_Button.TabIndex = 18;
             this.DoAllSteps_Button.Text = "Выполнить";
             this.DoAllSteps_Button.UseVisualStyleBackColor = true;
+            this.DoAllSteps_Button.Click += new System.EventHandler(this.DoAllSteps_Button_Click);
             // 
             // DeleteColumn
             // 

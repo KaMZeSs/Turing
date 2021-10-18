@@ -511,6 +511,7 @@ namespace Turing.Machines.OneLineTuringMachine
         private void Clear_button_Click(object sender, EventArgs e)
         {
             turingMachine.Line = new String('λ', 201);
+            turingMachine.CurrentPos = 101;
             ShowLine();
         }
     }

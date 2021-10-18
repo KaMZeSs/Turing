@@ -34,7 +34,7 @@ namespace Turing.Machines.TwoLinesTuringMachine
             PreviousAlphabet = Alphabet.Text;
             OrganizeLabels();
             ShowLine();
-            //timer.Tick += Timer_Tick;
+            timer.Tick += Timer_Tick;
             timer.Interval = 800;
         }
 
@@ -395,6 +395,70 @@ namespace Turing.Machines.TwoLinesTuringMachine
             {
                 //Сообщение об отсутствии команды
                 MessageBox.Show(except.Message);
+            }
+        }
+
+        private void DoAllSteps_Button_Click(object sender, EventArgs e)
+        {
+            foreach (DataGridViewRow Row in TableConditions.Rows)
+                foreach (DataGridViewCell Cell in Row.Cells)
+                    if (Cell.Value == null)
+                        Cell.Value = "";
+            timer.Start();
+            StopWork_Button.Enabled = true;
+        }
+
+        private void Timer_Tick(object sender, EventArgs e)
+        {
+            try
+            {
+                turingMachine.NextStep();
+                ShowLine();
+                if (turingMachine.CurrentCondition == -1)
+                {
+                    timer.Stop();
+                    StopWork_Button.Enabled = false;
+                    MessageBox.Show("Машина Тьюринга завершила работу");
+                }
+
+            }
+            catch (Exception except)
+            {
+                timer.Stop();
+                StopWork_Button.Enabled = false;
+                MessageBox.Show(except.Message);
+            }
+        }
+
+        private void OnTimerSpeedClick(object sender, EventArgs e)
+        {
+            int counter = 0;
+            foreach (ToolStripMenuItem elment in скоростьВыполненияToolStripMenuItem.DropDownItems)
+            {
+                if (sender == elment)
+                    break;
+                counter++;
+            }
+            switch (counter)
+            {
+                case 0:
+                    timer.Interval = 800;
+                    break;
+                case 1:
+                    timer.Interval = 600;
+                    break;
+                case 2:
+                    timer.Interval = 300;
+                    break;
+                case 3:
+                    timer.Interval = 150;
+                    break;
+                case 4:
+                    timer.Interval = 50;
+                    break;
+                case 5:
+                    timer.Interval = 2;
+                    break;
             }
         }
     }
