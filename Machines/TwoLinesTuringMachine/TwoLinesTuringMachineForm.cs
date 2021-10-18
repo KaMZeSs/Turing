@@ -213,7 +213,8 @@ namespace Turing.Machines.TwoLinesTuringMachine
         {
             if (isOpenFile)
             {
-                TableConditions.Rows.Add(GetRowsToAdd());
+                foreach (DataGridViewRow row in GetRowsToAdd())
+                    TableConditions.Rows.Add(row);
                 return;
             }
             if (!Alphabet.Text.Contains("λ"))
@@ -460,6 +461,147 @@ namespace Turing.Machines.TwoLinesTuringMachine
                     timer.Interval = 2;
                     break;
             }
+        }
+
+        private void ButtonToLeft_Click(object sender, EventArgs e)
+        {
+            if (sender == ButtonToLeftFirst)
+                if (turingMachine.CurrentPos_First + 7 != turingMachine.Line_First.Length)
+                    turingMachine.CurrentPos_First++;
+            if (sender == ButtonToLeftSecond)
+                if (turingMachine.CurrentPos_Second + 7 != turingMachine.Line_Second.Length)
+                    turingMachine.CurrentPos_Second++;
+            ShowLine();
+        }
+
+        private void ButtonToRight_Click(object sender, EventArgs e)
+        {
+            if (sender == ButtonToRightFirst)
+                if (turingMachine.CurrentPos_First - 7 != turingMachine.Line_First.Length)
+                    turingMachine.CurrentPos_First--;
+            if (sender == ButtonToRightSecond)
+                if (turingMachine.CurrentPos_Second - 7 != turingMachine.Line_Second.Length)
+                    turingMachine.CurrentPos_Second--;
+            ShowLine();
+        }
+
+        private void StopWork_Button_Click(object sender, EventArgs e)
+        {
+            StopWork_Button.Enabled = false;
+            timer.Stop();
+        }
+
+        private void TwoLinesTuringMachineForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            timer.Stop();
+        }
+        
+        private void Clear_button_Click(object sender, EventArgs e)
+        {
+            turingMachine.Line_First = new String('λ', 201);
+            turingMachine.Line_Second = new String('λ', 201);
+            turingMachine.CurrentPos_First = 101;
+            turingMachine.CurrentPos_Second = 101;
+            turingMachine.CurrentCondition = 0;
+            CurrentCondition.Text = "q0";
+            ShowLine();
+        }
+
+        private void SaveMachine_Button_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog fileDialog = new SaveFileDialog();
+            fileDialog.AddExtension = true;
+            fileDialog.Filter = "XML|*.xml";
+            fileDialog.CheckPathExists = true;
+            fileDialog.ValidateNames = true;
+            if (fileDialog.ShowDialog() == DialogResult.OK)
+            {
+                if (!fileDialog.FileName.EndsWith(".xml"))
+                    fileDialog.FileName += ".xml";
+
+                DataTable data = new DataTable();
+
+                foreach (DataGridViewColumn x in TableConditions.Columns)
+                {
+                    DataColumn column = new DataColumn();
+                    column.ColumnName = x.Index.ToString();
+                    data.Columns.Add(column);
+                }
+
+                foreach (DataGridViewRow x in TableConditions.Rows)
+                {
+                    DataRow Row = data.NewRow();
+                    String[] values = new String[TableConditions.Columns.Count];
+
+                    int counter = 0;
+                    foreach (DataGridViewCell Cell in x.Cells)
+                    {
+                        if (Cell.Value == null)
+                            values[counter] = "";
+                        else
+                            values[counter] = Cell.Value.ToString();
+                        counter++;
+                    }
+                    Row.ItemArray = values;
+
+                    data.Rows.Add(Row);
+                }
+
+                DataSet ds = new DataSet();
+                ds.Tables.Add(data);
+                ds.ExtendedProperties.Add("Alphabet", Alphabet.Text);
+
+                try
+                {
+                    ds.WriteXml(fileDialog.FileName, XmlWriteMode.WriteSchema);
+                }
+                catch { }
+            }
+        }
+
+        private void OpenMachine_Button_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog fileDialog = new OpenFileDialog();
+            fileDialog.AddExtension = true;
+            fileDialog.Filter = "XML|*.xml";
+            fileDialog.CheckPathExists = true;
+            fileDialog.ValidateNames = true;
+            if (fileDialog.ShowDialog() == DialogResult.OK)
+            {
+                isOpenFile = true;
+                TableConditions.Rows.Clear();
+
+                DataSet dataSet = new DataSet();
+
+                DataTable data = new DataTable();
+                try
+                {
+                    dataSet.ReadXml(fileDialog.FileName);
+                }
+                catch
+                {
+                }
+
+                data = dataSet.Tables[0];
+
+
+                PreviousAlphabet = "";
+
+                Alphabet.Text = (string)dataSet.ExtendedProperties["Alphabet"];
+
+                for (int i = 0; i < data.Columns.Count - 1; i++)
+                    AddColumnButton_Click(new object(), new EventArgs());
+
+                for (int i = 0; i < TableConditions.Rows.Count; i++)
+                {
+                    for (int j = 0; j < TableConditions.Columns.Count; j++)
+                    {
+                        String str = data.Rows[i][j].ToString();
+                        TableConditions[j, i].Value = str;
+                    }
+                }
+            }
+            isOpenFile = false;
         }
     }
 }

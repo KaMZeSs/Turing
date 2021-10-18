@@ -30,6 +30,8 @@ namespace Turing.Machines.TwoLinesTuringMachine
 
             String str = null;
 
+            if (CurrentCondition == -1)
+                throw new Exception("Машина Тьюринга не может продолжать работу в состоянии qz");
             foreach (DataGridViewRow row in DataConditions.Rows)
                 if (row.HeaderCell.Value.ToString() == Letter1.ToString() + Letter2.ToString())
                 {

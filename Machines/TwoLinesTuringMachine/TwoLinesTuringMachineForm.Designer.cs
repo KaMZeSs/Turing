@@ -119,42 +119,42 @@ namespace Turing.Machines.TwoLinesTuringMachine
             // медленноToolStripMenuItem
             // 
             this.медленноToolStripMenuItem.Name = "медленноToolStripMenuItem";
-            this.медленноToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.медленноToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
             this.медленноToolStripMenuItem.Text = "Медленно";
             this.медленноToolStripMenuItem.Click += new System.EventHandler(this.OnTimerSpeedClick);
             // 
             // среднеToolStripMenuItem
             // 
             this.среднеToolStripMenuItem.Name = "среднеToolStripMenuItem";
-            this.среднеToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.среднеToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
             this.среднеToolStripMenuItem.Text = "Средне";
             this.среднеToolStripMenuItem.Click += new System.EventHandler(this.OnTimerSpeedClick);
             // 
             // быстрееToolStripMenuItem
             // 
             this.быстрееToolStripMenuItem.Name = "быстрееToolStripMenuItem";
-            this.быстрееToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.быстрееToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
             this.быстрееToolStripMenuItem.Text = "Быстрее";
             this.быстрееToolStripMenuItem.Click += new System.EventHandler(this.OnTimerSpeedClick);
             // 
             // быстроToolStripMenuItem
             // 
             this.быстроToolStripMenuItem.Name = "быстроToolStripMenuItem";
-            this.быстроToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.быстроToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
             this.быстроToolStripMenuItem.Text = "Быстро";
             this.быстроToolStripMenuItem.Click += new System.EventHandler(this.OnTimerSpeedClick);
             // 
             // оченьБыстроToolStripMenuItem
             // 
             this.оченьБыстроToolStripMenuItem.Name = "оченьБыстроToolStripMenuItem";
-            this.оченьБыстроToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.оченьБыстроToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
             this.оченьБыстроToolStripMenuItem.Text = "Очень Быстро";
             this.оченьБыстроToolStripMenuItem.Click += new System.EventHandler(this.OnTimerSpeedClick);
             // 
             // мгновенноToolStripMenuItem
             // 
             this.мгновенноToolStripMenuItem.Name = "мгновенноToolStripMenuItem";
-            this.мгновенноToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.мгновенноToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
             this.мгновенноToolStripMenuItem.Text = "Мгновенно";
             this.мгновенноToolStripMenuItem.Click += new System.EventHandler(this.OnTimerSpeedClick);
             // 
@@ -192,6 +192,7 @@ namespace Turing.Machines.TwoLinesTuringMachine
             this.ButtonToLeftFirst.TabIndex = 47;
             this.ButtonToLeftFirst.Text = ">";
             this.ButtonToLeftFirst.UseVisualStyleBackColor = true;
+            this.ButtonToLeftFirst.Click += new System.EventHandler(this.ButtonToLeft_Click);
             // 
             // label15
             // 
@@ -397,6 +398,7 @@ namespace Turing.Machines.TwoLinesTuringMachine
             this.ButtonToRightFirst.TabIndex = 31;
             this.ButtonToRightFirst.Text = "<";
             this.ButtonToRightFirst.UseVisualStyleBackColor = true;
+            this.ButtonToRightFirst.Click += new System.EventHandler(this.ButtonToRight_Click);
             // 
             // CurrentCondition
             // 
@@ -416,6 +418,7 @@ namespace Turing.Machines.TwoLinesTuringMachine
             this.ButtonToLeftSecond.TabIndex = 47;
             this.ButtonToLeftSecond.Text = ">";
             this.ButtonToLeftSecond.UseVisualStyleBackColor = true;
+            this.ButtonToLeftSecond.Click += new System.EventHandler(this.ButtonToLeft_Click);
             // 
             // label17
             // 
@@ -621,6 +624,7 @@ namespace Turing.Machines.TwoLinesTuringMachine
             this.ButtonToRightSecond.TabIndex = 31;
             this.ButtonToRightSecond.Text = "<";
             this.ButtonToRightSecond.UseVisualStyleBackColor = true;
+            this.ButtonToRightSecond.Click += new System.EventHandler(this.ButtonToRight_Click);
             // 
             // panel2
             // 
@@ -692,6 +696,7 @@ namespace Turing.Machines.TwoLinesTuringMachine
             this.OpenMachine_Button.TabIndex = 24;
             this.OpenMachine_Button.Text = "Импорт";
             this.OpenMachine_Button.UseVisualStyleBackColor = true;
+            this.OpenMachine_Button.Click += new System.EventHandler(this.OpenMachine_Button_Click);
             // 
             // SaveMachine_Button
             // 
@@ -701,6 +706,7 @@ namespace Turing.Machines.TwoLinesTuringMachine
             this.SaveMachine_Button.TabIndex = 23;
             this.SaveMachine_Button.Text = "Экспорт";
             this.SaveMachine_Button.UseVisualStyleBackColor = true;
+            this.SaveMachine_Button.Click += new System.EventHandler(this.SaveMachine_Button_Click);
             // 
             // StopWork_Button
             // 
@@ -711,6 +717,7 @@ namespace Turing.Machines.TwoLinesTuringMachine
             this.StopWork_Button.TabIndex = 22;
             this.StopWork_Button.Text = "Стоп";
             this.StopWork_Button.UseVisualStyleBackColor = true;
+            this.StopWork_Button.Click += new System.EventHandler(this.StopWork_Button_Click);
             // 
             // Clear_button
             // 
@@ -720,6 +727,7 @@ namespace Turing.Machines.TwoLinesTuringMachine
             this.Clear_button.TabIndex = 21;
             this.Clear_button.Text = "Очистить";
             this.Clear_button.UseVisualStyleBackColor = true;
+            this.Clear_button.Click += new System.EventHandler(this.Clear_button_Click);
             // 
             // MakeStep_Button
             // 
@@ -797,6 +805,7 @@ namespace Turing.Machines.TwoLinesTuringMachine
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "TwoLinesTuringMachineForm";
             this.Text = "TwoLinesTuringMachine";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.TwoLinesTuringMachineForm_FormClosing);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.panel1.ResumeLayout(false);

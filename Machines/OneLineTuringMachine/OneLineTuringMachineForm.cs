@@ -39,7 +39,7 @@ namespace Turing.Machines.OneLineTuringMachine
             timer.Interval = 800;
         }
 
-        private void TuringMachine_ValuesChanged(object sender,EventArgs e)
+        private void TuringMachine_ValuesChanged(object sender, EventArgs e)
         {
             ShowLine();
             if (turingMachine.CurrentCondition == -1)
@@ -191,7 +191,7 @@ namespace Turing.Machines.OneLineTuringMachine
 
         private void DeleteColumntButton_Click(object sender, EventArgs e)
         {
-            if (TableConditions.Columns.Count == 1) 
+            if (TableConditions.Columns.Count == 1)
                 return;
             if ((int)numericUpDown1.Value > (int)numericUpDown1.Maximum)
                 return;
@@ -214,8 +214,8 @@ namespace Turing.Machines.OneLineTuringMachine
 
         private void TableConditions_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
-            RepairCell(TableConditions[e.ColumnIndex, e.RowIndex], 
-                TableConditions.Rows[e.RowIndex].HeaderCell.Value.ToString(), 
+            RepairCell(TableConditions[e.ColumnIndex, e.RowIndex],
+                TableConditions.Rows[e.RowIndex].HeaderCell.Value.ToString(),
                 e.ColumnIndex);
         }
 
@@ -276,14 +276,14 @@ namespace Turing.Machines.OneLineTuringMachine
                         parts.Letter = str[parts.PosLetter];
                         continue;
                     }
-                        
+
                 if (WorkWithString.isDirection(str[i].ToString()))
                 {
                     parts.PosDirection = i;
                     parts.Direction = str[parts.PosDirection];
                     continue;
                 }
-                    
+
                 if (parts.PosNum == -1)
                     if (str.isNumber(i))
                     {
@@ -295,7 +295,7 @@ namespace Turing.Machines.OneLineTuringMachine
                         catch { }
                         continue;
                     }
-                        
+
             }
 
             return parts;
@@ -345,7 +345,7 @@ namespace Turing.Machines.OneLineTuringMachine
                     StopWork_Button.Enabled = false;
                     MessageBox.Show("Машина Тьюринга завершила работу");
                 }
-                
+
             }
             catch (Exception except)
             {
@@ -475,7 +475,7 @@ namespace Turing.Machines.OneLineTuringMachine
                 isOpenFile = true;
                 TableConditions.Rows.Clear();
 
-                DataSet dataSet = new DataSet();   
+                DataSet dataSet = new DataSet();
 
                 DataTable data = new DataTable();
                 try
@@ -490,7 +490,7 @@ namespace Turing.Machines.OneLineTuringMachine
 
 
                 PreviousAlphabet = "";
-                
+
                 Alphabet.Text = (string)dataSet.ExtendedProperties["Alphabet"];
 
                 for (int i = 0; i < data.Columns.Count - 1; i++)
@@ -513,6 +513,16 @@ namespace Turing.Machines.OneLineTuringMachine
             turingMachine.Line = new String('λ', 201);
             turingMachine.CurrentPos = 101;
             ShowLine();
+        }
+
+        private void OneLineTuringMachineForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            timer.Stop();
+        }
+
+        private void SetString_Button_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
