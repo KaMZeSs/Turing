@@ -522,7 +522,14 @@ namespace Turing.Machines.OneLineTuringMachine
 
         private void SetString_Button_Click(object sender, EventArgs e)
         {
+            GetLineFromAlphabet form = new GetLineFromAlphabet(Alphabet.Text);
 
+            form.ShowDialog(this);
+
+            if (form.DialogResult == DialogResult.OK)
+            {
+
+            }
         }
     }
 }

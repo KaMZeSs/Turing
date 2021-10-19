@@ -528,6 +528,7 @@ namespace Turing.Machines.TwoLinesTuringMachine
                     data.Columns.Add(column);
                 }
 
+                List<String> HeaderCells = new List<String>();
                 foreach (DataGridViewRow x in TableConditions.Rows)
                 {
                     DataRow Row = data.NewRow();
@@ -543,12 +544,19 @@ namespace Turing.Machines.TwoLinesTuringMachine
                         counter++;
                     }
                     Row.ItemArray = values;
-
+                    HeaderCells.Add(x.HeaderCell.Value.ToString());
                     data.Rows.Add(Row);
                 }
 
+                String toSaveHeaders = "";
+
+                foreach (String s in HeaderCells)
+                    toSaveHeaders += s + " ";
+
                 DataSet ds = new DataSet();
                 ds.Tables.Add(data);
+                //ds.ExtendedProperties.Add("isTwoLines", "true");
+                ds.ExtendedProperties.Add("HeaderCells", toSaveHeaders);
                 ds.ExtendedProperties.Add("Alphabet", Alphabet.Text);
 
                 try
@@ -588,12 +596,14 @@ namespace Turing.Machines.TwoLinesTuringMachine
                 PreviousAlphabet = "";
 
                 Alphabet.Text = (string)dataSet.ExtendedProperties["Alphabet"];
-
+                String st = (string)dataSet.ExtendedProperties["HeaderCells"];
+                String[] HCells = st.Trim().Split(' ');
                 for (int i = 0; i < data.Columns.Count - 1; i++)
                     AddColumnButton_Click(new object(), new EventArgs());
 
-                for (int i = 0; i < TableConditions.Rows.Count; i++)
+                for (int i = 0; i < HCells.Length; i++)
                 {
+                    TableConditions.Rows[i].HeaderCell.Value = HCells[i];
                     for (int j = 0; j < TableConditions.Columns.Count; j++)
                     {
                         String str = data.Rows[i][j].ToString();
