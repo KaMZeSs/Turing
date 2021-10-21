@@ -262,6 +262,10 @@ namespace Turing.Machines.TwoLinesTuringMachine
 
         private void TableConditions_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
+            if (TableConditions[e.ColumnIndex, e.RowIndex].Value == null)
+                return;
+            if (TableConditions[e.ColumnIndex, e.RowIndex].Value.ToString().Length == 0)
+                return;
             RepairCell(TableConditions[e.ColumnIndex, e.RowIndex],
                 TableConditions.Rows[e.RowIndex].HeaderCell.Value.ToString(),
                 e.ColumnIndex);
@@ -334,7 +338,7 @@ namespace Turing.Machines.TwoLinesTuringMachine
             bool isFirstDirection = true;
             for (int i = 0; i < str.Length; i++)
             {
-                if (Char.IsLetter(str[i]))
+                if (Alphabet.Text.Contains(str[i]))
                 {
                     if (isFirstLetter)
                     {

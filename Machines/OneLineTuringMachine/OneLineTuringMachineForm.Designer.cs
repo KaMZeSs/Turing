@@ -386,10 +386,11 @@ namespace Turing.Machines.OneLineTuringMachine
             // 
             // CurrentCondition
             // 
+            this.CurrentCondition.AutoSize = true;
             this.CurrentCondition.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F);
             this.CurrentCondition.Location = new System.Drawing.Point(371, 73);
             this.CurrentCondition.Name = "CurrentCondition";
-            this.CurrentCondition.Size = new System.Drawing.Size(50, 45);
+            this.CurrentCondition.Size = new System.Drawing.Size(44, 31);
             this.CurrentCondition.TabIndex = 2;
             this.CurrentCondition.Text = "q0";
             // 
