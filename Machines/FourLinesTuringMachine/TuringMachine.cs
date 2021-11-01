@@ -79,7 +79,7 @@ namespace Turing.Machines.FourLinesTuringMachine
             else if (Command[7] == '<')
                 CurrentPos_Fourth--;
 
-            CurrentCondition = Convert.ToInt32(Command.Substring(4));
+            CurrentCondition = Convert.ToInt32(Command.Substring(8));
 
             if (CurrentPos_First == Line_First.Length - 20)
                 Line_First += new string('λ', 100);
