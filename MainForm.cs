@@ -22,6 +22,7 @@ namespace Turing
         private void button2_Click(object sender, EventArgs e)
         {
             Form form = new Turing.Machines.TwoLinesTuringMachine.TwoLinesTuringMachineForm();
+            form.FormClosed += Form_Closed;
             form.Show();
         }
 
@@ -34,6 +35,13 @@ namespace Turing
             }
             counter = 0;
             GC.Collect();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            Form form = new Turing.Machines.FourLinesTuringMachine.FourLinesTuringMachineForm();
+            form.FormClosed += Form_Closed;
+            form.Show();
         }
     }
 }
