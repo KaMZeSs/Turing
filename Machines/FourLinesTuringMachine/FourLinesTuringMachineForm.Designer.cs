@@ -702,7 +702,6 @@ namespace Turing.Machines.FourLinesTuringMachine
             // 
             this.TableConditions.AllowUserToAddRows = false;
             this.TableConditions.AllowUserToDeleteRows = false;
-            this.TableConditions.AllowUserToResizeColumns = false;
             this.TableConditions.AllowUserToResizeRows = false;
             this.TableConditions.BackgroundColor = System.Drawing.SystemColors.Control;
             this.TableConditions.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;

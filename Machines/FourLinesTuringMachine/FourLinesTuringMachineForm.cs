@@ -28,7 +28,7 @@ namespace Turing.Machines.FourLinesTuringMachine
             PreviousAlphabet = "";
             AddColumnButton_Click(new object(), new EventArgs());
             DataGridViewRow newRow = new DataGridViewRow();
-            newRow.HeaderCell.Value = "λλ";
+            newRow.HeaderCell.Value = "λλλλ";
             TableConditions.Rows.Add(newRow);
             Alphabet.Text = turingMachine.Alphabet;
             PreviousAlphabet = Alphabet.Text;
@@ -252,7 +252,10 @@ namespace Turing.Machines.FourLinesTuringMachine
 
             foreach (Char letter1 in Alphabet.Text)
                 foreach (Char letter2 in Alphabet.Text)
-                    hasToBe.Add(letter1.ToString() + letter2.ToString());
+                    foreach (Char letter3 in Alphabet.Text)
+                        foreach (Char letter4 in Alphabet.Text)
+                            hasToBe.Add(letter1.ToString() + letter2.ToString() + 
+                                letter3.ToString() + letter4.ToString());
 
             for (int i = 0; i < TableConditions.Rows.Count; i++)
                 if (hasToBe.Contains(TableConditions.Rows[i].HeaderCell.Value))
@@ -388,12 +391,34 @@ namespace Turing.Machines.FourLinesTuringMachine
             }
             else
                 command.Letter2 = Row[1];
+            
+            if (command.PosLetter3 != -1)
+            {
+                if (!Alphabet.Text.Contains(command.Letter3))
+                    command.Letter3 = Row[2];
+            }
+            else
+                command.Letter3 = Row[2];
+
+            if (command.PosLetter4 != -1)
+            {
+                if (!Alphabet.Text.Contains(command.Letter4))
+                    command.Letter4 = Row[3];
+            }
+            else
+                command.Letter4 = Row[3];
 
             if (command.PosDirection1 == -1)
                 command.Direction1 = '>';
 
             if (command.PosDirection2 == -1)
                 command.Direction2 = '>';
+
+            if (command.PosDirection3 == -1)
+                command.Direction3 = '>';
+
+            if (command.PosDirection4 == -1)
+                command.Direction4 = '>';
 
             if (command.PosNum != -1)
             {
@@ -403,14 +428,16 @@ namespace Turing.Machines.FourLinesTuringMachine
             else
                 command.Num = Column;
 
-            Cell.Value = $"{command.Letter1}{command.Direction1}{command.Letter2}{command.Direction2}{command.Num}";
+            Cell.Value = $"{command.Letter1}{command.Direction1}{command.Letter2}{command.Direction2}{command.Letter3}{command.Direction3}{command.Letter4}{command.Direction4}{command.Num}";
         }
 
         private PartsOfCommand GetPartsOfCommand(object obj)
         {
             String str;
             PartsOfCommand parts = new PartsOfCommand();
-            parts.PosDirection1 = parts.PosLetter1 = parts.PosDirection2 = parts.PosLetter2 = parts.PosNum = -1;
+            parts.PosDirection1 = parts.PosLetter1 = parts.PosDirection2 = parts.PosLetter2 
+                = parts.PosDirection3 = parts.PosLetter3 = parts.PosDirection4 = parts.PosLetter4 
+                = parts.PosNum = -1;
             if (obj == null)
                 return parts;
             else
@@ -418,37 +445,74 @@ namespace Turing.Machines.FourLinesTuringMachine
             if (str == null | str.Length == 0)
                 return parts;
 
-            bool isFirstLetter = true;
-            bool isFirstDirection = true;
             for (int i = 0; i < str.Length; i++)
             {
                 if (Alphabet.Text.Contains(str[i]))
                 {
-                    if (isFirstLetter)
+                    if (parts.PosLetter1 == -1)
                     {
                         parts.PosLetter1 = i;
-                        parts.Letter1 = str[parts.PosLetter1];
-                        isFirstLetter = false;
+                        parts.Letter1 = str[i];
                         continue;
                     }
-                    parts.PosLetter2 = i;
-                    parts.Letter2 = str[parts.PosLetter2];
-                    isFirstDirection = false;
-                    continue;
+                    if (parts.PosLetter2 == -1)
+                    {
+                        parts.PosLetter2 = i;
+                        parts.Letter2 = str[i];
+                        if (parts.PosDirection1 == -1)
+                            parts.PosDirection1 = -2;
+                        continue;
+                    }
+                    if (parts.PosLetter3 == -1)
+                    {
+                        parts.PosLetter3 = i;
+                        parts.Letter3 = str[i];
+                        if (parts.PosDirection2 == -1)
+                            parts.PosDirection2 = -2;
+                        continue;
+                    }
+                    if (parts.PosLetter4 == -1)
+                    {
+                        parts.PosLetter4 = i;
+                        parts.Letter4 = str[i];
+                        if (parts.PosDirection3 == -1)
+                            parts.PosDirection3 = -2;
+                        continue;
+                    }
                 }
 
                 if (WorkWithString.isDirection(str[i].ToString()))
                 {
-                    if (isFirstDirection)
+                    if (parts.PosDirection1 == -1)
                     {
                         parts.PosDirection1 = i;
-                        parts.Direction1 = str[parts.PosDirection1];
-                        isFirstDirection = false;
+                        parts.Direction1 = str[i];
                         continue;
                     }
-                    parts.PosDirection2 = i;
-                    parts.Direction2 = str[parts.PosDirection2];
-                    continue;
+                    if (parts.PosDirection2 == -1)
+                    {
+                        parts.PosDirection2 = i;
+                        parts.Direction2 = str[i];
+                        if (parts.PosLetter1 == -1)
+                            parts.PosLetter1 = -2;
+                        continue;
+                    }
+                    if (parts.PosDirection3 == -1)
+                    {
+                        parts.PosDirection3 = i;
+                        parts.Direction3 = str[i];
+                        if (parts.PosLetter2 == -1)
+                            parts.PosLetter2 = -2;
+                        continue;
+                    }
+                    if (parts.PosDirection4 == -1)
+                    {
+                        parts.PosDirection4 = i;
+                        parts.Direction4 = str[i];
+                        if (parts.PosLetter3 == -1)
+                            parts.PosLetter3 = -2;
+                        continue;
+                    }
                 }
 
                 if (str.isNumber(i))
@@ -462,6 +526,24 @@ namespace Turing.Machines.FourLinesTuringMachine
                     catch { }
                 }
             }
+
+            if (parts.PosLetter1 == -2)
+                parts.PosLetter1 = -1;
+            if (parts.PosLetter2 == -2)
+                parts.PosLetter2 = -1;
+            if (parts.PosLetter3 == -2)
+                parts.PosLetter3 = -1;
+            if (parts.PosLetter4 == -2)
+                parts.PosLetter4 = -1;
+            if (parts.PosDirection1 == -2)
+                parts.PosDirection1 = -1;
+            if (parts.PosDirection2 == -2)
+                parts.PosDirection2 = -1;
+            if (parts.PosDirection3 == -2)
+                parts.PosDirection3 = -1;
+            if (parts.PosDirection4 == -2)
+                parts.PosDirection4 = -1;
+
             return parts;
         }
 
