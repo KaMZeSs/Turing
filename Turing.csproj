@@ -78,6 +78,7 @@
     <Compile Include="Machines\TwoLinesTuringMachine\TwoLinesTuringMachineForm.Designer.cs">
       <DependentUpon>TwoLinesTuringMachineForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Machines\ViewGraphic\OneLine.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>

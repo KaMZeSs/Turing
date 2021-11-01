@@ -69,7 +69,6 @@ namespace Turing.Machines.OneLineTuringMachine
             this.StopWork_Button = new System.Windows.Forms.Button();
             this.SaveMachine_Button = new System.Windows.Forms.Button();
             this.OpenMachine_Button = new System.Windows.Forms.Button();
-            this.SetString_Button = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -534,22 +533,11 @@ namespace Turing.Machines.OneLineTuringMachine
             this.OpenMachine_Button.UseVisualStyleBackColor = true;
             this.OpenMachine_Button.Click += new System.EventHandler(this.OpenMachine_Button_Click);
             // 
-            // SetString_Button
-            // 
-            this.SetString_Button.Location = new System.Drawing.Point(596, 83);
-            this.SetString_Button.Name = "SetString_Button";
-            this.SetString_Button.Size = new System.Drawing.Size(111, 23);
-            this.SetString_Button.TabIndex = 16;
-            this.SetString_Button.Text = "Задать строку";
-            this.SetString_Button.UseVisualStyleBackColor = true;
-            this.SetString_Button.Click += new System.EventHandler(this.SetString_Button_Click);
-            // 
             // OneLineTuringMachineForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(792, 450);
-            this.Controls.Add(this.SetString_Button);
             this.Controls.Add(this.OpenMachine_Button);
             this.Controls.Add(this.SaveMachine_Button);
             this.Controls.Add(this.StopWork_Button);
@@ -625,6 +613,5 @@ namespace Turing.Machines.OneLineTuringMachine
         private System.Windows.Forms.Button StopWork_Button;
         private System.Windows.Forms.Button SaveMachine_Button;
         private System.Windows.Forms.Button OpenMachine_Button;
-        private System.Windows.Forms.Button SetString_Button;
     }
 }

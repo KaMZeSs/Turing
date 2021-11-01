@@ -1,6 +1,7 @@
 ﻿using System;
+using System.Data;
 using System.Windows.Forms;
-
+using Turing.Machines.OneLineTuringMachine;
 
 namespace Turing
 {
@@ -42,6 +43,16 @@ namespace Turing
             Form form = new Turing.Machines.FourLinesTuringMachine.FourLinesTuringMachineForm();
             form.FormClosed += Form_Closed;
             form.Show();
+        }
+
+        private void OneLineGraphic_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void FourLinesGraphic_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
