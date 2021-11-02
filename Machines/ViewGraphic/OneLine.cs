@@ -5,28 +5,35 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using Turing.Machines.OneLineTuringMachine;
+using System.Threading.Tasks;
 
 namespace Turing.Machines.ViewGraphic
 {
     class OneLine
     {
-        Form form;
         DataGridView TableConditions;
         String Alphabet;
 
         List<int> allResults;
-        List<int> temporaryResults;
 
-        OneLine()
+        public OneLine()
         {
-            form = new Form();
             TableConditions = new DataGridView();
             Alphabet = "abc";
             List<int> allResults = new List<int>();
+            OpenTable();
+        }
+
+        public void Work()
+        {
+            for (int i = 0; ; i++)
+            {
+                MessageBox.Show(CreateAllTasks(i).ToString());
+            }
         }
 
         private void OpenTable()
-        {
+        {            
             OpenFileDialog fileDialog = new OpenFileDialog();
             fileDialog.AddExtension = true;
             fileDialog.Filter = "XML|*.xml";
@@ -45,15 +52,22 @@ namespace Turing.Machines.ViewGraphic
                 }
 
                 data = dataSet.Tables[0];
-
+                String st = (string)dataSet.ExtendedProperties["HeaderCells"];
+                String[] HCells = st.Trim().Split(' ');
                 for (int i = 0; i < data.Columns.Count - 1; i++)
                 {
                     int index = TableConditions.Columns.Count;
                     TableConditions.Columns.Add(index.ToString(), "q" + index.ToString());
                 }
 
-                for (int i = 0; i < TableConditions.Rows.Count; i++)
+                for (int i = 0; i < HCells.Length; i++)
                 {
+                    TableConditions.Rows.Add();
+                }
+
+                for (int i = 0; i < HCells.Length; i++)
+                {
+                    TableConditions.Rows[i].HeaderCell.Value = HCells[i];
                     for (int j = 0; j < TableConditions.Columns.Count; j++)
                     {
                         String str = data.Rows[i][j].ToString();
@@ -63,9 +77,25 @@ namespace Turing.Machines.ViewGraphic
             }
         }
 
-        private void CreateAllTasks(int level)
+        public int CreateAllTasks(int level)
         {
-            
+            int[] temp = new int[(int)Math.Pow(Alphabet.Length, level)];
+            PermutationsWithRepetition gen = new PermutationsWithRepetition(
+                    Alphabet.Trim().ToCharArray(), level);
+            String[] variations = gen.getVariations();
+
+            Parallel.For(0, variations.Length, i =>
+            {
+                try
+                {
+                    temp[i] = DoTask(variations[i]);
+                }
+                catch (Exception exc)
+                {
+                    MessageBox.Show(exc.Message);
+                }
+            });
+            return GetMaxFormArray(temp);
         }
 
         private int DoTask(String line)
@@ -75,94 +105,39 @@ namespace Turing.Machines.ViewGraphic
                     if (Cell.Value == null)
                         Cell.Value = "";
 
-            TuringMachine turingMachine = new TuringMachine(ref TableConditions);
+            TuringMachine turingMachine = new TuringMachine(ref TableConditions, line);
 
+            int counter = 0;
             while (true)
             {
                 try
                 {
-                    
+                    turingMachine.NextStep();
+                    counter++;
                 }
                 catch (Exception except)
                 {
-                    break;
+                    if (turingMachine.CurrentCondition == -1)
+                        break;
+                    else
+                        throw new Exception($"Ошибка команд\n{line}\nСостояние : {turingMachine.CurrentCondition}\nСчетчик: {counter}");
                 }
             }
-
-            return 0;
+            return counter;
         }
 
+        private int GetMaxFormArray(int[] array)
+        {
+            if (array == null)
+                throw new Exception();
+            if (array.Length == 0)
+                throw new Exception();
+            int max = array[0];
 
+            foreach (int num in array)
+                max = num > max ? num : max;
 
-        //public class PermutationsWithRepetition
-        //{
-        //    private Char[] source;
-        //    private int variationLength;
-
-        //    public PermutationsWithRepetition(Char[] source, int variationLength)
-        //    {
-        //        this.source = source;
-        //        this.variationLength = variationLength;
-        //    }
-
-        //    public String[] getVariations()
-        //    {
-        //        int srcLength = source.Length;
-        //        int permutations = (int)Math.Pow(srcLength, variationLength);
-
-        //        Object[,] table = new Object[permutations, variationLength];
-
-        //        for (int i = 0; i < variationLength; i++)
-        //        {
-        //            int t2 = (int)Math.Pow(srcLength, i);
-        //            for (int p1 = 0; p1 < permutations;)
-        //            {
-        //                for (int al = 0; al < srcLength; al++)
-        //                {
-        //                    for (int p2 = 0; p2 < t2; p2++)
-        //                    {
-        //                        table[p1, i] = source[al];
-        //                        p1++;
-        //                    }
-        //                }
-        //            }
-        //        }
-
-        //        String[] result = new String[permutations];
-
-        //        for (int i = 0; i < permutations; i++)
-        //        {
-        //            Char[] array = new Char[variationLength];
-        //            for (int j = 0; j < variationLength; j++)
-        //                array[j] = (Char)table[i, j];
-        //            result[i] = new String(array);
-        //        }
-
-        //        return result;
-        //    }
-        //}
-
-        //class Program
-        //{
-        //    static void Main(string[] args)
-        //    {
-        //        String str = Console.ReadLine();
-        //        int len = Convert.ToInt32(Console.ReadLine());
-
-        //        PermutationsWithRepetition gen = new PermutationsWithRepetition(
-        //            str.Trim().ToCharArray(), len);
-
-        //        var variations = gen.getVariations();
-
-        //        //foreach (String s in variations)
-        //        //{
-        //        //    Console.WriteLine(s);
-        //        //}
-
-        //        Console.WriteLine(variations.Length);
-
-        //        Console.ReadKey();
-        //    }
-        //}
+            return max;
+        }
     }
 }

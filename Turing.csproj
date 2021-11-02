@@ -78,7 +78,14 @@
     <Compile Include="Machines\TwoLinesTuringMachine\TwoLinesTuringMachineForm.Designer.cs">
       <DependentUpon>TwoLinesTuringMachineForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Machines\ViewGraphic\GraphicOneLine.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Machines\ViewGraphic\GraphicOneLine.Designer.cs">
+      <DependentUpon>GraphicOneLine.cs</DependentUpon>
+    </Compile>
     <Compile Include="Machines\ViewGraphic\OneLine.cs" />
+    <Compile Include="Machines\ViewGraphic\PermutationsWithRepetition.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -101,6 +108,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Machines\TwoLinesTuringMachine\TwoLinesTuringMachineForm.resx">
       <DependentUpon>TwoLinesTuringMachineForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Machines\ViewGraphic\GraphicOneLine.resx">
+      <DependentUpon>GraphicOneLine.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>

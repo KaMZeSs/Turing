@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
 using System.Linq;
@@ -83,6 +84,10 @@ namespace Turing.Machines.OneLineTuringMachine
                 label.Text = turingMachine.Line[pos].ToString();
                 pos++;
             }
+            if (turingMachine.CurrentCondition == -1)
+                CurrentCondition.Text = "qz";
+            else
+                CurrentCondition.Text = "q" + turingMachine.CurrentCondition.ToString();
         }
 
         private void OnLabelClick(object sender, EventArgs e)
@@ -431,6 +436,7 @@ namespace Turing.Machines.OneLineTuringMachine
                     fileDialog.FileName += ".xml";
 
                 DataTable data = new DataTable();
+                List<String> HeaderCells = new List<String>();
 
                 foreach (DataGridViewColumn x in TableConditions.Columns)
                 {
@@ -454,12 +460,19 @@ namespace Turing.Machines.OneLineTuringMachine
                         counter++;
                     }
                     Row.ItemArray = values;
+                    HeaderCells.Add(x.HeaderCell.Value.ToString());
 
                     data.Rows.Add(Row);
                 }
 
+                String toSaveHeaders = "";
+
+                foreach (String s in HeaderCells)
+                    toSaveHeaders += s + " ";
+
                 DataSet ds = new DataSet();
                 ds.Tables.Add(data);
+                ds.ExtendedProperties.Add("HeaderCells", toSaveHeaders);
                 ds.ExtendedProperties.Add("Alphabet", Alphabet.Text);
 
                 try
@@ -499,12 +512,14 @@ namespace Turing.Machines.OneLineTuringMachine
                 PreviousAlphabet = "";
 
                 Alphabet.Text = (string)dataSet.ExtendedProperties["Alphabet"];
-
+                String st = (string)dataSet.ExtendedProperties["HeaderCells"];
+                String[] HCells = st.Trim().Split(' ');
                 for (int i = 0; i < data.Columns.Count - 1; i++)
                     AddColumnButton_Click(new object(), new EventArgs());
 
-                for (int i = 0; i < TableConditions.Rows.Count; i++)
+                for (int i = 0; i < HCells.Length; i++)
                 {
+                    TableConditions.Rows[i].HeaderCell.Value = HCells[i];
                     for (int j = 0; j < TableConditions.Columns.Count; j++)
                     {
                         String str = data.Rows[i][j].ToString();
@@ -519,6 +534,7 @@ namespace Turing.Machines.OneLineTuringMachine
         {
             turingMachine.Line = new String('λ', 201);
             turingMachine.CurrentPos = 101;
+            turingMachine.CurrentCondition = 0;
             ShowLine();
         }
 

@@ -22,7 +22,7 @@ namespace Turing.Machines.OneLineTuringMachine
 
         public TuringMachine(ref DataGridView dataGridView, String line)
         {
-            Line = new String('λ', 101);
+            Line = new String('λ', 101) + line + new string('λ', 101);
             CurrentPos = 101;
             Alphabet = "λ";
             DataConditions = dataGridView;

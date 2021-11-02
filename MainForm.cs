@@ -2,6 +2,7 @@
 using System.Data;
 using System.Windows.Forms;
 using Turing.Machines.OneLineTuringMachine;
+using Turing.Machines.ViewGraphic;
 
 namespace Turing
 {
@@ -47,7 +48,9 @@ namespace Turing
 
         private void OneLineGraphic_Click(object sender, EventArgs e)
         {
-            
+            new GraphicOneLine();
+            //OneLine oneLine = new OneLine();
+            //oneLine.Work();
         }
 
         private void FourLinesGraphic_Click(object sender, EventArgs e)
