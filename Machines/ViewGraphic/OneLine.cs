@@ -4,6 +4,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using Turing.Machines.OneLineTuringMachine;
 
 namespace Turing.Machines.ViewGraphic
 {
@@ -12,11 +13,16 @@ namespace Turing.Machines.ViewGraphic
         Form form;
         DataGridView TableConditions;
         String Alphabet;
+
+        List<int> allResults;
+        List<int> temporaryResults;
+
         OneLine()
         {
             form = new Form();
             TableConditions = new DataGridView();
             Alphabet = "abc";
+            List<int> allResults = new List<int>();
         }
 
         private void OpenTable()
@@ -59,18 +65,33 @@ namespace Turing.Machines.ViewGraphic
 
         private void CreateAllTasks(int level)
         {
-            int m = 4, n = 3;
-            for (int i = 0; i < Math.Pow(m, n); i++)
+            
+        }
+
+        private int DoTask(String line)
+        {
+            foreach (DataGridViewRow Row in TableConditions.Rows)
+                foreach (DataGridViewCell Cell in Row.Cells)
+                    if (Cell.Value == null)
+                        Cell.Value = "";
+
+            TuringMachine turingMachine = new TuringMachine(ref TableConditions);
+
+            while (true)
             {
-                string s = "";
-                int ii = i;
-                for (int j = 0; j < n; j++)
+                try
                 {
-                    s = Alphabet[ii % m] + s;
-                    ii /= m;
+                    
+                }
+                catch (Exception except)
+                {
+                    break;
                 }
             }
+
+            return 0;
         }
+
 
 
         //public class PermutationsWithRepetition

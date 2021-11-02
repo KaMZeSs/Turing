@@ -20,6 +20,14 @@ namespace Turing.Machines.OneLineTuringMachine
             DataConditions = dataGridView;
         }
 
+        public TuringMachine(ref DataGridView dataGridView, String line)
+        {
+            Line = new String('λ', 101);
+            CurrentPos = 101;
+            Alphabet = "λ";
+            DataConditions = dataGridView;
+        }
+
         public void NextStep()
         {
             char Letter = Line[CurrentPos];

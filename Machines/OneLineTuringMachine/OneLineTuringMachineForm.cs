@@ -214,6 +214,10 @@ namespace Turing.Machines.OneLineTuringMachine
 
         private void TableConditions_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
+            if (TableConditions[e.ColumnIndex, e.RowIndex].Value == null)
+                return;
+            if (TableConditions[e.ColumnIndex, e.RowIndex].Value.ToString().Length == 0)
+                return;
             RepairCell(TableConditions[e.ColumnIndex, e.RowIndex],
                 TableConditions.Rows[e.RowIndex].HeaderCell.Value.ToString(),
                 e.ColumnIndex);
@@ -269,13 +273,15 @@ namespace Turing.Machines.OneLineTuringMachine
 
             for (int i = 0; i < str.Length; i++)
             {
-                if (parts.PosLetter == -1)
-                    if (Char.IsLetter(str[i]))
+                if (Alphabet.Text.Contains(str[i]))
+                {
+                    if (parts.PosLetter == -1)
                     {
                         parts.PosLetter = i;
                         parts.Letter = str[parts.PosLetter];
                         continue;
                     }
+                }
 
                 if (WorkWithString.isDirection(str[i].ToString()))
                 {
@@ -291,6 +297,7 @@ namespace Turing.Machines.OneLineTuringMachine
                         {
                             parts.Num = Convert.ToInt32(str.Substring(i));
                             parts.PosNum = i;
+                            break;
                         }
                         catch { }
                         continue;
