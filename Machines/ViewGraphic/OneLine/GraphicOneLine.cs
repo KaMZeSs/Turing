@@ -7,8 +7,10 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Windows.Forms;
+using System.Threading.Tasks;
+using Turing.Library;
 
-namespace Turing.Machines.ViewGraphic
+namespace Turing.Machines.ViewGraphic.OneLine
 {
     public partial class GraphicOneLine : Form
     {
@@ -20,6 +22,8 @@ namespace Turing.Machines.ViewGraphic
 
         OneLine oneLine;
         Thread thread;
+        String Alphabet;
+
         public GraphicOneLine()
         {
             InitializeComponent();
@@ -27,6 +31,7 @@ namespace Turing.Machines.ViewGraphic
             oneLine = new OneLine();
             thread = new Thread(GetData);
             thread.Priority = ThreadPriority.Lowest;
+            Alphabet = "abc";
         }
 
         private void GraphicOneLine_FormClosing(object sender, FormClosingEventArgs e)
@@ -39,16 +44,50 @@ namespace Turing.Machines.ViewGraphic
             thread.Start();
         }
 
+        public int CreateAllTasks(int level)
+        {
+            
+
+            Parallel.For(0, variations.Length, i =>
+            {
+                try
+                {
+                    temp[i] = oneLine.DoTask(variations[i]);
+                }
+                catch (Exception exc)
+                {
+                    MessageBox.Show(exc.Message);
+                }
+            });
+            
+            return WorkWithArrays.GetMaxFormArray(temp);
+        }
+
         private void GetData()
         {
             try
             {
                 for (int i = 0; ; i++)
                 {
-                    // Подавать инфу порционно
-                    int max = oneLine.CreateAllTasks(i);
+                    int[] temp = new int[(int)Math.Pow(Alphabet.Length, i)];
+                    PermutationsWithRepetition gen = new PermutationsWithRepetition(
+                            Alphabet.Trim().ToCharArray(), i);
+                    String[] variations = gen.getVariations();
+
+                    int max = 0;
+
+                    for (int j = 0; j < temp.Length; j += 50)
+                    {
+                        
+                    }
+
+
+
                     BeginInvoke(new DelegateUpdate(Update), max);
                     var result = (bool)Invoke(new DelegateisContinue(GetisContinue));
+
+
+
                     if (!result)
                         mre.WaitOne();
                 }

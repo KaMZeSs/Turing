@@ -1,5 +1,5 @@
 ﻿
-namespace Turing.Machines.ViewGraphic
+namespace Turing.Machines.ViewGraphic.OneLine
 {
     partial class GraphicOneLine
     {

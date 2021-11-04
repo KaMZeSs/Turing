@@ -5,31 +5,21 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using Turing.Machines.OneLineTuringMachine;
-using System.Threading.Tasks;
 
-namespace Turing.Machines.ViewGraphic
+
+namespace Turing.Machines.ViewGraphic.OneLine
 {
     class OneLine
     {
         DataGridView TableConditions;
-        String Alphabet;
 
         List<int> allResults;
 
         public OneLine()
         {
             TableConditions = new DataGridView();
-            Alphabet = "abc";
             List<int> allResults = new List<int>();
             OpenTable();
-        }
-
-        public void Work()
-        {
-            for (int i = 0; ; i++)
-            {
-                MessageBox.Show(CreateAllTasks(i).ToString());
-            }
         }
 
         private void OpenTable()
@@ -77,28 +67,7 @@ namespace Turing.Machines.ViewGraphic
             }
         }
 
-        public int CreateAllTasks(int level)
-        {
-            int[] temp = new int[(int)Math.Pow(Alphabet.Length, level)];
-            PermutationsWithRepetition gen = new PermutationsWithRepetition(
-                    Alphabet.Trim().ToCharArray(), level);
-            String[] variations = gen.getVariations();
-
-            Parallel.For(0, variations.Length, i =>
-            {
-                try
-                {
-                    temp[i] = DoTask(variations[i]);
-                }
-                catch (Exception exc)
-                {
-                    MessageBox.Show(exc.Message);
-                }
-            });
-            return GetMaxFormArray(temp);
-        }
-
-        private int DoTask(String line)
+        public int DoTask(String line)
         {
             foreach (DataGridViewRow Row in TableConditions.Rows)
                 foreach (DataGridViewCell Cell in Row.Cells)
@@ -124,20 +93,6 @@ namespace Turing.Machines.ViewGraphic
                 }
             }
             return counter;
-        }
-
-        private int GetMaxFormArray(int[] array)
-        {
-            if (array == null)
-                throw new Exception();
-            if (array.Length == 0)
-                throw new Exception();
-            int max = array[0];
-
-            foreach (int num in array)
-                max = num > max ? num : max;
-
-            return max;
         }
     }
 }

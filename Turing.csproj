@@ -44,6 +44,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Library\WorkWithArrays.cs" />
     <Compile Include="Library\WorkWithString.cs" />
     <Compile Include="Machines\FourLinesTuringMachine\TuringMachine.cs" />
     <Compile Include="Machines\FourLinesTuringMachine\FourLinesTuringMachineForm.cs">
@@ -78,13 +79,13 @@
     <Compile Include="Machines\TwoLinesTuringMachine\TwoLinesTuringMachineForm.Designer.cs">
       <DependentUpon>TwoLinesTuringMachineForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Machines\ViewGraphic\GraphicOneLine.cs">
+    <Compile Include="Machines\ViewGraphic\OneLine\GraphicOneLine.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Machines\ViewGraphic\GraphicOneLine.Designer.cs">
+    <Compile Include="Machines\ViewGraphic\OneLine\GraphicOneLine.Designer.cs">
       <DependentUpon>GraphicOneLine.cs</DependentUpon>
     </Compile>
-    <Compile Include="Machines\ViewGraphic\OneLine.cs" />
+    <Compile Include="Machines\ViewGraphic\OneLine\OneLine.cs" />
     <Compile Include="Machines\ViewGraphic\PermutationsWithRepetition.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
@@ -109,7 +110,7 @@
     <EmbeddedResource Include="Machines\TwoLinesTuringMachine\TwoLinesTuringMachineForm.resx">
       <DependentUpon>TwoLinesTuringMachineForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Machines\ViewGraphic\GraphicOneLine.resx">
+    <EmbeddedResource Include="Machines\ViewGraphic\OneLine\GraphicOneLine.resx">
       <DependentUpon>GraphicOneLine.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
@@ -136,8 +137,5 @@
     </Compile>
   </ItemGroup>
   <ItemGroup />
-  <ItemGroup>
-    <Content Include="Sprites\ConditionPointer.png" />
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
