@@ -20,21 +20,36 @@ namespace Turing.Library
 
             return max;
         }
-        
+
         public static T[] Cut<T>(ref T[] array, int len)
         {
-            T[] result = new T[len];
-                
-            for (; 0 < array.Length & 0 < len; len--)
+            T[] result = new T[len < array.Length ? len : array.Length];
+            List<T> list = array.ToList();
+            for (int i = 0; 0 < list.Count & 0 < len; len--, i++)
             {
-                result[0] = array[0];
-                List<T> l = array.ToList();
-                l.Remove(array[0]);
-                array = l.ToArray();
+                result[i] = list.First();
+                list.Remove(list.First());
             }
-
+            array = list.ToArray();
             return result;
         }
-            
+
+        public static List<T[]> Split<T>(T[] array, int len)
+        {
+            List<T[]> res = new List<T[]>();
+            List<T> list = array.ToList();
+            while (list.Count != 0)
+            {
+                T[] result = new T[len < list.Count ? len : list.Count];
+                for (int i = 0; i < result.Length; i++)
+                {
+                    result[i] = list.First();
+                    list.Remove(list.First());
+                }
+                res.Add(result);
+            }
+            return res;
+        }
+
     }
 }

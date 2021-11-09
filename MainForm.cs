@@ -48,7 +48,8 @@ namespace Turing
 
         private void OneLineGraphic_Click(object sender, EventArgs e)
         {
-            new GraphicOneLine();
+            Form form = new Machines.ViewGraphic.OneLine.GraphicOneLine();
+            form.Show(this);
             //OneLine oneLine = new OneLine();
             //oneLine.Work();
         }
