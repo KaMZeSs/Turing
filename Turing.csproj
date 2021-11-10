@@ -34,6 +34,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Windows.Forms.DataVisualization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -85,7 +86,6 @@
     <Compile Include="Machines\ViewGraphic\OneLine\GraphicOneLine.Designer.cs">
       <DependentUpon>GraphicOneLine.cs</DependentUpon>
     </Compile>
-    <Compile Include="Machines\ViewGraphic\OneLine\OneLine.cs" />
     <Compile Include="Machines\ViewGraphic\PermutationsWithRepetition.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>

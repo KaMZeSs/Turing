@@ -50,6 +50,5 @@ namespace Turing.Library
             }
             return res;
         }
-
     }
 }
