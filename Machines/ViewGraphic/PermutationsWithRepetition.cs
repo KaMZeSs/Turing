@@ -10,11 +10,15 @@ namespace Turing.Machines.ViewGraphic
     {
         private Char[] source;
         private int variationLength;
+        private byte[] byteSource;
 
         public PermutationsWithRepetition(Char[] source, int variationLength)
         {
             this.source = source;
             this.variationLength = variationLength;
+            byteSource = new byte[source.Length];
+            for (int i = 0; i < source.Length; i++)
+                byteSource[i] = (byte)source[i];
         }
 
         public String[] getVariations()
@@ -22,7 +26,8 @@ namespace Turing.Machines.ViewGraphic
             int srcLength = source.Length;
             int permutations = (int)Math.Pow(srcLength, variationLength);
 
-            Object[,] table = new Object[permutations, variationLength];
+            //Char[,] table = new Char[permutations, variationLength];
+            Byte[,] table = new Byte[permutations, variationLength];
 
             for (int i = 0; i < variationLength; i++)
             {
@@ -33,7 +38,8 @@ namespace Turing.Machines.ViewGraphic
                     {
                         for (int p2 = 0; p2 < t2; p2++)
                         {
-                            table[p1, i] = source[al];
+                            table[p1, i] = byteSource[al];
+                            //table[p1, i] = source[al];
                             p1++;
                         }
                     }
