@@ -1,7 +1,7 @@
 ﻿
-namespace Turing.Machines.ViewGraphic.OneLine
+namespace Turing.Machines.ViewGraphic.FourLines
 {
-    partial class GraphicOneLine
+    partial class GraphicFourLines
     {
         /// <summary>
         /// Required designer variable.

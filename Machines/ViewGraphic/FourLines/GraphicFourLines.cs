@@ -6,11 +6,11 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Turing.Library;
-using Turing.Machines.OneLineTuringMachine;
+using Turing.Machines.FourLinesTuringMachine;
 
-namespace Turing.Machines.ViewGraphic.OneLine
+namespace Turing.Machines.ViewGraphic.FourLines
 {
-    public partial class GraphicOneLine : Form
+    public partial class GraphicFourLines : Form
     {
         readonly int ThreadsCount = Environment.ProcessorCount;
         public bool isPause = false;
@@ -23,7 +23,7 @@ namespace Turing.Machines.ViewGraphic.OneLine
         List<int> allResults;
         Task task;
 
-        public GraphicOneLine()
+        public GraphicFourLines()
         {
             InitializeComponent();
             Alphabet = "abc";
@@ -170,10 +170,22 @@ namespace Turing.Machines.ViewGraphic.OneLine
                 }
                 catch (Exception except)
                 {
-                    if (turingMachine.CurrentCondition == -1)
+                    if (except.Message.Equals("Индекс за пределами диапазона. Индекс должен быть положительным числом, а его размер не должен превышать размер коллекции.\r\nИмя параметра: index"))
+                    {
+                        counter++;
                         break;
+                    }
                     else
-                        throw new Exception($"Ошибка команд\n{line}\nСостояние : {turingMachine.CurrentCondition}\nСчетчик: {counter}");
+                    {
+                        if (turingMachine.CurrentCondition == -1)
+                            break;
+                        else
+                        {
+                            MessageBox.Show($"Ошибка команд\n{line}\nСостояние : {turingMachine.CurrentCondition}\nСчетчик: {counter}");
+                            break;
+                        }
+                    }
+                    
                 }
             }
             

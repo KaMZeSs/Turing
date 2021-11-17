@@ -26,7 +26,6 @@ namespace Turing.Machines.ViewGraphic
             int srcLength = source.Length;
             int permutations = (int)Math.Pow(srcLength, variationLength);
 
-            //Char[,] table = new Char[permutations, variationLength];
             Byte[,] table = new Byte[permutations, variationLength];
 
             for (int i = 0; i < variationLength; i++)
@@ -39,7 +38,6 @@ namespace Turing.Machines.ViewGraphic
                         for (int p2 = 0; p2 < t2; p2++)
                         {
                             table[p1, i] = byteSource[al];
-                            //table[p1, i] = source[al];
                             p1++;
                         }
                     }

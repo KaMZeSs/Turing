@@ -87,6 +87,12 @@
       <DependentUpon>GraphicOneLine.cs</DependentUpon>
     </Compile>
     <Compile Include="Machines\ViewGraphic\PermutationsWithRepetition.cs" />
+    <Compile Include="Machines\ViewGraphic\FourLines\GraphicFourLines.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Machines\ViewGraphic\FourLines\GraphicFourLines.Designer.cs">
+      <DependentUpon>GraphicFourLines.cs</DependentUpon>
+    </Compile>
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -112,6 +118,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Machines\ViewGraphic\OneLine\GraphicOneLine.resx">
       <DependentUpon>GraphicOneLine.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Machines\ViewGraphic\FourLines\GraphicFourLines.resx">
+      <DependentUpon>GraphicFourLines.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>

@@ -32,6 +32,20 @@ namespace Turing.Machines.FourLinesTuringMachine
             DataConditions = dataGridView;
         }
 
+        public TuringMachine(ref DataGridView dataGridView, String line)
+        {
+            Line_First = new String('λ', 101) + line + new string('λ', 101);
+            Line_Second = new String('λ', 201);
+            Line_Third = new String('λ', 201);
+            Line_Fourth = new String('λ', 201);
+            CurrentPos_First = 101;
+            CurrentPos_Second = 101;
+            CurrentPos_Third = 101;
+            CurrentPos_Fourth = 101;
+            Alphabet = "λ";
+            DataConditions = dataGridView;
+        }
+
         public void NextStep()
         {
             char Letter1 = Line_First[CurrentPos_First], Letter2 = Line_Second[CurrentPos_Second],
