@@ -92,5 +92,25 @@ namespace Turing.Library
                 
             return true;
         }
+
+        public static String GetKAtLine(this string source)
+        {
+            int start, len; start = -1; len = 0;
+            bool hasStart = false;
+
+            for (int i = 0; i < source.Length; i++)
+            {
+                if (!hasStart && source[i] != 'λ')
+                {
+                    start = i;
+                    hasStart = true;
+                }
+                if (hasStart && source[i] != 'λ')
+                    len++;
+            }
+            if (len == 0)
+                return "";
+            return source.Substring(start, len);
+        }
     }
 }

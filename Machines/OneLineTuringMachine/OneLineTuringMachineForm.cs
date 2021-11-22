@@ -313,6 +313,8 @@ namespace Turing.Machines.OneLineTuringMachine
             return parts;
         }
 
+        List<String> strings = new List<string>();
+
         private void MakeStepButton_Click(object sender, EventArgs e)
         {
             foreach (DataGridViewRow Row in TableConditions.Rows)
@@ -322,8 +324,10 @@ namespace Turing.Machines.OneLineTuringMachine
             try
             {
                 turingMachine.NextStep();
+                
                 if (turingMachine.CurrentCondition == -1)
                 {
+                    
                     MessageBox.Show("Машина Тьюринга завершила работу");
                     return;
                 }
@@ -349,13 +353,42 @@ namespace Turing.Machines.OneLineTuringMachine
         {
             try
             {
+                String listing = "λ" + turingMachine.Line.GetKAtLine() + "λ";
+                if (listing.Length == 2)
+                    listing = "λ" + "q" + turingMachine.CurrentCondition.ToString() + "λ";
+                else
+                {
+                    int pos = turingMachine.CurrentPos - turingMachine.Line.IndexOf(listing[1]) + 1;
+                    listing = listing.Insert(pos < 0 ? 0 : pos, "q" + turingMachine.CurrentCondition.ToString());
+                    strings.Add(listing);
+                }
+                
                 turingMachine.NextStep();
+                
                 ShowLine();
                 if (turingMachine.CurrentCondition == -1)
                 {
                     timer.Stop();
                     StopWork_Button.Enabled = false;
+                    listing = turingMachine.Line.GetKAtLine();
+                    if (listing.Length == 2)
+                        listing = "λ" + "q" + turingMachine.CurrentCondition.ToString() + "λ";
+                    else
+                    {
+                        int pos = turingMachine.CurrentPos - turingMachine.Line.IndexOf(listing[0]) + 1;
+                        listing = listing.Insert(pos < 0 ? 0 : pos, "q" + turingMachine.CurrentCondition.ToString());
+                        strings.Add(listing);
+                    }
                     MessageBox.Show("Машина Тьюринга завершила работу");
+                    Form form = new Form();
+                    TextBox textBox = new TextBox();
+                    form.Controls.Add(textBox);
+                    textBox.Dock = DockStyle.Fill;
+                    textBox.Font = new Font(FontFamily.GenericSansSerif, 14f);
+                    textBox.ScrollBars = ScrollBars.Both;
+                    textBox.Multiline = true;
+                    textBox.Text = String.Join(Environment.NewLine, strings);
+                    form.Show();
                 }
 
             }
@@ -535,6 +568,7 @@ namespace Turing.Machines.OneLineTuringMachine
             turingMachine.Line = new String('λ', 201);
             turingMachine.CurrentPos = 101;
             turingMachine.CurrentCondition = 0;
+            strings.Clear();
             ShowLine();
         }
 
