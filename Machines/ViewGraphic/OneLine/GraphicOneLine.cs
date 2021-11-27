@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -102,52 +103,58 @@ namespace Turing.Machines.ViewGraphic.OneLine
 
         private void GetData()
         {
-            Thread.CurrentThread.Priority = ThreadPriority.AboveNormal;
-            for (int level = 0; ; level++)
+            if (Directory.Exists("Listing_OneLine"))
             {
-                PermutationsWithRepetition gen = new PermutationsWithRepetition(
-                        Alphabet.Trim().ToCharArray(), level);
-
-                if (isStop)
-                    break;
-
-                List<String[]> haveToDo = WorkWithArrays.Split(gen.getVariations(), ThreadsCount * 3);
-
-                if (isStop)
-                    break;
-
-                List<int> temp = new List<int>();
-                while (haveToDo.Count != 0)
-                {
-                    try
-                    {
-                        Thread[] threads = new Thread[haveToDo[0].Length];
-                        for (int i = 0; i < haveToDo[0].Length; i++)
-                        {
-                            threads[i] = new Thread(new ParameterizedThreadStart(DoTask));
-                            threads[i].Name = i.ToString();
-                            threads[i].Priority = ThreadPriority.AboveNormal;
-                            threads[i].Start(haveToDo.First()[i]);
-                        }
-                        haveToDo.RemoveAt(0);
-                        foreach (Thread thread in threads)
-                            thread.Join();
-
-                        if (isStop)
-                            break;
-                    }
-                    catch (Exception exc)
-                    {
-                        MessageBox.Show(exc.Message);
-                    }
-                }
+                Directory.Delete("Listing_OneLine", true);
             }
+            Directory.CreateDirectory("Listing_OneLine");
+
+            Thread.CurrentThread.Priority = ThreadPriority.AboveNormal;
+            Repetition repetition = new Repetition(Alphabet.ToCharArray());
+
+            DoTask("");
+            DoTask("a");
+
+            while (true)
+            {
+                if (isStop)
+                    break;
+                while (isPause)
+                    Thread.Sleep(500);
+                try
+                {
+                    Thread[] threads = new Thread[ThreadsCount * 2];
+
+                    for (int i = 0; i < threads.Length; i++)
+                    {
+                        threads[i] = new Thread(new ParameterizedThreadStart(DoTask));
+                        threads[i].Name = i.ToString();
+                        threads[i].Priority = ThreadPriority.AboveNormal;
+                        String str = new String(repetition.nextStep());
+                        if (str.Contains('\0'))
+                            MessageBox.Show(str);
+                        threads[i].Start(str);
+                    }
+
+                    foreach (Thread thread in threads)
+                        thread.Join();
+                }
+                catch (Exception exc)
+                {
+                    MessageBox.Show(exc.Message);
+                }
+
+            }
+
             Thread.CurrentThread.Priority = ThreadPriority.Normal;
         }
 
-        public void DoTask(object str)
+        public void DoTask(object wordAsArray)
         {
-            String line = (String)str;
+            String line = (String)wordAsArray;
+            Directory.CreateDirectory($"Listing_OneLine/{line.Length}");
+            StreamWriter streamWriter = File.AppendText($"Listing_OneLine/{line.Length}/{line}.txt"); ;
+
             foreach (DataGridViewRow Row in TableConditions.Rows)
                 foreach (DataGridViewCell Cell in Row.Cells)
                     if (Cell.Value == null)
@@ -164,6 +171,20 @@ namespace Turing.Machines.ViewGraphic.OneLine
                         Thread.Sleep(500);
                     if (isStop)
                         return;
+
+                    String listing = "λ" + turingMachine.Line.GetKAtLine() + "λ";
+                    if (listing.Length == 2)
+                        listing = "λ" + "q" + turingMachine.CurrentCondition.ToString() + "λ";
+                    else
+                    {
+                        int pos = turingMachine.CurrentPos - turingMachine.Line.IndexOf(listing[1]) + 1;
+                        if (turingMachine.CurrentCondition == -1)
+                            listing = listing.Insert(pos < 0 ? 0 : pos, "qz");
+                        else
+                            listing = listing.Insert(pos < 0 ? 0 : pos, "q" + turingMachine.CurrentCondition.ToString());
+                        streamWriter.WriteLine(listing);
+                    }
+
                     turingMachine.NextStep();
                     
                     counter++;
@@ -171,36 +192,36 @@ namespace Turing.Machines.ViewGraphic.OneLine
                 catch (Exception except)
                 {
                     if (turingMachine.CurrentCondition == -1)
+                    {
+                        
                         break;
+                    }
+
                     else
+                    {
+                        streamWriter.Close();
                         throw new Exception($"Ошибка команд\n{line}\nСостояние : {turingMachine.CurrentCondition}\nСчетчик: {counter}");
+                    }
                 }
             }
-            
+            streamWriter.Close();
             BeginInvoke(new DelegateUpdate2(Update), counter, line.Length);
         }
 
         private void Update(int num, int level)
         {
-            if (allResults.Count <= level)
-            {
-                allResults.Add(num);
-                chart1.Series[0].Points.AddXY(level, num);
-            }
-            else
-            {
-                int max = allResults[level];
+            while (allResults.Count <= level)
+                allResults.Add(0);
 
-                if (max >= num)
+            int max = allResults[level];
+
+            if (max < num)
+            {
+                allResults[level] = num;
+                chart1.Series[0].Points.Clear();
+                for (int i = 0; i < allResults.Count; i++)
                 {
-                    return;
-                }
-                else
-                {
-                    allResults[level] = num;
-                    if (chart1.Series[0].Points.Count != 0)
-                        chart1.Series[0].Points.RemoveAt(chart1.Series[0].Points.Count - 1);
-                    chart1.Series[0].Points.AddXY(level, num);
+                    chart1.Series[0].Points.AddXY(i, allResults[i]);
                 }
             }
         }

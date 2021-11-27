@@ -93,6 +93,7 @@
     <Compile Include="Machines\ViewGraphic\FourLines\GraphicFourLines.Designer.cs">
       <DependentUpon>GraphicFourLines.cs</DependentUpon>
     </Compile>
+    <Compile Include="Machines\ViewGraphic\Repetition.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>

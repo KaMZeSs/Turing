@@ -103,45 +103,42 @@ namespace Turing.Machines.ViewGraphic.FourLines
         private void GetData()
         {
             Thread.CurrentThread.Priority = ThreadPriority.AboveNormal;
-            for (int level = 0; ; level++)
+            Repetition repetition = new Repetition(Alphabet.ToCharArray());
+
+            DoTask("");
+            DoTask("a");
+
+            while (true)
             {
-                PermutationsWithRepetition gen = new PermutationsWithRepetition(
-                        Alphabet.Trim().ToCharArray(), level);
-
                 if (isStop)
                     break;
-
-                List<String[]> haveToDo = WorkWithArrays.Split(gen.getVariations(), ThreadsCount * 3);
-
-                if (isStop)
-                    break;
-
-                List<int> temp = new List<int>();
-                while (haveToDo.Count != 0)
+                while (isPause)
+                    Thread.Sleep(500);
+                try
                 {
-                    try
-                    {
-                        Thread[] threads = new Thread[haveToDo[0].Length];
-                        for (int i = 0; i < haveToDo[0].Length; i++)
-                        {
-                            threads[i] = new Thread(new ParameterizedThreadStart(DoTask));
-                            threads[i].Name = i.ToString();
-                            threads[i].Priority = ThreadPriority.AboveNormal;
-                            threads[i].Start(haveToDo.First()[i]);
-                        }
-                        haveToDo.RemoveAt(0);
-                        foreach (Thread thread in threads)
-                            thread.Join();
+                    Thread[] threads = new Thread[ThreadsCount * 3];
 
-                        if (isStop)
-                            break;
-                    }
-                    catch (Exception exc)
+                    for (int i = 0; i < threads.Length; i++)
                     {
-                        MessageBox.Show(exc.Message);
+                        threads[i] = new Thread(new ParameterizedThreadStart(DoTask));
+                        threads[i].Name = i.ToString();
+                        threads[i].Priority = ThreadPriority.AboveNormal;
+                        String str = new String(repetition.nextStep());
+                        if (str.Contains('\0'))
+                            MessageBox.Show(str);
+                        threads[i].Start(str);
                     }
+
+                    foreach (Thread thread in threads)
+                        thread.Join();
                 }
+                catch (Exception exc)
+                {
+                    MessageBox.Show(exc.Message);
+                }
+
             }
+
             Thread.CurrentThread.Priority = ThreadPriority.Normal;
         }
 
@@ -194,25 +191,18 @@ namespace Turing.Machines.ViewGraphic.FourLines
 
         private void Update(int num, int level)
         {
-            if (allResults.Count <= level)
-            {
-                allResults.Add(num);
-                chart1.Series[0].Points.AddXY(level, num);
-            }
-            else
-            {
-                int max = allResults[level];
+            while (allResults.Count <= level)
+                allResults.Add(0);
 
-                if (max >= num)
+            int max = allResults[level];
+
+            if (max < num)
+            {
+                allResults[level] = num;
+                chart1.Series[0].Points.Clear();
+                for (int i = 0; i < allResults.Count; i++)
                 {
-                    return;
-                }
-                else
-                {
-                    allResults[level] = num;
-                    if (chart1.Series[0].Points.Count != 0)
-                        chart1.Series[0].Points.RemoveAt(chart1.Series[0].Points.Count - 1);
-                    chart1.Series[0].Points.AddXY(level, num);
+                    chart1.Series[0].Points.AddXY(i, allResults[i]);
                 }
             }
         }
