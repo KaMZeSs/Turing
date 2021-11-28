@@ -14,6 +14,8 @@ namespace Turing.Machines.ViewGraphic.OneLine
     public partial class GraphicOneLine : Form
     {
         readonly int ThreadsCount = Environment.ProcessorCount;
+        public bool isWriteListing;
+
         public bool isPause = false;
         public bool isStop = false;
 
@@ -76,6 +78,11 @@ namespace Turing.Machines.ViewGraphic.OneLine
                         TableConditions[j, i].Value = str;
                     }
                 }
+
+                foreach (DataGridViewRow Row in TableConditions.Rows)
+                    foreach (DataGridViewCell Cell in Row.Cells)
+                        if (Cell.Value == null)
+                            Cell.Value = "";
             }
             else
             {
@@ -98,16 +105,33 @@ namespace Turing.Machines.ViewGraphic.OneLine
         private void button1_Click(object sender, EventArgs e)
         {
             if (task == null)
+            {
+                DialogResult result = MessageBox.Show("Записывать ли информацию обо всех шагах машин Тьюринга?", 
+                    "Записывать ли?", MessageBoxButtons.YesNoCancel);
+                if (result == DialogResult.OK || result == DialogResult.Yes)
+                {
+                    isWriteListing = true;
+                }
+                else if (result == DialogResult.No)
+                {
+                    isWriteListing = false;
+                }
+                else
+                    return;
                 task = Task.Factory.StartNew(new Action(() => GetData()), TaskCreationOptions.LongRunning);
+            }  
         }
 
         private void GetData()
-        {
-            if (Directory.Exists("Listing_OneLine"))
+        {   
+            if (isWriteListing)
             {
-                Directory.Delete("Listing_OneLine", true);
+                if (Directory.Exists("Listing_OneLine"))
+                {
+                    Directory.Delete("Listing_OneLine", true);
+                }
+                Directory.CreateDirectory("Listing_OneLine");
             }
-            Directory.CreateDirectory("Listing_OneLine");
 
             Thread.CurrentThread.Priority = ThreadPriority.AboveNormal;
             Repetition repetition = new Repetition(Alphabet.ToCharArray());
@@ -143,22 +167,20 @@ namespace Turing.Machines.ViewGraphic.OneLine
                 {
                     MessageBox.Show(exc.Message);
                 }
-
             }
-
             Thread.CurrentThread.Priority = ThreadPriority.Normal;
         }
 
         public void DoTask(object wordAsArray)
         {
             String line = (String)wordAsArray;
-            Directory.CreateDirectory($"Listing_OneLine/{line.Length}");
-            StreamWriter streamWriter = File.AppendText($"Listing_OneLine/{line.Length}/{line}.txt"); ;
-
-            foreach (DataGridViewRow Row in TableConditions.Rows)
-                foreach (DataGridViewCell Cell in Row.Cells)
-                    if (Cell.Value == null)
-                        Cell.Value = "";
+            
+            StreamWriter streamWriter = null;
+            if (isWriteListing)
+            {
+                Directory.CreateDirectory($"Listing_OneLine/{line.Length}");
+                streamWriter = File.AppendText($"Listing_OneLine/{line.Length}/{line}.txt");
+            }
 
             TuringMachine turingMachine = new TuringMachine(ref TableConditions, line);
 
@@ -171,19 +193,23 @@ namespace Turing.Machines.ViewGraphic.OneLine
                         Thread.Sleep(500);
                     if (isStop)
                         return;
-
-                    String listing = "λ" + turingMachine.Line.GetKAtLine() + "λ";
-                    if (listing.Length == 2)
-                        listing = "λ" + "q" + turingMachine.CurrentCondition.ToString() + "λ";
-                    else
+                    
+                    if (isWriteListing)
                     {
-                        int pos = turingMachine.CurrentPos - turingMachine.Line.IndexOf(listing[1]) + 1;
-                        if (turingMachine.CurrentCondition == -1)
-                            listing = listing.Insert(pos < 0 ? 0 : pos, "qz");
+                        String listing = "λ" + turingMachine.Line.GetKAtLine() + "λ";
+                        if (listing.Length == 2)
+                            listing = "λ" + "q" + turingMachine.CurrentCondition.ToString() + "λ";
                         else
-                            listing = listing.Insert(pos < 0 ? 0 : pos, "q" + turingMachine.CurrentCondition.ToString());
-                        streamWriter.WriteLine(listing);
+                        {
+                            int pos = turingMachine.CurrentPos - turingMachine.Line.IndexOf(listing[1]) + 1;
+                            if (turingMachine.CurrentCondition == -1)
+                                listing = listing.Insert(pos < 0 ? 0 : pos, "qz");
+                            else
+                                listing = listing.Insert(pos < 0 ? 0 : pos, "q" + turingMachine.CurrentCondition.ToString());
+                            streamWriter.WriteLine(listing);
+                        }
                     }
+                    
 
                     turingMachine.NextStep();
                     
@@ -192,19 +218,19 @@ namespace Turing.Machines.ViewGraphic.OneLine
                 catch (Exception except)
                 {
                     if (turingMachine.CurrentCondition == -1)
-                    {
-                        
+                    { 
                         break;
                     }
-
                     else
                     {
-                        streamWriter.Close();
+                        if (isWriteListing)
+                            streamWriter.Close();
                         throw new Exception($"Ошибка команд\n{line}\nСостояние : {turingMachine.CurrentCondition}\nСчетчик: {counter}");
                     }
                 }
             }
-            streamWriter.Close();
+            if (isWriteListing)
+                streamWriter.Close();
             BeginInvoke(new DelegateUpdate2(Update), counter, line.Length);
         }
 

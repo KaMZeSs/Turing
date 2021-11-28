@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -15,6 +16,7 @@ namespace Turing.Machines.ViewGraphic.FourLines
         readonly int ThreadsCount = Environment.ProcessorCount;
         public bool isPause = false;
         public bool isStop = false;
+        public bool isWriteListing;
 
         public delegate void DelegateUpdate2(int num, int level);
 
@@ -55,7 +57,7 @@ namespace Turing.Machines.ViewGraphic.FourLines
                 data = dataSet.Tables[0];
                 String st = (string)dataSet.ExtendedProperties["HeaderCells"];
                 String[] HCells = st.Trim().Split(' ');
-                for (int i = 0; i < data.Columns.Count - 1; i++)
+                for (int i = 0; i < data.Columns.Count; i++)
                 {
                     int index = TableConditions.Columns.Count;
                     TableConditions.Columns.Add(index.ToString(), "q" + index.ToString());
@@ -75,6 +77,11 @@ namespace Turing.Machines.ViewGraphic.FourLines
                         TableConditions[j, i].Value = str;
                     }
                 }
+
+                foreach (DataGridViewRow Row in TableConditions.Rows)
+                    foreach (DataGridViewCell Cell in Row.Cells)
+                        if (Cell.Value == null)
+                            Cell.Value = "";
             }
             else
             {
@@ -97,11 +104,34 @@ namespace Turing.Machines.ViewGraphic.FourLines
         private void button1_Click(object sender, EventArgs e)
         {
             if (task == null)
+            {
+                DialogResult result = MessageBox.Show("Записывать ли информацию обо всех шагах машин Тьюринга?",
+                    "Записывать ли?", MessageBoxButtons.YesNoCancel);
+                if (result == DialogResult.OK || result == DialogResult.Yes)
+                {
+                    isWriteListing = true;
+                }
+                else if (result == DialogResult.No)
+                {
+                    isWriteListing = false;
+                }
+                else
+                    return;
                 task = Task.Factory.StartNew(new Action(() => GetData()), TaskCreationOptions.LongRunning);
+            }
         }
 
         private void GetData()
         {
+            if (isWriteListing)
+            {
+                if (Directory.Exists("Listing_FourLines"))
+                {
+                    Directory.Delete("Listing_FourLines", true);
+                }
+                Directory.CreateDirectory("Listing_FourLines");
+            }
+
             Thread.CurrentThread.Priority = ThreadPriority.AboveNormal;
             Repetition repetition = new Repetition(Alphabet.ToCharArray());
 
@@ -116,7 +146,7 @@ namespace Turing.Machines.ViewGraphic.FourLines
                     Thread.Sleep(500);
                 try
                 {
-                    Thread[] threads = new Thread[ThreadsCount * 3];
+                    Thread[] threads = new Thread[ThreadsCount * 2];
 
                     for (int i = 0; i < threads.Length; i++)
                     {
@@ -136,19 +166,20 @@ namespace Turing.Machines.ViewGraphic.FourLines
                 {
                     MessageBox.Show(exc.Message);
                 }
-
             }
-
             Thread.CurrentThread.Priority = ThreadPriority.Normal;
         }
 
         public void DoTask(object str)
         {
             String line = (String)str;
-            foreach (DataGridViewRow Row in TableConditions.Rows)
-                foreach (DataGridViewCell Cell in Row.Cells)
-                    if (Cell.Value == null)
-                        Cell.Value = "";
+
+            StreamWriter streamWriter = null;
+            if (isWriteListing)
+            {
+                Directory.CreateDirectory($"Listing_FourLines/{line.Length}");
+                streamWriter = File.AppendText($"Listing_FourLines/{line.Length}/{line}.txt");
+            }
 
             TuringMachine turingMachine = new TuringMachine(ref TableConditions, line);
 
@@ -161,31 +192,86 @@ namespace Turing.Machines.ViewGraphic.FourLines
                         Thread.Sleep(500);
                     if (isStop)
                         return;
+
+                    if (isWriteListing)
+                    {
+                        String[] listing = new String[4];
+                        listing[0] = "λ" + turingMachine.Line_First.GetKAtLine() + "λ";
+                        listing[1] = "λ" + turingMachine.Line_Second.GetKAtLine() + "λ";
+                        listing[2] = "λ" + turingMachine.Line_Third.GetKAtLine() + "λ";
+                        listing[3] = "λ" + turingMachine.Line_Fourth.GetKAtLine() + "λ";
+
+                        if (listing[0].Length == 2)
+                            listing[0] = "λ" + "q" + turingMachine.CurrentCondition.ToString() + "λ";
+                        else
+                        {
+                            int pos = turingMachine.CurrentPos_First - turingMachine.Line_First.IndexOf(listing[0][1]) + 1;
+                            if (turingMachine.CurrentCondition == -1)
+                                listing[0] = listing[0].Insert(pos < 0 ? 0 : pos, "qz");
+                            else
+                                listing[0] = listing[0].Insert(pos < 0 ? 0 : pos, "q" + turingMachine.CurrentCondition.ToString());
+                        }
+                        
+                        if (listing[1].Length == 2)
+                            listing[1] = "λ" + "q" + turingMachine.CurrentCondition.ToString() + "λ";
+                        else
+                        {
+                            int pos = turingMachine.CurrentPos_Second - turingMachine.Line_Second.IndexOf(listing[1][1]) + 1;
+                            if (turingMachine.CurrentCondition == -1)
+                                listing[1] = listing[1].Insert(pos < 0 ? 0 : pos, "qz");
+                            else
+                                listing[1] = listing[1].Insert(pos < 0 ? 0 : pos, "q" + turingMachine.CurrentCondition.ToString());
+                        }
+
+                        if (listing[2].Length == 2)
+                            listing[2] = "λ" + "q" + turingMachine.CurrentCondition.ToString() + "λ";
+                        else
+                        {
+                            int pos = turingMachine.CurrentPos_Third - turingMachine.Line_Third.IndexOf(listing[2][1]) + 1;
+                            if (turingMachine.CurrentCondition == -1)
+                                listing[2] = listing[2].Insert(pos < 0 ? 0 : pos, "qz");
+                            else
+                                listing[2] = listing[2].Insert(pos < 0 ? 0 : pos, "q" + turingMachine.CurrentCondition.ToString());
+                        }
+
+                        if (listing[3].Length == 2)
+                            listing[3] = "λ" + "q" + turingMachine.CurrentCondition.ToString() + "λ";
+                        else
+                        {
+                            int pos = turingMachine.CurrentPos_Fourth - turingMachine.Line_Fourth.IndexOf(listing[3][1]) + 1;
+                            if (turingMachine.CurrentCondition == -1)
+                                listing[3] = listing[3].Insert(pos < 0 ? 0 : pos, "qz");
+                            else
+                                listing[3] = listing[3].Insert(pos < 0 ? 0 : pos, "q" + turingMachine.CurrentCondition.ToString());
+                        }
+
+                        for (int i = 0; i < listing.Length; i++)
+                            if (listing[i].Contains("q-1"))
+                                listing[i] = listing[i].Replace("q-1", "qz");
+
+                        streamWriter.WriteLine(String.Join("\n", listing));
+                        streamWriter.WriteLine();
+                    }
+
                     turingMachine.NextStep();
                     
                     counter++;
                 }
                 catch (Exception except)
                 {
-                    if (except.Message.Equals("Индекс за пределами диапазона. Индекс должен быть положительным числом, а его размер не должен превышать размер коллекции.\r\nИмя параметра: index"))
-                    {
-                        counter++;
+                    if (turingMachine.CurrentCondition == -1)
                         break;
-                    }
                     else
                     {
-                        if (turingMachine.CurrentCondition == -1)
-                            break;
-                        else
-                        {
-                            MessageBox.Show($"Ошибка команд\n{line}\nСостояние : {turingMachine.CurrentCondition}\nСчетчик: {counter}");
-                            break;
-                        }
+                        if (isWriteListing)
+                            streamWriter.Close();
+                        MessageBox.Show($"Ошибка команд\n{line}\nСостояние : {turingMachine.CurrentCondition}\nСчетчик: {counter}");
+                        break;
                     }
-                    
                 }
             }
-            
+            if (isWriteListing)
+                streamWriter.Close();
             BeginInvoke(new DelegateUpdate2(Update), counter, line.Length);
         }
 

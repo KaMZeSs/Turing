@@ -20,28 +20,28 @@ namespace Turing.Machines.FourLinesTuringMachine
 
         public TuringMachine(ref DataGridView dataGridView)
         {
-            Line_First = new String('λ', 201);
-            Line_Second = new String('λ', 201);
-            Line_Third = new String('λ', 201);
-            Line_Fourth = new String('λ', 201);
-            CurrentPos_First = 101;
-            CurrentPos_Second = 101;
-            CurrentPos_Third = 101;
-            CurrentPos_Fourth = 101;
+            Line_First = new String('λ', 61);
+            Line_Second = new String('λ', 61);
+            Line_Third = new String('λ', 61);
+            Line_Fourth = new String('λ', 61);
+            CurrentPos_First = 30;
+            CurrentPos_Second = 30;
+            CurrentPos_Third = 30;
+            CurrentPos_Fourth = 30;
             Alphabet = "λ";
             DataConditions = dataGridView;
         }
 
         public TuringMachine(ref DataGridView dataGridView, String line)
         {
-            Line_First = new String('λ', 101) + line + new string('λ', 101);
-            Line_Second = new String('λ', 201);
-            Line_Third = new String('λ', 201);
-            Line_Fourth = new String('λ', 201);
-            CurrentPos_First = 101;
-            CurrentPos_Second = 101;
-            CurrentPos_Third = 101;
-            CurrentPos_Fourth = 101;
+            Line_First = new String('λ', 20) + line + new string('λ', 20);
+            Line_Second = new String('λ', 41);
+            Line_Third = new String('λ', 41);
+            Line_Fourth = new String('λ', 41);
+            CurrentPos_First = 20;
+            CurrentPos_Second = 20;
+            CurrentPos_Third = 20;
+            CurrentPos_Fourth = 20;
             Alphabet = "λ";
             DataConditions = dataGridView;
         }
@@ -55,9 +55,10 @@ namespace Turing.Machines.FourLinesTuringMachine
 
             if (CurrentCondition == -1)
                 throw new Exception("Машина Тьюринга не может продолжать работу в состоянии qz");
+            String command = Letter1.ToString() +
+                    Letter2.ToString() + Letter3.ToString() + Letter4.ToString();
             foreach (DataGridViewRow row in DataConditions.Rows)
-                if (row.HeaderCell.Value.ToString() == Letter1.ToString() + 
-                    Letter2.ToString() + Letter3.ToString() + Letter4.ToString())
+                if (row.HeaderCell.Value.ToString().Equals(command))
                 {
                     str = row.Cells[CurrentCondition].Value.ToString();
                     break;
@@ -95,33 +96,33 @@ namespace Turing.Machines.FourLinesTuringMachine
 
             CurrentCondition = Convert.ToInt32(Command.Substring(8));
 
-            if (CurrentPos_First == Line_First.Length - 20)
-                Line_First += new string('λ', 100);
-            if (CurrentPos_Second == Line_Second.Length - 20)
-                Line_Second += new string('λ', 100);
-            if (CurrentPos_Third == Line_Third.Length - 20)
-                Line_Third += new string('λ', 100);
-            if (CurrentPos_Fourth == Line_Fourth.Length - 20)
-                Line_Fourth += new string('λ', 100);
-            if (CurrentPos_First == 20)
+            if (CurrentPos_First == Line_First.Length - 7)
+                Line_First += new string('λ', 10);
+            if (CurrentPos_Second == Line_Second.Length - 7)
+                Line_Second += new string('λ', 10);
+            if (CurrentPos_Third == Line_Third.Length - 7)
+                Line_Third += new string('λ', 10);
+            if (CurrentPos_Fourth == Line_Fourth.Length - 7)
+                Line_Fourth += new string('λ', 10);
+            if (CurrentPos_First == 10)
             {
-                Line_First = new string('λ', 100) + Line_First;
-                CurrentPos_First += 100;
+                Line_First = new string('λ', 10) + Line_First;
+                CurrentPos_First += 10;
             }
-            if (CurrentPos_Second == 20)
+            if (CurrentPos_Second == 10)
             {
-                Line_Second = new string('λ', 100) + Line_Second;
-                CurrentPos_Second += 100;
+                Line_Second = new string('λ', 10) + Line_Second;
+                CurrentPos_Second += 10;
             }
-            if (CurrentPos_Third == 20)
+            if (CurrentPos_Third == 10)
             {
-                Line_Third = new string('λ', 100) + Line_Third;
-                CurrentPos_Third += 100;
+                Line_Third = new string('λ', 10) + Line_Third;
+                CurrentPos_Third += 10;
             }
-            if (CurrentPos_Fourth == 20)
+            if (CurrentPos_Fourth == 10)
             {
-                Line_Fourth = new string('λ', 100) + Line_Fourth;
-                CurrentPos_Fourth += 100;
+                Line_Fourth = new string('λ', 10) + Line_Fourth;
+                CurrentPos_Fourth += 10;
             }
 
             OnMachineValuesChanged(new EventArgs());
