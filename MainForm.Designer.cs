@@ -33,6 +33,7 @@ namespace Turing
             this.button3 = new System.Windows.Forms.Button();
             this.OneLineGraphic = new System.Windows.Forms.Button();
             this.FourLinesGraphic = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // button1
@@ -51,9 +52,9 @@ namespace Turing
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(126, 23);
             this.button3.TabIndex = 1;
-            this.button3.Text = "Четырехленточная";
+            this.button3.Text = "Трехленточная";
             this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
+            this.button3.Click += new System.EventHandler(this.OpenThreeLines);
             // 
             // OneLineGraphic
             // 
@@ -67,7 +68,7 @@ namespace Turing
             // 
             // FourLinesGraphic
             // 
-            this.FourLinesGraphic.Location = new System.Drawing.Point(178, 41);
+            this.FourLinesGraphic.Location = new System.Drawing.Point(318, 41);
             this.FourLinesGraphic.Name = "FourLinesGraphic";
             this.FourLinesGraphic.Size = new System.Drawing.Size(125, 57);
             this.FourLinesGraphic.TabIndex = 2;
@@ -75,12 +76,23 @@ namespace Turing
             this.FourLinesGraphic.UseVisualStyleBackColor = true;
             this.FourLinesGraphic.Click += new System.EventHandler(this.FourLinesGraphic_Click);
             // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(318, 12);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(126, 23);
+            this.button2.TabIndex = 1;
+            this.button2.Text = "Четырехленточная";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button3_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(314, 110);
+            this.ClientSize = new System.Drawing.Size(490, 110);
             this.Controls.Add(this.FourLinesGraphic);
+            this.Controls.Add(this.button2);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.OneLineGraphic);
             this.Controls.Add(this.button1);
@@ -96,5 +108,6 @@ namespace Turing
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button OneLineGraphic;
         private System.Windows.Forms.Button FourLinesGraphic;
+        private System.Windows.Forms.Button button2;
     }
 }

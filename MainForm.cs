@@ -25,6 +25,12 @@ namespace Turing
             form.Show();
         }
 
+        private void OpenThreeLines(object sender, EventArgs e)
+        {
+            Form form = new Turing.Machines.ThreeLinesTuringMachine.ThreeLinesTuringMachineForm();
+            form.Show();
+        }
+
         private void OneLineGraphic_Click(object sender, EventArgs e)
         {
             Form form = new Machines.ViewGraphic.OneLine.GraphicOneLine();
