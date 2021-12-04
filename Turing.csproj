@@ -101,6 +101,12 @@
       <DependentUpon>GraphicFourLines.cs</DependentUpon>
     </Compile>
     <Compile Include="Machines\ViewGraphic\Repetition.cs" />
+    <Compile Include="Machines\ViewGraphic\ThreeLines\GraphicThreeLines.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Machines\ViewGraphic\ThreeLines\GraphicThreeLines.Designer.cs">
+      <DependentUpon>GraphicThreeLines.cs</DependentUpon>
+    </Compile>
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -132,6 +138,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Machines\ViewGraphic\FourLines\GraphicFourLines.resx">
       <DependentUpon>GraphicFourLines.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Machines\ViewGraphic\ThreeLines\GraphicThreeLines.resx">
+      <DependentUpon>GraphicThreeLines.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>

@@ -38,6 +38,13 @@ namespace Turing
                 form.Show(this);
         }
 
+        private void ThreeLinesGraphic_Click(object sender, EventArgs e)
+        {
+            Form form = new Machines.ViewGraphic.ThreeLines.GraphicThreeLines();
+            if (!form.IsDisposed)
+                form.Show(this);
+        }
+
         private void FourLinesGraphic_Click(object sender, EventArgs e)
         {
             Form form = new Machines.ViewGraphic.FourLines.GraphicFourLines();
