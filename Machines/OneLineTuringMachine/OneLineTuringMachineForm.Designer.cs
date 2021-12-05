@@ -69,6 +69,7 @@ namespace Turing.Machines.OneLineTuringMachine
             this.StopWork_Button = new System.Windows.Forms.Button();
             this.SaveMachine_Button = new System.Windows.Forms.Button();
             this.OpenMachine_Button = new System.Windows.Forms.Button();
+            this.EnterWord_Button = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -533,11 +534,22 @@ namespace Turing.Machines.OneLineTuringMachine
             this.OpenMachine_Button.UseVisualStyleBackColor = true;
             this.OpenMachine_Button.Click += new System.EventHandler(this.OpenMachine_Button_Click);
             // 
+            // EnterWord_Button
+            // 
+            this.EnterWord_Button.Location = new System.Drawing.Point(596, 83);
+            this.EnterWord_Button.Name = "EnterWord_Button";
+            this.EnterWord_Button.Size = new System.Drawing.Size(111, 23);
+            this.EnterWord_Button.TabIndex = 16;
+            this.EnterWord_Button.Text = "Ввести слово";
+            this.EnterWord_Button.UseVisualStyleBackColor = true;
+            this.EnterWord_Button.Click += new System.EventHandler(this.EnterWord_Button_Click);
+            // 
             // OneLineTuringMachineForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(792, 450);
+            this.Controls.Add(this.EnterWord_Button);
             this.Controls.Add(this.OpenMachine_Button);
             this.Controls.Add(this.SaveMachine_Button);
             this.Controls.Add(this.StopWork_Button);
@@ -613,5 +625,6 @@ namespace Turing.Machines.OneLineTuringMachine
         private System.Windows.Forms.Button StopWork_Button;
         private System.Windows.Forms.Button SaveMachine_Button;
         private System.Windows.Forms.Button OpenMachine_Button;
+        private System.Windows.Forms.Button EnterWord_Button;
     }
 }

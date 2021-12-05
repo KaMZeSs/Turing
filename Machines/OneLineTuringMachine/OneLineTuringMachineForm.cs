@@ -324,6 +324,7 @@ namespace Turing.Machines.OneLineTuringMachine
             try
             {
                 turingMachine.NextStep();
+                ShowLine();
                 
                 if (turingMachine.CurrentCondition == -1)
                 {
@@ -575,6 +576,20 @@ namespace Turing.Machines.OneLineTuringMachine
         private void OneLineTuringMachineForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             timer.Stop();
+        }
+
+        private void EnterWord_Button_Click(object sender, EventArgs e)
+        {
+            GetInputFromAlphabet form = new GetInputFromAlphabet(Alphabet.Text);
+            form.ShowDialog(this);
+
+            if (form.DialogResult == DialogResult.OK)
+            {
+                Clear_button_Click(sender, e);
+                turingMachine = new TuringMachine(ref TableConditions, form.result);
+                ShowLine();
+            }
+            form.Close();
         }
     }
 }
