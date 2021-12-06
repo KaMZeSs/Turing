@@ -21,6 +21,7 @@ namespace Turing.Machines
             foreach (Char Letter in textBox1.Text)
                 if (Alphabet.Contains(Letter))
                     result += Letter;
+            textBox1.Text = result;
         }
 
         private void button1_Click(object sender, EventArgs e)

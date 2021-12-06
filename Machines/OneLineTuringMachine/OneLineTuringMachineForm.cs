@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 using Turing.Library;
@@ -19,6 +20,10 @@ namespace Turing.Machines.OneLineTuringMachine
         TuringMachine turingMachine;
 
         Label[] labels = new Label[15];
+        Form formListing = new Form();
+        TextBox formListing_textBox = new TextBox();
+
+        StreamWriter streamWriter = new StreamWriter($"Listing_OneLine_{DateTime.Now.ToString().Replace('.', '_').Replace(' ', '_').Replace(':', '_')}.txt");
 
         public OneLineTuringMachineForm()
         {
@@ -38,6 +43,19 @@ namespace Turing.Machines.OneLineTuringMachine
             ShowLine();
             timer.Tick += Timer_Tick;
             timer.Interval = 800;
+
+            formListing.FormClosing += FormListing_FormClosing;
+            formListing.Controls.Add(formListing_textBox);
+            formListing_textBox.Dock = DockStyle.Fill;
+            formListing_textBox.Font = new Font(FontFamily.GenericSansSerif, 14f);
+            formListing_textBox.ScrollBars = ScrollBars.Both;
+            formListing_textBox.Multiline = true;
+        }
+
+        private void FormListing_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            formListing.Hide();
+            e.Cancel = true;
         }
 
         private void TuringMachine_ValuesChanged(object sender, EventArgs e)
@@ -313,22 +331,44 @@ namespace Turing.Machines.OneLineTuringMachine
             return parts;
         }
 
-        List<String> strings = new List<string>();
-
         private void MakeStepButton_Click(object sender, EventArgs e)
         {
             foreach (DataGridViewRow Row in TableConditions.Rows)
                 foreach (DataGridViewCell Cell in Row.Cells)
                     if (Cell.Value == null)
                         Cell.Value = "";
+            
+            formListing.Visible = true;
+
             try
             {
+                String listing = "λ" + turingMachine.Line.GetKAtLine() + "λ";
+                if (listing.Length == 2)
+                    listing = "λ" + "q" + turingMachine.CurrentCondition.ToString() + "λ";
+                else
+                {
+                    int pos = turingMachine.CurrentPos - turingMachine.Line.IndexOf(listing[1]) + 1;
+                    listing = listing.Insert(pos < 0 ? 0 : pos, "q" + turingMachine.CurrentCondition.ToString());
+                }
+
+                formListing_textBox.Text += listing + Environment.NewLine;
+
                 turingMachine.NextStep();
                 ShowLine();
                 
                 if (turingMachine.CurrentCondition == -1)
                 {
-                    
+                    listing = turingMachine.Line.GetKAtLine();
+                    if (listing.Length == 1)
+                        listing = "λqz" + listing + "λ";
+                    else if (listing.Length == 2)
+                        listing = "λ" + "qz" + "λ";
+                    else
+                    {
+                        int pos = turingMachine.CurrentPos - turingMachine.Line.IndexOf(listing[0]) + 1;
+                        listing = listing.Insert(pos < 0 ? 0 : pos, "qz");
+                    }
+                    formListing_textBox.Text += listing + Environment.NewLine;
                     MessageBox.Show("Машина Тьюринга завершила работу");
                     return;
                 }
@@ -348,6 +388,9 @@ namespace Turing.Machines.OneLineTuringMachine
                         Cell.Value = "";
             timer.Start();
             StopWork_Button.Enabled = true;
+            if (!formListing.Visible)
+                formListing.Show();
+            formListing_textBox.Text = String.Empty;
         }
 
         private void Timer_Tick(object sender, EventArgs e)
@@ -361,9 +404,10 @@ namespace Turing.Machines.OneLineTuringMachine
                 {
                     int pos = turingMachine.CurrentPos - turingMachine.Line.IndexOf(listing[1]) + 1;
                     listing = listing.Insert(pos < 0 ? 0 : pos, "q" + turingMachine.CurrentCondition.ToString());
-                    strings.Add(listing);
                 }
-                
+
+                formListing_textBox.Text += listing + Environment.NewLine;
+
                 turingMachine.NextStep();
                 
                 ShowLine();
@@ -372,24 +416,17 @@ namespace Turing.Machines.OneLineTuringMachine
                     timer.Stop();
                     StopWork_Button.Enabled = false;
                     listing = turingMachine.Line.GetKAtLine();
-                    if (listing.Length == 2)
-                        listing = "λ" + "q" + turingMachine.CurrentCondition.ToString() + "λ";
+                    if (listing.Length == 1)
+                        listing = "λqz" + listing + "λ";
+                    else if (listing.Length == 2)
+                        listing = "λ" + "qz" + "λ";
                     else
                     {
                         int pos = turingMachine.CurrentPos - turingMachine.Line.IndexOf(listing[0]) + 1;
-                        listing = listing.Insert(pos < 0 ? 0 : pos, "q" + turingMachine.CurrentCondition.ToString());
-                        strings.Add(listing);
+                        listing = listing.Insert(pos < 0 ? 0 : pos, "qz");
                     }
+                    formListing_textBox.Text += listing + Environment.NewLine;
                     MessageBox.Show("Машина Тьюринга завершила работу");
-                    Form form = new Form();
-                    TextBox textBox = new TextBox();
-                    form.Controls.Add(textBox);
-                    textBox.Dock = DockStyle.Fill;
-                    textBox.Font = new Font(FontFamily.GenericSansSerif, 14f);
-                    textBox.ScrollBars = ScrollBars.Both;
-                    textBox.Multiline = true;
-                    textBox.Text = String.Join(Environment.NewLine, strings);
-                    form.Show();
                 }
 
             }
@@ -569,7 +606,7 @@ namespace Turing.Machines.OneLineTuringMachine
             turingMachine.Line = new String('λ', 201);
             turingMachine.CurrentPos = 101;
             turingMachine.CurrentCondition = 0;
-            strings.Clear();
+            formListing_textBox.Text = String.Empty;
             ShowLine();
         }
 
