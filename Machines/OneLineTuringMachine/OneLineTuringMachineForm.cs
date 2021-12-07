@@ -50,6 +50,8 @@ namespace Turing.Machines.OneLineTuringMachine
             formListing_textBox.Font = new Font(FontFamily.GenericSansSerif, 14f);
             formListing_textBox.ScrollBars = ScrollBars.Both;
             formListing_textBox.Multiline = true;
+
+            streamWriter.AutoFlush = true;
         }
 
         private void FormListing_FormClosing(object sender, FormClosingEventArgs e)
@@ -407,6 +409,7 @@ namespace Turing.Machines.OneLineTuringMachine
                 }
 
                 formListing_textBox.Text += listing + Environment.NewLine;
+                streamWriter.WriteLine(listing);
 
                 turingMachine.NextStep();
                 
@@ -425,6 +428,7 @@ namespace Turing.Machines.OneLineTuringMachine
                         int pos = turingMachine.CurrentPos - turingMachine.Line.IndexOf(listing[0]) + 1;
                         listing = listing.Insert(pos < 0 ? 0 : pos, "qz");
                     }
+                    streamWriter.WriteLine(listing + Environment.NewLine);
                     formListing_textBox.Text += listing + Environment.NewLine;
                     MessageBox.Show("Машина Тьюринга завершила работу");
                 }

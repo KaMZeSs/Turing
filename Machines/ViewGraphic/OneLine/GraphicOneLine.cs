@@ -58,7 +58,7 @@ namespace Turing.Machines.ViewGraphic.OneLine
                 data = dataSet.Tables[0];
                 String st = (string)dataSet.ExtendedProperties["HeaderCells"];
                 String[] HCells = st.Trim().Split(' ');
-                for (int i = 0; i < data.Columns.Count - 1; i++)
+                for (int i = 0; i < data.Columns.Count; i++)
                 {
                     int index = TableConditions.Columns.Count;
                     TableConditions.Columns.Add(index.ToString(), "q" + index.ToString());
@@ -147,7 +147,7 @@ namespace Turing.Machines.ViewGraphic.OneLine
                     Thread.Sleep(500);
                 try
                 {
-                    Thread[] threads = new Thread[ThreadsCount * 2];
+                    Thread[] threads = new Thread[ThreadsCount * 3];
 
                     for (int i = 0; i < threads.Length; i++)
                     {
@@ -174,7 +174,10 @@ namespace Turing.Machines.ViewGraphic.OneLine
         public void DoTask(object wordAsArray)
         {
             String line = (String)wordAsArray;
-            
+            String str;
+            if (line.Length == 2)
+                 str = "";
+
             StreamWriter streamWriter = null;
             if (isWriteListing)
             {
@@ -225,7 +228,8 @@ namespace Turing.Machines.ViewGraphic.OneLine
                     {
                         if (isWriteListing)
                             streamWriter.Close();
-                        throw new Exception($"Ошибка команд\n{line}\nСостояние : {turingMachine.CurrentCondition}\nСчетчик: {counter}");
+                        MessageBox.Show($"Ошибка команд\n{line}\nСостояние : {turingMachine.CurrentCondition}\nСчетчик: {counter}");
+                        return;
                     }
                 }
             }
