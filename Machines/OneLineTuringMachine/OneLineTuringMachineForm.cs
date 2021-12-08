@@ -50,6 +50,7 @@ namespace Turing.Machines.OneLineTuringMachine
             formListing_textBox.Font = new Font(FontFamily.GenericSansSerif, 14f);
             formListing_textBox.ScrollBars = ScrollBars.Both;
             formListing_textBox.Multiline = true;
+            formListing_textBox.ReadOnly = true;
 
             streamWriter.AutoFlush = true;
         }
@@ -354,6 +355,7 @@ namespace Turing.Machines.OneLineTuringMachine
                 }
 
                 formListing_textBox.Text += listing + Environment.NewLine;
+                streamWriter.WriteLine(listing);
 
                 turingMachine.NextStep();
                 ShowLine();
@@ -371,6 +373,7 @@ namespace Turing.Machines.OneLineTuringMachine
                         listing = listing.Insert(pos < 0 ? 0 : pos, "qz");
                     }
                     formListing_textBox.Text += listing + Environment.NewLine;
+                    streamWriter.WriteLine(listing + Environment.NewLine);
                     MessageBox.Show("Машина Тьюринга завершила работу");
                     return;
                 }
@@ -390,9 +393,6 @@ namespace Turing.Machines.OneLineTuringMachine
                         Cell.Value = "";
             timer.Start();
             StopWork_Button.Enabled = true;
-            if (!formListing.Visible)
-                formListing.Show();
-            formListing_textBox.Text = String.Empty;
         }
 
         private void Timer_Tick(object sender, EventArgs e)
@@ -611,6 +611,7 @@ namespace Turing.Machines.OneLineTuringMachine
             turingMachine.CurrentPos = 101;
             turingMachine.CurrentCondition = 0;
             formListing_textBox.Text = String.Empty;
+            streamWriter.WriteLine(Environment.NewLine);
             ShowLine();
         }
 
@@ -631,6 +632,11 @@ namespace Turing.Machines.OneLineTuringMachine
                 ShowLine();
             }
             form.Close();
+        }
+
+        private void Listing_button_Click(object sender, EventArgs e)
+        {
+            formListing.Visible = !formListing.Visible;
         }
     }
 }

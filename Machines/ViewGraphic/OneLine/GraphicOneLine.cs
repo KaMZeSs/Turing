@@ -119,7 +119,7 @@ namespace Turing.Machines.ViewGraphic.OneLine
                 else
                     return;
                 task = Task.Factory.StartNew(new Action(() => GetData()), TaskCreationOptions.LongRunning);
-            }  
+            }
         }
 
         private void GetData()
@@ -213,7 +213,6 @@ namespace Turing.Machines.ViewGraphic.OneLine
                         }
                     }
                     
-
                     turingMachine.NextStep();
                     
                     counter++;

@@ -70,6 +70,7 @@ namespace Turing.Machines.OneLineTuringMachine
             this.SaveMachine_Button = new System.Windows.Forms.Button();
             this.OpenMachine_Button = new System.Windows.Forms.Button();
             this.EnterWord_Button = new System.Windows.Forms.Button();
+            this.Listing_button = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -544,11 +545,22 @@ namespace Turing.Machines.OneLineTuringMachine
             this.EnterWord_Button.UseVisualStyleBackColor = true;
             this.EnterWord_Button.Click += new System.EventHandler(this.EnterWord_Button_Click);
             // 
+            // Listing_button
+            // 
+            this.Listing_button.Location = new System.Drawing.Point(457, 83);
+            this.Listing_button.Name = "Listing_button";
+            this.Listing_button.Size = new System.Drawing.Size(127, 23);
+            this.Listing_button.TabIndex = 17;
+            this.Listing_button.Text = "Листинг";
+            this.Listing_button.UseVisualStyleBackColor = true;
+            this.Listing_button.Click += new System.EventHandler(this.Listing_button_Click);
+            // 
             // OneLineTuringMachineForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(792, 450);
+            this.Controls.Add(this.Listing_button);
             this.Controls.Add(this.EnterWord_Button);
             this.Controls.Add(this.OpenMachine_Button);
             this.Controls.Add(this.SaveMachine_Button);
@@ -626,5 +638,6 @@ namespace Turing.Machines.OneLineTuringMachine
         private System.Windows.Forms.Button SaveMachine_Button;
         private System.Windows.Forms.Button OpenMachine_Button;
         private System.Windows.Forms.Button EnterWord_Button;
+        private System.Windows.Forms.Button Listing_button;
     }
 }
