@@ -535,6 +535,8 @@ namespace Turing.Machines.ThreeLinesTuringMachine
 
                 if (turingMachine.CurrentCondition == -1)
                 {
+                    streamWriter.WriteLine("Конец работы алгоритма");
+
                     listing1 = "λ" + turingMachine.Line_First.GetKAtLine() + "λ" + Environment.NewLine;
                     listing2 = "λ" + turingMachine.Line_Second.GetKAtLine() + "λ" + Environment.NewLine;
                     listing3 = "λ" + turingMachine.Line_Third.GetKAtLine() + "λ" + Environment.NewLine;
@@ -620,6 +622,8 @@ namespace Turing.Machines.ThreeLinesTuringMachine
                 ShowLine();
                 if (turingMachine.CurrentCondition == -1)
                 {
+                    streamWriter.WriteLine("Конец работы алгоритма");
+
                     listing1 = "λ" + turingMachine.Line_First.GetKAtLine() + "λ" + Environment.NewLine;
                     listing2 = "λ" + turingMachine.Line_Second.GetKAtLine() + "λ" + Environment.NewLine;
                     listing3 = "λ" + turingMachine.Line_Third.GetKAtLine() + "λ" + Environment.NewLine;
@@ -814,9 +818,6 @@ namespace Turing.Machines.ThreeLinesTuringMachine
             fileDialog.ValidateNames = true;
             if (fileDialog.ShowDialog() == DialogResult.OK)
             {
-                isOpenFile = true;
-                TableConditions.Rows.Clear();
-
                 DataSet dataSet = new DataSet();
 
                 DataTable data = new DataTable();
@@ -829,13 +830,19 @@ namespace Turing.Machines.ThreeLinesTuringMachine
                 }
 
                 data = dataSet.Tables[0];
-
-
-                PreviousAlphabet = "";
-
-                Alphabet.Text = (string)dataSet.ExtendedProperties["Alphabet"];
+                
                 String st = (string)dataSet.ExtendedProperties["HeaderCells"];
                 String[] HCells = st.Trim().Split(' ');
+
+                if (HCells[0].Length != 3)
+                {
+                    return;
+                }
+                isOpenFile = true;
+                TableConditions.Rows.Clear();
+                PreviousAlphabet = "";
+                Alphabet.Text = (string)dataSet.ExtendedProperties["Alphabet"];
+
                 for (int i = 0; i < data.Columns.Count - 1; i++)
                     AddColumnButton_Click(new object(), new EventArgs());
 

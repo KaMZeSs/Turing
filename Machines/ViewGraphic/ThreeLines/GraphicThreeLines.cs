@@ -57,6 +57,10 @@ namespace Turing.Machines.ViewGraphic.ThreeLines
                 data = dataSet.Tables[0];
                 String st = (string)dataSet.ExtendedProperties["HeaderCells"];
                 String[] HCells = st.Trim().Split(' ');
+
+                if (HCells[0].Length != 3)
+                    return;
+
                 for (int i = 0; i < data.Columns.Count; i++)
                 {
                     int index = TableConditions.Columns.Count;

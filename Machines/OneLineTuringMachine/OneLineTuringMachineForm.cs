@@ -359,6 +359,8 @@ namespace Turing.Machines.OneLineTuringMachine
 
                 if (turingMachine.CurrentCondition == -1)
                 {
+                    streamWriter.WriteLine("Конец работы алгоритма");
+
                     listing = turingMachine.Line.GetKAtLine();
                     if (listing.Length == 1)
                         listing = "λqz" + listing + "λ";
@@ -414,6 +416,8 @@ namespace Turing.Machines.OneLineTuringMachine
                 ShowLine();
                 if (turingMachine.CurrentCondition == -1)
                 {
+                    streamWriter.WriteLine("Конец работы алгоритма");
+
                     timer.Stop();
                     StopWork_Button.Enabled = false;
                     listing = turingMachine.Line.GetKAtLine();
@@ -566,9 +570,6 @@ namespace Turing.Machines.OneLineTuringMachine
             fileDialog.ValidateNames = true;
             if (fileDialog.ShowDialog() == DialogResult.OK)
             {
-                isOpenFile = true;
-                TableConditions.Rows.Clear();
-
                 DataSet dataSet = new DataSet();
 
                 DataTable data = new DataTable();
@@ -582,12 +583,19 @@ namespace Turing.Machines.OneLineTuringMachine
 
                 data = dataSet.Tables[0];
 
-
-                PreviousAlphabet = "";
-
-                Alphabet.Text = (string)dataSet.ExtendedProperties["Alphabet"];
                 String st = (string)dataSet.ExtendedProperties["HeaderCells"];
                 String[] HCells = st.Trim().Split(' ');
+
+                if (HCells[0].Length != 1)
+                {
+                    return;
+                }
+                isOpenFile = true;
+                TableConditions.Rows.Clear();
+                PreviousAlphabet = "";
+                Alphabet.Text = (string)dataSet.ExtendedProperties["Alphabet"];
+
+
                 for (int i = 0; i < data.Columns.Count - 1; i++)
                     AddColumnButton_Click(new object(), new EventArgs());
 
