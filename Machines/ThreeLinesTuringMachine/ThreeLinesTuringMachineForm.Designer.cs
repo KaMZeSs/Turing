@@ -104,6 +104,8 @@ namespace Turing.Machines.ThreeLinesTuringMachine
             this.label44 = new System.Windows.Forms.Label();
             this.label45 = new System.Windows.Forms.Label();
             this.ButtonToRightThird = new System.Windows.Forms.Button();
+            this.Listing_button = new System.Windows.Forms.Button();
+            this.EnterWord_Button = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -1041,11 +1043,33 @@ namespace Turing.Machines.ThreeLinesTuringMachine
             this.ButtonToRightThird.UseVisualStyleBackColor = true;
             this.ButtonToRightThird.Click += new System.EventHandler(this.ButtonToRight_Click);
             // 
-            // FourLinesTuringMachineForm
+            // Listing_button
+            // 
+            this.Listing_button.Location = new System.Drawing.Point(448, 196);
+            this.Listing_button.Name = "Listing_button";
+            this.Listing_button.Size = new System.Drawing.Size(127, 23);
+            this.Listing_button.TabIndex = 28;
+            this.Listing_button.Text = "Листинг";
+            this.Listing_button.UseVisualStyleBackColor = true;
+            this.Listing_button.Click += new System.EventHandler(this.Listing_button_Click);
+            // 
+            // EnterWord_Button
+            // 
+            this.EnterWord_Button.Location = new System.Drawing.Point(587, 196);
+            this.EnterWord_Button.Name = "EnterWord_Button";
+            this.EnterWord_Button.Size = new System.Drawing.Size(111, 23);
+            this.EnterWord_Button.TabIndex = 27;
+            this.EnterWord_Button.Text = "Ввести слово";
+            this.EnterWord_Button.UseVisualStyleBackColor = true;
+            this.EnterWord_Button.Click += new System.EventHandler(this.EnterWord_Button_Click);
+            // 
+            // ThreeLinesTuringMachineForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(791, 581);
+            this.Controls.Add(this.Listing_button);
+            this.Controls.Add(this.EnterWord_Button);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.numericUpDown1);
             this.Controls.Add(this.OpenMachine_Button);
@@ -1064,7 +1088,7 @@ namespace Turing.Machines.ThreeLinesTuringMachine
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.menuStrip1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Name = "FourLinesTuringMachineForm";
+            this.Name = "ThreeLinesTuringMachineForm";
             this.Text = "TwoLinesTuringMachine";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.TwoLinesTuringMachineForm_FormClosing);
             this.menuStrip1.ResumeLayout(false);
@@ -1156,5 +1180,7 @@ namespace Turing.Machines.ThreeLinesTuringMachine
         private System.Windows.Forms.Button ButtonToRightThird;
         private System.Windows.Forms.Button ButtonToLeftThird;
         private System.Windows.Forms.Label label46;
+        private System.Windows.Forms.Button Listing_button;
+        private System.Windows.Forms.Button EnterWord_Button;
     }
 }

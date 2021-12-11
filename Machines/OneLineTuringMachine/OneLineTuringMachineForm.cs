@@ -340,9 +340,6 @@ namespace Turing.Machines.OneLineTuringMachine
                 foreach (DataGridViewCell Cell in Row.Cells)
                     if (Cell.Value == null)
                         Cell.Value = "";
-            
-            formListing.Visible = true;
-
             try
             {
                 String listing = "λ" + turingMachine.Line.GetKAtLine() + "λ";
@@ -354,7 +351,7 @@ namespace Turing.Machines.OneLineTuringMachine
                     listing = listing.Insert(pos < 0 ? 0 : pos, "q" + turingMachine.CurrentCondition.ToString());
                 }
 
-                formListing_textBox.Text += listing + Environment.NewLine;
+                formListing_textBox.AppendText(listing + Environment.NewLine);
                 streamWriter.WriteLine(listing);
 
                 turingMachine.NextStep();
@@ -372,7 +369,7 @@ namespace Turing.Machines.OneLineTuringMachine
                         int pos = turingMachine.CurrentPos - turingMachine.Line.IndexOf(listing[0]) + 1;
                         listing = listing.Insert(pos < 0 ? 0 : pos, "qz");
                     }
-                    formListing_textBox.Text += listing + Environment.NewLine;
+                    formListing_textBox.AppendText(listing + Environment.NewLine);
                     streamWriter.WriteLine(listing + Environment.NewLine);
                     MessageBox.Show("Машина Тьюринга завершила работу");
                     return;
@@ -408,7 +405,8 @@ namespace Turing.Machines.OneLineTuringMachine
                     listing = listing.Insert(pos < 0 ? 0 : pos, "q" + turingMachine.CurrentCondition.ToString());
                 }
 
-                formListing_textBox.Text += listing + Environment.NewLine;
+                formListing_textBox.AppendText(listing + Environment.NewLine);
+
                 streamWriter.WriteLine(listing);
 
                 turingMachine.NextStep();
@@ -429,7 +427,8 @@ namespace Turing.Machines.OneLineTuringMachine
                         listing = listing.Insert(pos < 0 ? 0 : pos, "qz");
                     }
                     streamWriter.WriteLine(listing + Environment.NewLine);
-                    formListing_textBox.Text += listing + Environment.NewLine;
+                    formListing_textBox.AppendText(listing + Environment.NewLine);
+
                     MessageBox.Show("Машина Тьюринга завершила работу");
                 }
 

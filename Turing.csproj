@@ -79,11 +79,11 @@
       <DependentUpon>OneLineTuringMachineForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Machines\OneLineTuringMachine\TuringMachine.cs" />
-    <Compile Include="Machines\ThreeLinesTuringMachine\FourLinesTuringMachineForm.cs">
+    <Compile Include="Machines\ThreeLinesTuringMachine\ThreeLinesTuringMachineForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Machines\ThreeLinesTuringMachine\FourLinesTuringMachineForm.Designer.cs">
-      <DependentUpon>FourLinesTuringMachineForm.cs</DependentUpon>
+    <Compile Include="Machines\ThreeLinesTuringMachine\ThreeLinesTuringMachineForm.Designer.cs">
+      <DependentUpon>ThreeLinesTuringMachineForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Machines\ThreeLinesTuringMachine\TuringMachine.cs" />
     <Compile Include="Machines\TwoLinesTuringMachine\TuringMachine.cs" />
@@ -136,8 +136,8 @@
     <EmbeddedResource Include="Machines\OneLineTuringMachine\OneLineTuringMachineForm.resx">
       <DependentUpon>OneLineTuringMachineForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Machines\ThreeLinesTuringMachine\FourLinesTuringMachineForm.resx">
-      <DependentUpon>FourLinesTuringMachineForm.cs</DependentUpon>
+    <EmbeddedResource Include="Machines\ThreeLinesTuringMachine\ThreeLinesTuringMachineForm.resx">
+      <DependentUpon>ThreeLinesTuringMachineForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Machines\TwoLinesTuringMachine\TwoLinesTuringMachineForm.resx">
       <DependentUpon>TwoLinesTuringMachineForm.cs</DependentUpon>

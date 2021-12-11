@@ -22,6 +22,7 @@ namespace Turing.Machines
                 if (Alphabet.Contains(Letter))
                     result += Letter;
             textBox1.Text = result;
+            textBox1.SelectionStart = textBox1.Text.Length;
         }
 
         private void button1_Click(object sender, EventArgs e)

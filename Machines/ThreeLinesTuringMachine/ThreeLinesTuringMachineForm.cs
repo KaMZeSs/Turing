@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
@@ -17,6 +18,11 @@ namespace Turing.Machines.ThreeLinesTuringMachine
         String PreviousAlphabet;
         System.Windows.Forms.Timer timer = new System.Windows.Forms.Timer();
         bool isOpenFile = false;
+
+        Form formListing = new Form();
+        TextBox formListing_textBox = new TextBox();
+
+        StreamWriter streamWriter = new StreamWriter($"Listing_ThreeLines_{DateTime.Now.ToString().Replace('.', '_').Replace(' ', '_').Replace(':', '_')}.txt");
 
         public ThreeLinesTuringMachineForm()
         {
@@ -36,6 +42,22 @@ namespace Turing.Machines.ThreeLinesTuringMachine
             ShowLine();
             timer.Tick += Timer_Tick;
             timer.Interval = 800;
+
+            formListing.FormClosing += FormListing_FormClosing;
+            formListing.Controls.Add(formListing_textBox);
+            formListing_textBox.Dock = DockStyle.Fill;
+            formListing_textBox.Font = new Font(FontFamily.GenericSansSerif, 14f);
+            formListing_textBox.ScrollBars = ScrollBars.Both;
+            formListing_textBox.Multiline = true;
+            formListing_textBox.ReadOnly = true;
+
+            streamWriter.AutoFlush = true;
+        }
+
+        private void FormListing_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            formListing.Hide();
+            e.Cancel = true;
         }
 
         private void OrganizeLabels()
@@ -482,9 +504,67 @@ namespace Turing.Machines.ThreeLinesTuringMachine
                         Cell.Value = "";
             try
             {
+                String listing1 = "λ" + turingMachine.Line_First.GetKAtLine() + "λ" + Environment.NewLine;
+                String listing2 = "λ" + turingMachine.Line_Second.GetKAtLine() + "λ" + Environment.NewLine;
+                String listing3 = "λ" + turingMachine.Line_Third.GetKAtLine() + "λ" + Environment.NewLine;
+                if (listing1.Length == 4)
+                    listing1 = "λ" + "q" + turingMachine.CurrentCondition.ToString() + "λ" + Environment.NewLine;
+                else
+                {
+                    int pos = turingMachine.CurrentPos_First - turingMachine.Line_First.IndexOf(listing1[1]) + 1;
+                    listing1 = listing1.Insert(pos < 0 ? 0 : pos, "q" + turingMachine.CurrentCondition.ToString());
+                }
+                if (listing2.Length == 4)
+                    listing2 = "λ" + "q" + turingMachine.CurrentCondition.ToString() + "λ" + Environment.NewLine;
+                else
+                {
+                    int pos = turingMachine.CurrentPos_Second - turingMachine.Line_Second.IndexOf(listing2[1]) + 1;
+                    listing2 = listing2.Insert(pos < 0 ? 0 : pos, "q" + turingMachine.CurrentCondition.ToString());
+                }
+                if (listing3.Length == 4)
+                    listing3 = "λ" + "q" + turingMachine.CurrentCondition.ToString() + "λ" + Environment.NewLine;
+                else
+                {
+                    int pos = turingMachine.CurrentPos_Third - turingMachine.Line_Third.IndexOf(listing3[1]) + 1;
+                    listing3 = listing3.Insert(pos < 0 ? 0 : pos, "q" + turingMachine.CurrentCondition.ToString());
+                }
+
+                formListing_textBox.AppendText(listing1 + listing2 + listing3 + Environment.NewLine);
+                streamWriter.WriteLine(listing1 + listing2 + listing3);
+
                 turingMachine.NextStep();
+                ShowLine();
+
                 if (turingMachine.CurrentCondition == -1)
                 {
+                    listing1 = "λ" + turingMachine.Line_First.GetKAtLine() + "λ" + Environment.NewLine;
+                    listing2 = "λ" + turingMachine.Line_Second.GetKAtLine() + "λ" + Environment.NewLine;
+                    listing3 = "λ" + turingMachine.Line_Third.GetKAtLine() + "λ" + Environment.NewLine;
+                    if (listing1.Length == 4)
+                        listing1 = "λ" + "qz" + "λ" + Environment.NewLine;
+                    else
+                    {
+                        int pos = turingMachine.CurrentPos_First - turingMachine.Line_First.IndexOf(listing1[1]) + 1;
+                        listing1 = listing1.Insert(pos < 0 ? 0 : pos, "qz");
+                    }
+                    if (listing2.Length == 4)
+                        listing2 = "λ" + "qz" + "λ" + Environment.NewLine;
+                    else
+                    {
+                        int pos = turingMachine.CurrentPos_Second - turingMachine.Line_Second.IndexOf(listing2[1]) + 1;
+                        listing2 = listing2.Insert(pos < 0 ? 0 : pos, "qz");
+                    }
+                    if (listing3.Length == 4)
+                        listing3 = "λ" + "qz" + "λ" + Environment.NewLine;
+                    else
+                    {
+                        int pos = turingMachine.CurrentPos_Third - turingMachine.Line_Third.IndexOf(listing3[1]) + 1;
+                        listing3 = listing3.Insert(pos < 0 ? 0 : pos, "qz");
+                    }
+
+                    formListing_textBox.AppendText(listing1 + listing2 + listing3 + Environment.NewLine);
+                    streamWriter.WriteLine(listing1 + listing2 + listing3);
+
                     MessageBox.Show("Машина Тьюринга завершила работу");
                     return;
                 }
@@ -510,10 +590,66 @@ namespace Turing.Machines.ThreeLinesTuringMachine
         {
             try
             {
+                String listing1 = "λ" + turingMachine.Line_First.GetKAtLine() + "λ" + Environment.NewLine;
+                String listing2 = "λ" + turingMachine.Line_Second.GetKAtLine() + "λ" + Environment.NewLine;
+                String listing3 = "λ" + turingMachine.Line_Third.GetKAtLine() + "λ" + Environment.NewLine;
+                if (listing1.Length == 4)
+                    listing1 = "λ" + "q" + turingMachine.CurrentCondition.ToString() + "λ" + Environment.NewLine;
+                else
+                {
+                    int pos = turingMachine.CurrentPos_First - turingMachine.Line_First.IndexOf(listing1[1]) + 1;
+                    listing1 = listing1.Insert(pos < 0 ? 0 : pos, "q" + turingMachine.CurrentCondition.ToString());
+                }
+                if (listing2.Length == 4)
+                    listing2 = "λ" + "q" + turingMachine.CurrentCondition.ToString() + "λ" + Environment.NewLine;
+                else
+                {
+                    int pos = turingMachine.CurrentPos_Second - turingMachine.Line_Second.IndexOf(listing2[1]) + 1;
+                    listing2 = listing2.Insert(pos < 0 ? 0 : pos, "q" + turingMachine.CurrentCondition.ToString());
+                }
+                if (listing3.Length == 4)
+                    listing3 = "λ" + "q" + turingMachine.CurrentCondition.ToString() + "λ" + Environment.NewLine;
+                else
+                {
+                    int pos = turingMachine.CurrentPos_Third - turingMachine.Line_Third.IndexOf(listing3[1]) + 1;
+                    listing3 = listing3.Insert(pos < 0 ? 0 : pos, "q" + turingMachine.CurrentCondition.ToString());
+                }
+
+                formListing_textBox.AppendText(listing1 + listing2 + listing3 + Environment.NewLine);
+                streamWriter.WriteLine(listing1 + listing2 + listing3);
+
                 turingMachine.NextStep();
                 ShowLine();
                 if (turingMachine.CurrentCondition == -1)
                 {
+                    listing1 = "λ" + turingMachine.Line_First.GetKAtLine() + "λ" + Environment.NewLine;
+                    listing2 = "λ" + turingMachine.Line_Second.GetKAtLine() + "λ" + Environment.NewLine;
+                    listing3 = "λ" + turingMachine.Line_Third.GetKAtLine() + "λ" + Environment.NewLine;
+                    if (listing1.Length == 4)
+                        listing1 = "λ" + "qz" + "λ" + Environment.NewLine;
+                    else
+                    {
+                        int pos = turingMachine.CurrentPos_First - turingMachine.Line_First.IndexOf(listing1[1]) + 1;
+                        listing1 = listing1.Insert(pos < 0 ? 0 : pos, "qz");
+                    }
+                    if (listing2.Length == 4)
+                        listing2 = "λ" + "qz" + "λ" + Environment.NewLine;
+                    else
+                    {
+                        int pos = turingMachine.CurrentPos_Second - turingMachine.Line_Second.IndexOf(listing2[1]) + 1;
+                        listing2 = listing2.Insert(pos < 0 ? 0 : pos, "qz");
+                    }
+                    if (listing3.Length == 4)
+                        listing3 = "λ" + "qz" + "λ" + Environment.NewLine;
+                    else
+                    {
+                        int pos = turingMachine.CurrentPos_Third - turingMachine.Line_Third.IndexOf(listing3[1]) + 1;
+                        listing3 = listing3.Insert(pos < 0 ? 0 : pos, "qz");
+                    }
+
+                    formListing_textBox.AppendText(listing1 + listing2 + listing3 + Environment.NewLine);
+                    streamWriter.WriteLine(listing1 + listing2 + listing3);
+
                     timer.Stop();
                     StopWork_Button.Enabled = false;
                     MessageBox.Show("Машина Тьюринга завершила работу");
@@ -716,6 +852,25 @@ namespace Turing.Machines.ThreeLinesTuringMachine
                 }
             }
             isOpenFile = false;
+        }
+
+        private void EnterWord_Button_Click(object sender, EventArgs e)
+        {
+            GetInputFromAlphabet form = new GetInputFromAlphabet(Alphabet.Text);
+            form.ShowDialog(this);
+
+            if (form.DialogResult == DialogResult.OK)
+            {
+                Clear_button_Click(sender, e);
+                turingMachine = new TuringMachine(ref TableConditions, form.result);
+                ShowLine();
+            }
+            form.Close();
+        }
+
+        private void Listing_button_Click(object sender, EventArgs e)
+        {
+            formListing.Visible = !formListing.Visible;
         }
     }
 }
