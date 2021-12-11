@@ -66,12 +66,6 @@
     <Compile Include="Machines\GetInputFromAlphabet.Designer.cs">
       <DependentUpon>GetInputFromAlphabet.cs</DependentUpon>
     </Compile>
-    <Compile Include="Machines\GetLineFromAlphabet.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Machines\GetLineFromAlphabet.Designer.cs">
-      <DependentUpon>GetLineFromAlphabet.cs</DependentUpon>
-    </Compile>
     <Compile Include="Machines\OneLineTuringMachine\OneLineTuringMachineForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -129,9 +123,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Machines\GetInputFromAlphabet.resx">
       <DependentUpon>GetInputFromAlphabet.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Machines\GetLineFromAlphabet.resx">
-      <DependentUpon>GetLineFromAlphabet.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Machines\OneLineTuringMachine\OneLineTuringMachineForm.resx">
       <DependentUpon>OneLineTuringMachineForm.cs</DependentUpon>

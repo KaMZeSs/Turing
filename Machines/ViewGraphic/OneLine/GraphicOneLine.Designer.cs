@@ -70,12 +70,15 @@ namespace Turing.Machines.ViewGraphic.OneLine
             series1.BorderWidth = 5;
             series1.ChartArea = "ChartArea1";
             series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
+            series1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             series1.IsValueShownAsLabel = true;
             series1.MarkerBorderColor = System.Drawing.Color.BlueViolet;
             series1.MarkerColor = System.Drawing.Color.Fuchsia;
             series1.MarkerSize = 10;
             series1.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle;
             series1.Name = "Series1";
+            series1.SmartLabelStyle.CalloutStyle = System.Windows.Forms.DataVisualization.Charting.LabelCalloutStyle.Box;
+            series1.SmartLabelStyle.IsMarkerOverlappingAllowed = true;
             series1.YValuesPerPoint = 3;
             this.chart1.Series.Add(series1);
             this.chart1.Size = new System.Drawing.Size(800, 398);

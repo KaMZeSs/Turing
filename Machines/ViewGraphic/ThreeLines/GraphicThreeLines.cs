@@ -210,7 +210,7 @@ namespace Turing.Machines.ViewGraphic.ThreeLines
                             else
                                 listing[0] = listing[0].Insert(pos < 0 ? 0 : pos, "q" + turingMachine.CurrentCondition.ToString());
                         }
-                        
+
                         if (listing[1].Length == 2)
                             listing[1] = "λ" + "q" + turingMachine.CurrentCondition.ToString() + "λ";
                         else
@@ -242,10 +242,12 @@ namespace Turing.Machines.ViewGraphic.ThreeLines
                     }
 
                     turingMachine.NextStep();
-                    
+
                     counter++;
                 }
+#pragma warning disable CS0168 // Переменная "except" объявлена, но ни разу не использована.
                 catch (Exception except)
+#pragma warning restore CS0168 // Переменная "except" объявлена, но ни разу не использована.
                 {
                     if (turingMachine.CurrentCondition == -1)
                         break;

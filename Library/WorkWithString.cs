@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Turing.Machines.OneLineTuringMachine;
 
 namespace Turing.Library
 {
@@ -89,7 +87,7 @@ namespace Turing.Library
                 else if (!Char.IsDigit(element))
                     return false;
             }
-                
+
             return true;
         }
 

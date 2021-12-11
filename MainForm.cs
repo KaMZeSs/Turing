@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Data;
 using System.Windows.Forms;
-using Turing.Machines.OneLineTuringMachine;
-using Turing.Machines.ViewGraphic;
 
 namespace Turing
 {

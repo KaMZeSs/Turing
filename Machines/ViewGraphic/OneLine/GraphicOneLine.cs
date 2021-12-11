@@ -106,7 +106,7 @@ namespace Turing.Machines.ViewGraphic.OneLine
         {
             if (task == null)
             {
-                DialogResult result = MessageBox.Show("Записывать ли информацию обо всех шагах машин Тьюринга?", 
+                DialogResult result = MessageBox.Show("Записывать ли информацию обо всех шагах машин Тьюринга?",
                     "Записывать ли?", MessageBoxButtons.YesNoCancel);
                 if (result == DialogResult.OK || result == DialogResult.Yes)
                 {
@@ -123,7 +123,7 @@ namespace Turing.Machines.ViewGraphic.OneLine
         }
 
         private void GetData()
-        {   
+        {
             if (isWriteListing)
             {
                 if (Directory.Exists("Listing_OneLine"))
@@ -174,9 +174,11 @@ namespace Turing.Machines.ViewGraphic.OneLine
         public void DoTask(object wordAsArray)
         {
             String line = (String)wordAsArray;
+#pragma warning disable CS0219 // Переменной "str" присвоено значение, но оно ни разу не использовано.
             String str;
+#pragma warning restore CS0219 // Переменной "str" присвоено значение, но оно ни разу не использовано.
             if (line.Length == 2)
-                 str = "";
+                str = "";
 
             StreamWriter streamWriter = null;
             if (isWriteListing)
@@ -196,7 +198,7 @@ namespace Turing.Machines.ViewGraphic.OneLine
                         Thread.Sleep(500);
                     if (isStop)
                         return;
-                    
+
                     if (isWriteListing)
                     {
                         String listing = "λ" + turingMachine.Line.GetKAtLine() + "λ";
@@ -212,15 +214,17 @@ namespace Turing.Machines.ViewGraphic.OneLine
                             streamWriter.WriteLine(listing);
                         }
                     }
-                    
+
                     turingMachine.NextStep();
-                    
+
                     counter++;
                 }
+#pragma warning disable CS0168 // Переменная "except" объявлена, но ни разу не использована.
                 catch (Exception except)
+#pragma warning restore CS0168 // Переменная "except" объявлена, но ни разу не использована.
                 {
                     if (turingMachine.CurrentCondition == -1)
-                    { 
+                    {
                         break;
                     }
                     else

@@ -49,7 +49,7 @@ namespace Turing.Machines.TwoLinesTuringMachine
         {
             Line_First = Line_First.ChangeValue(CurrentPos_First, Command[0].ToString());
             Line_Second = Line_Second.ChangeValue(CurrentPos_Second, Command[2].ToString());
-            
+
             if (Command[1] == '>')
                 CurrentPos_First++;
             else if (Command[1] == '<')

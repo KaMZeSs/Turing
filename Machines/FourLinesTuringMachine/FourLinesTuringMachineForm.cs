@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 using Turing.Library;
 
@@ -214,7 +212,7 @@ namespace Turing.Machines.FourLinesTuringMachine
                 }
             }
         }
-        
+
         private void AddColumnButton_Click(object sender, EventArgs e)
         {
             int index = TableConditions.Columns.Count;
@@ -254,7 +252,7 @@ namespace Turing.Machines.FourLinesTuringMachine
                 foreach (Char letter2 in Alphabet.Text)
                     foreach (Char letter3 in Alphabet.Text)
                         foreach (Char letter4 in Alphabet.Text)
-                            hasToBe.Add(letter1.ToString() + letter2.ToString() + 
+                            hasToBe.Add(letter1.ToString() + letter2.ToString() +
                                 letter3.ToString() + letter4.ToString());
 
             for (int i = 0; i < TableConditions.Rows.Count; i++)
@@ -271,11 +269,11 @@ namespace Turing.Machines.FourLinesTuringMachine
 
             return rows;
         }
-        
+
         private DataGridViewRow[] GetRowsToDelete(char Letter)
         {
             List<Int32> hasToBeDeleted = new List<int>();
-            
+
             for (int i = 0; i < TableConditions.Rows.Count; i++)
                 if (TableConditions.Rows[i].HeaderCell.Value.ToString().Contains(Letter))
                     hasToBeDeleted.Add(i);
@@ -383,7 +381,7 @@ namespace Turing.Machines.FourLinesTuringMachine
             }
             else
                 command.Letter1 = Row[0];
-            
+
             if (command.PosLetter2 != -1)
             {
                 if (!Alphabet.Text.Contains(command.Letter2))
@@ -391,7 +389,7 @@ namespace Turing.Machines.FourLinesTuringMachine
             }
             else
                 command.Letter2 = Row[1];
-            
+
             if (command.PosLetter3 != -1)
             {
                 if (!Alphabet.Text.Contains(command.Letter3))
@@ -435,8 +433,8 @@ namespace Turing.Machines.FourLinesTuringMachine
         {
             String str;
             PartsOfCommand parts = new PartsOfCommand();
-            parts.PosDirection1 = parts.PosLetter1 = parts.PosDirection2 = parts.PosLetter2 
-                = parts.PosDirection3 = parts.PosLetter3 = parts.PosDirection4 = parts.PosLetter4 
+            parts.PosDirection1 = parts.PosLetter1 = parts.PosDirection2 = parts.PosLetter2
+                = parts.PosDirection3 = parts.PosLetter3 = parts.PosDirection4 = parts.PosLetter4
                 = parts.PosNum = -1;
             if (obj == null)
                 return parts;
@@ -677,7 +675,7 @@ namespace Turing.Machines.FourLinesTuringMachine
         {
             timer.Stop();
         }
-        
+
         private void Clear_button_Click(object sender, EventArgs e)
         {
             turingMachine.Line_First = new String('λ', 201);

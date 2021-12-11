@@ -42,7 +42,7 @@ namespace Turing.Machines.OneLineTuringMachine
                     str = row.Cells[CurrentCondition].Value.ToString();
                     break;
                 }
-                    
+
 
             if (str == "")
                 throw new Exception("No Command");
@@ -52,7 +52,7 @@ namespace Turing.Machines.OneLineTuringMachine
 
         private void ExecuteCommand(String Command)
         {
-            Line = Line.ChangeValue(CurrentPos, Command[0].ToString()); 
+            Line = Line.ChangeValue(CurrentPos, Command[0].ToString());
             if (Command[1] == '>')
                 CurrentPos++;
             else if (Command[1] == '<')

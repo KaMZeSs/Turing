@@ -76,7 +76,7 @@ namespace Turing.Machines.FourLinesTuringMachine
             Line_Second = Line_Second.ChangeValue(CurrentPos_Second, Command[2].ToString());
             Line_Third = Line_Third.ChangeValue(CurrentPos_Third, Command[4].ToString());
             Line_Fourth = Line_Fourth.ChangeValue(CurrentPos_Fourth, Command[6].ToString());
-            
+
             if (Command[1] == '>')
                 CurrentPos_First++;
             else if (Command[1] == '<')

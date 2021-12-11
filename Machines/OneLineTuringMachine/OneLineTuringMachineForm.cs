@@ -356,7 +356,7 @@ namespace Turing.Machines.OneLineTuringMachine
 
                 turingMachine.NextStep();
                 ShowLine();
-                
+
                 if (turingMachine.CurrentCondition == -1)
                 {
                     listing = turingMachine.Line.GetKAtLine();
@@ -410,7 +410,7 @@ namespace Turing.Machines.OneLineTuringMachine
                 streamWriter.WriteLine(listing);
 
                 turingMachine.NextStep();
-                
+
                 ShowLine();
                 if (turingMachine.CurrentCondition == -1)
                 {

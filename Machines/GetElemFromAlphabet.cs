@@ -1,10 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 
 namespace Turing.Machines
@@ -16,7 +11,7 @@ namespace Turing.Machines
         {
             InitializeComponent();
             SetAllButtons(str);
-            this.Visible = false;;
+            this.Visible = false; ;
         }
 
         private void SetAllButtons(String str)

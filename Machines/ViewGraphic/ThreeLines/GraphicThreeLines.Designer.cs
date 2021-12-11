@@ -70,7 +70,9 @@ namespace Turing.Machines.ViewGraphic.ThreeLines
             series1.BorderWidth = 5;
             series1.ChartArea = "ChartArea1";
             series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
+            series1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             series1.IsValueShownAsLabel = true;
+            series1.LabelBorderDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.NotSet;
             series1.MarkerBorderColor = System.Drawing.Color.BlueViolet;
             series1.MarkerColor = System.Drawing.Color.Fuchsia;
             series1.MarkerSize = 10;
@@ -131,14 +133,14 @@ namespace Turing.Machines.ViewGraphic.ThreeLines
             this.panel2.Size = new System.Drawing.Size(800, 398);
             this.panel2.TabIndex = 6;
             // 
-            // GraphicOneLine
+            // GraphicThreeLines
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
-            this.Name = "GraphicOneLine";
+            this.Name = "GraphicThreeLines";
             this.Text = "Graphic";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.GraphicOneLine_FormClosing);
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();
