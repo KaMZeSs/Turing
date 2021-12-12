@@ -249,12 +249,12 @@ namespace Turing.Machines.ViewGraphic.ThreeLines
 
                     counter++;
                 }
-#pragma warning disable CS0168 // Переменная "except" объявлена, но ни разу не использована.
                 catch (Exception except)
-#pragma warning restore CS0168 // Переменная "except" объявлена, но ни разу не использована.
                 {
                     if (turingMachine.CurrentCondition == -1)
+                    {
                         break;
+                    }
                     else
                     {
                         if (isWriteListing)
